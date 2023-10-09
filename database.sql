@@ -25,7 +25,7 @@ CREATE TABLE sex(
 
 CREATE TABLE advertisements(
    id INT,
-   offerDate DATETIME NOT NULL,
+   offerDate TIMESTAMP NOT NULL,
    title VARCHAR(50) NOT NULL,
    description VARCHAR(50),
    workingTime VARCHAR(50) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE utilisateurs(
 CREATE TABLE applications(
    id INT,
    message VARCHAR(50) NOT NULL,
-   applyDate DATETIME NOT NULL,
+   applyDate TIMESTAMP NOT NULL,
    firstname VARCHAR(50),
    lastname VARCHAR(50),
    phone VARCHAR(50),
