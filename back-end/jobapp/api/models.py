@@ -1,0 +1,57 @@
+
+from django.db import models
+from pygments.lexers import get_all_lexers
+from pygments.styles import get_all_styles
+
+LEXERS = [item for item in get_all_lexers() if item[1]]
+LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
+STYLE_CHOICES = sorted([(item, item) for item in get_all_styles()])
+
+class Company(models.Model):
+    name = models.CharField(max_length=50, null=False)
+    address = models.CharField(max_length=50, blank=True, null=True)
+
+class Permission(models.Model):
+    name = models.CharField(max_length=50, null=False)
+
+class Contract(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+
+class Sex(models.Model):
+    name = models.CharField(max_length=50, null=False)
+
+class Advertisement(models.Model):
+    offer_date = models.DateTimeField(null=False)
+    title = models.CharField(max_length=50, null=False)
+    description = models.CharField(max_length=50, blank=True, null=True)
+    working_time = models.CharField(max_length=50, null=False)
+    wage = models.DecimalField(max_digits=15, decimal_places=2, null=False)
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+class Utilisateur(models.Model):
+    firstname = models.CharField(max_length=50, null=False)
+    lastname = models.CharField(max_length=50, null=False)
+    phone = models.CharField(max_length=50, null=False)
+    email = models.EmailField(null=False)
+    cv = models.CharField(max_length=50, blank=True, null=True)
+    sex = models.ForeignKey(Sex, on_delete=models.CASCADE)
+    permission = models.ForeignKey(Permission, on_delete=models.CASCADE)
+
+class Application(models.Model):
+    message = models.CharField(max_length=50, null=False)
+    apply_date = models.DateTimeField(null=False)
+    firstname = models.CharField(max_length=50, blank=True, null=True)
+    lastname = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    cv = models.CharField(max_length=50, blank=True, null=True)
+    user = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, blank=True, null=True)
+    advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE)
+
+class Work(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    user = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['company', 'user']
