@@ -1,9 +1,11 @@
-export const getCompany = async () => {
+import type { CompanyType } from "../../typings/type";
+const postCompany = (values : CompanyType) => {
     return fetch('http://localhost:8000/companies/', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
+        body : JSON.stringify(values)
     })
     .then(response => {
         if (!response.ok) {
@@ -19,3 +21,5 @@ export const getCompany = async () => {
         throw error;
     });
 }
+
+export default postCompany
