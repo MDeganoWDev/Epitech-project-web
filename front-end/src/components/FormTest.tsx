@@ -2,6 +2,7 @@ import { useState } from "react"
 import postCompany from "./../api/post/postCompany"
 
 import type { CompanyType } from "../typings/type";
+
 const FormTest = () => {
     const [nameCompany, setNameCompany] = useState("");
     const [addressCompany, setAddressCompany] = useState("");
