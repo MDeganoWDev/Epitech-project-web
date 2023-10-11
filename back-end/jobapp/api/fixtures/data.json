@@ -1,0 +1,86 @@
+[
+    {
+        "model": "api.Permission",
+        "pk": 1,
+        "fields" : {
+            "name": "admin"
+        }
+    },
+    {
+        "model": "api.Permission",
+        "pk": 2,
+        "fields" : {
+            "name": "companyAdmin"
+        }
+    },
+    {
+        "model": "api.Permission",
+        "pk": 3,
+        "fields" : {
+            "name": "company"
+        }
+    },
+    {
+        "model": "api.Permission",
+        "pk": 4,
+        "fields" : {
+            "name": "worker"
+        }
+    },
+    {
+        "model": "api.Sex",
+        "pk": 1,
+        "fields" : {
+            "name": "masculin"
+        }
+    },
+    {
+        "model": "api.Sex",
+        "pk": 2,
+        "fields" : {
+            "name": "feminin"
+        }
+    },
+    {
+        "model": "api.Sex",
+        "pk": 3,
+        "fields" : {
+            "name": "autre"
+        }
+    },
+    {
+        "model": "api.Contract",
+        "pk": 1,
+        "fields" : {
+            "name": "cdi"
+        }
+    },
+    {
+        "model": "api.Contract",
+        "pk": 2,
+        "fields" : {
+            "name": "cdd"
+        }
+    },
+    {
+        "model": "api.Contract",
+        "pk": 3,
+        "fields" : {
+            "name": "alternance"
+        }
+    },
+    {
+        "model": "api.Contract",
+        "pk": 4,
+        "fields" : {
+            "name": "stage"
+        }
+    },
+    {
+        "model": "api.Contract",
+        "pk": 5,
+        "fields" : {
+            "name": "interim"
+        }
+    }
+]

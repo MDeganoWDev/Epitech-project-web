@@ -7,8 +7,6 @@ from rest_framework import status
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
-    def list(self, request):
-        return Response({"message": "This is a test response from /companies/test"}, status=status.HTTP_200_OK)
 
 class AdvertisementViewSet(viewsets.ModelViewSet):
     queryset = Advertisement.objects.all()
