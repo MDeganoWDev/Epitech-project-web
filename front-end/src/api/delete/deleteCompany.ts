@@ -1,8 +1,8 @@
-import type { CompanyType } from "../../typings/type";
+import { CompanyType } from "../../typings/type"
 
-const postCompany = async (values : CompanyType) => {
+const deleteCompany = async (values : CompanyType) => {
     return fetch('http://localhost:8000/companies/', {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -23,4 +23,4 @@ const postCompany = async (values : CompanyType) => {
     });
 }
 
-export default postCompany
+export default deleteCompany

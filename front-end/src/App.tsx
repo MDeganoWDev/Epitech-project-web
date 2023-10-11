@@ -3,6 +3,7 @@ import Banner from "./components/Banner";
 import Card from "./components/Card";
 import RightPanel from "./components/RightPanel";
 import FormTest from "./components/FormTest";
+import ShowCompany from "./components/ShowCompany";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         </div>
       </div>
       <FormTest/>
+      <ShowCompany/>
     </>
   )
 }

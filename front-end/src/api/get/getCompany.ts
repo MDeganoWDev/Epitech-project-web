@@ -1,4 +1,4 @@
-export const getCompany = async () => {
+export const getCompany = async () => { 
     return fetch('http://localhost:8000/companies/', {
         method: 'GET',
         headers: {
@@ -18,4 +18,4 @@ export const getCompany = async () => {
         console.error("Error : ", error);
         throw error;
     });
-}
+} 
