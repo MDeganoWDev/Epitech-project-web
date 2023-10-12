@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+    
     return (
         <header className="p-20 bg-slate-300 flex justify-between items-center py-4">
             <h1 className="text-blue-700 text-2xl font-bold">JobBoard</h1>
@@ -16,6 +19,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                     Connexion
                 </button>
             )}
+            <Link to="/admin">Admin</Link>
         </header>
     );
 };

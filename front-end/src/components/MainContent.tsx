@@ -1,12 +1,11 @@
 import AdvertisementsPanel from "./AdvertisementsPanel"
+import SelectedAdvertisement from "./SelectedAdvertisement"
 
 const MainContent = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
     <AdvertisementsPanel/>
-    <div className="w-1/2">
-      
-    </div>
+    <SelectedAdvertisement/>
   </div>
   )
 }
