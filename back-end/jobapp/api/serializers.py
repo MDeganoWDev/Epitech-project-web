@@ -1,3 +1,4 @@
+from rest_framework.authtoken.models import Token
 from rest_framework import serializers
 from .models import Company, Permission, Contract, Sex, Advertisement, Utilisateur, Application, Work, LANGUAGE_CHOICES, STYLE_CHOICES
 
@@ -29,9 +30,15 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UtilisateurSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField()
+
     class Meta:
         model = Utilisateur
         fields = '__all__'
+
+    def get_token(self, obj):
+        token, created = Token.objects.get_or_create(user=obj)
+        return token.key
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
