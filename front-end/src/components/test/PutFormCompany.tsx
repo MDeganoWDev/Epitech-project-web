@@ -9,14 +9,12 @@ const PutFormCompany = () => {
     const [addressCompany, setAddressCompany] = useState("");
     const [loading, setLoading] = useState(true);
   
-    const handleSubmit = (event) => {
-      event.preventDefault()
+    const handleSubmit = () => {
         const values : CompanyType = {
             id : idCompany,
             name : nameCompany,
             address : addressCompany
         }
-        console.log(values)
         putCompany(values);
     }
     
