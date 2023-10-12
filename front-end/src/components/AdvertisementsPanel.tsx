@@ -26,6 +26,7 @@ const AdvertisementsPanel = () => {
         {advertisements.map((advertisement)=>(
             <CardAdvertisement
               key = {advertisement.id}
+              id = {advertisement.id}
               title = {advertisement.title}
               description = {advertisement.description}
             />

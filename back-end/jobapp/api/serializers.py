@@ -23,6 +23,8 @@ class SexSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AdvertisementSerializer(serializers.ModelSerializer):
+    company = CompanySerializer()
+    contract = ContractSerializer()
     class Meta:
         model = Advertisement
         fields = '__all__'

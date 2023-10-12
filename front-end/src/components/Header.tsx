@@ -1,47 +1,7 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleConnexionClick = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/utilisateurs/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                    firstname: "John", // Provide a default value or get the value from user input
-                    lastname: "Doe",   // Provide a default value or get the value from user input
-                    phone: "123456789", // Provide a default value or get the value from user input
-                    email: "johnny@example.com", // Provide a default value or get the value from user input
-                    sex: 1,           // Provide a default value or get the value from user input
-                    permission: 1, // Provide a default value or get the value from user input
-                }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Assuming the API response contains a token field
-                const authToken = data.token;
-                console.log(authToken);
-
-                // Now you can store the authToken in your application state or localStorage
-                // Handle login logic here, e.g., setLoggedIn(true) and store the token
-            } else {
-                // Handle error cases, e.g., display an error message to the user
-                console.error("Error creating utilisateur:", data.detail);
-            }
-        } catch (error) {
-            console.error("Error creating utilisateur:", error);
-        }
-    };
-
-
+    
     return (
         <header className="p-20 bg-slate-300 flex justify-between items-center py-4">
             <h1 className="text-blue-700 text-2xl font-bold">JobBoard</h1>
@@ -78,6 +38,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                     </button>
                 </div>
             )}
+            <Link to="/admin">Admin</Link>
         </header>
     );
 };

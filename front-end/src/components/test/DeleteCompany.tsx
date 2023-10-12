@@ -1,4 +1,4 @@
-import deleteCompany from "../api/delete/deleteCompany"
+import deleteCompany from "../../api/delete/deleteCompany"
 
 type DeleteCompanyButtonProps = {
     id?: number

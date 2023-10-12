@@ -5,11 +5,17 @@ export type CompanyType = {
 }
 
 export type AdvertisementType = {
-    id?: number
-    title: string
-    description: string
-    working_time: string
-    wage: string
-    contract: number
-    company: number
+    id? : number
+    offerDate? : string
+    title : string
+    description : string
+    working_time : string
+    wage : string
+    contract? : ContractType
+    company? : CompanyType
+}
+
+export type ContractType = {
+    id? : number
+    name : string
 }

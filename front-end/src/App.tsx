@@ -1,14 +1,21 @@
-import Header from "./components/Header";
-import Banner from "./components/Banner";
 import MainContent from "./components/MainContent";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AdminBackOffice from "./components/AdminBackOffice";
+import Layout from "./Layout";
 
 function App() {
 
   return (
     <>
-      <Header isLoggedIn={false} />
-      <Banner />
-      <MainContent />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<MainContent />} />
+          <Route path="admin" element={<AdminBackOffice />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
     </>
   )
 }
