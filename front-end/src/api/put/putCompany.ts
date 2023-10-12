@@ -1,11 +1,12 @@
-export const getCompany = async (id? : number) => { 
-    const url = id ? `http://localhost:8000/companies/${id}` : `http://localhost:8000/companies`;
-    
-    return fetch(url, {
-        method: 'GET',
+import type { CompanyType } from "../../typings/type";
+
+const putCompany = async (values : CompanyType) => {
+    return fetch(`http://localhost:8000/companies/${values.id}/`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
+        body : JSON.stringify(values)
     })
     .then(response => {
         if (!response.ok) {
@@ -20,4 +21,6 @@ export const getCompany = async (id? : number) => {
         console.error("Error : ", error);
         throw error;
     });
-} 
+}
+
+export default putCompany

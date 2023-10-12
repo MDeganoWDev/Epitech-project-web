@@ -2,8 +2,7 @@ import Header from "./components/Header";
 import Banner from "./components/Banner";
 import Card from "./components/Card";
 import RightPanel from "./components/RightPanel";
-import FormTest from "./components/FormTest";
-import ShowCompany from "./components/ShowCompany";
+import PutFormCompany from "./components/PutFormCompany";
 
 function App() {
 
@@ -25,8 +24,7 @@ function App() {
           />
         </div>
       </div>
-      <FormTest/>
-      <ShowCompany/>
+   <PutFormCompany/>
     </>
   )
 }
