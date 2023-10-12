@@ -28,7 +28,7 @@ const AdvertisementsPanel = () => {
               key = {advertisement.id}
               id = {advertisement.id}
               title = {advertisement.title}
-              description = {advertisement.description}
+              description = {advertisement.quick_description}
             />
         ))}
     </div>

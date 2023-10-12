@@ -1,5 +1,5 @@
-export const deleteCompany = async (id? : number) => {
-    return fetch(`http://localhost:8000/companies/${id}`, {
+export const deleteAdvertisement = async (id? : number) => {
+    return fetch(`http://localhost:8000/advertisements/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -19,4 +19,3 @@ export const deleteCompany = async (id? : number) => {
         throw error;
     });
 }
-

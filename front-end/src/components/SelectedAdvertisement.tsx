@@ -31,7 +31,7 @@ const SelectedAdvertisement = () => {
         <div>{advertisement?.wage}</div>
         <div>{advertisement?.contract?.name}</div>
         <div>{advertisement?.working_time}</div>
-        <div>{advertisement?.description}</div>
+        <div>{advertisement?.full_description}</div>
         <div>{advertisement?.company?.name}</div>
         <div>{advertisement?.company?.address}</div>
     </div>
