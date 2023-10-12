@@ -1,9 +1,12 @@
-export const deleteCompany = async (id? : number) => {
-    return fetch(`http://localhost:8000/companies/${id}`, {
-        method: 'DELETE',
+import type { ContractType } from "../../typings/type";
+
+const putCompany = async (values : ContractType) => {
+    return fetch(`http://localhost:8000/contract/${values.id}/`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
+        body : JSON.stringify(values)
     })
     .then(response => {
         if (!response.ok) {
@@ -20,3 +23,4 @@ export const deleteCompany = async (id? : number) => {
     });
 }
 
+export default putCompany

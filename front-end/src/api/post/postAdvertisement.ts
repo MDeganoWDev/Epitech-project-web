@@ -1,9 +1,12 @@
-export const deleteCompany = async (id? : number) => {
-    return fetch(`http://localhost:8000/companies/${id}`, {
-        method: 'DELETE',
+import type { AdvertisementType } from "../../typings/type";
+
+const postCompany = async (values : AdvertisementType) => {
+    return fetch('http://localhost:8000/advertisements/', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
+        body : JSON.stringify(values)
     })
     .then(response => {
         if (!response.ok) {
@@ -20,3 +23,4 @@ export const deleteCompany = async (id? : number) => {
     });
 }
 
+export default postCompany

@@ -1,6 +1,8 @@
 const AdminBackOffice = () => {
   return (
-    <div>AdminBackOffice</div>
+    <div>
+      
+    </div>
   )
 }
 
