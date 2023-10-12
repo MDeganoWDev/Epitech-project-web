@@ -30,8 +30,9 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UtilisateurSerializer(serializers.ModelSerializer):
+    sex = SexSerializer()
+    permission = PermissionSerializer()
     token = serializers.SerializerMethodField()
-
     class Meta:
         model = Utilisateur
         fields = '__all__'
@@ -50,11 +51,15 @@ class UtilisateurSerializer(serializers.ModelSerializer):
         return user
 
 class ApplicationSerializer(serializers.ModelSerializer):
+    user = UtilisateurSerializer()
+    advertisement = AdvertisementSerializer()
     class Meta:
         model = Application
         fields = '__all__'
 
 class WorkSerializer(serializers.ModelSerializer):
+    company = CompanySerializer()
+    user = UtilisateurSerializer()
     class Meta:
         model = Work
         fields = '__all__'
