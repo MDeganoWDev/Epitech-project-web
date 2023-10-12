@@ -1,19 +1,40 @@
-import { useState } from "react"
-import postCompany from "./../api/post/postCompany"
-
+import { useEffect, useState } from "react"
+import putCompany from "../api/put/putCompany";
 import type { CompanyType } from "../typings/type";
+import { getCompany } from "../api/get/getCompany";
 
-const FormTest = () => {
+const PutFormCompany = () => {
+    const [idCompany, setIdCompany] = useState();
     const [nameCompany, setNameCompany] = useState("");
     const [addressCompany, setAddressCompany] = useState("");
-    
-    const handleSubmit = () => {
+    const [loading, setLoading] = useState(true);
+  
+    const handleSubmit = (event) => {
+      event.preventDefault()
         const values : CompanyType = {
+            id : idCompany,
             name : nameCompany,
             address : addressCompany
         }
-        postCompany(values);
+        console.log(values)
+        putCompany(values);
     }
+    
+    useEffect(()=>{
+        const fetchData = async () => {
+          const companyData = await getCompany(1);
+          setIdCompany(companyData.id);
+          setNameCompany(companyData.name);
+          setAddressCompany(companyData.address);
+          setLoading(false);
+        }
+    
+        fetchData()
+      }, [])
+    
+      if (loading) {
+        return <div>Loading</div>
+      } 
 
   return (
     <form onSubmit={handleSubmit}>
@@ -39,4 +60,4 @@ const FormTest = () => {
   )
 }
 
-export default FormTest
+export default PutFormCompany

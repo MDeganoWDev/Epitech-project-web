@@ -1,12 +1,9 @@
-import { CompanyType } from "../../typings/type"
-
-const deleteCompany = async (values : CompanyType) => {
-    return fetch('http://localhost:8000/companies/', {
+const deleteCompany = async (id? : number) => {
+    return fetch(`http://localhost:8000/companies/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         },
-        body : JSON.stringify(values)
     })
     .then(response => {
         if (!response.ok) {
