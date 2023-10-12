@@ -4,9 +4,6 @@ from .serializers import CompanySerializer, AdvertisementSerializer, ContractSer
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 
-class UserRegistrationAPIView(CreateAPIView):
-    queryset = Utilisateur.objects.all()
-    serializer_class = UtilisateurSerializer
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer

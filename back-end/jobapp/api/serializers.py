@@ -35,10 +35,19 @@ class UtilisateurSerializer(serializers.ModelSerializer):
     class Meta:
         model = Utilisateur
         fields = '__all__'
+        extra_kwargs = {'password': {'write_only': True}}
 
     def get_token(self, obj):
         token, created = Token.objects.get_or_create(user=obj)
         return token.key
+
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        user = Utilisateur(**validated_data)
+        if password:
+            user.set_password(password) # Set the password and hash it
+        user.save()
+        return user
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
