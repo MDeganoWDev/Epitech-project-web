@@ -1,7 +1,5 @@
-
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.contrib.auth.models import User
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
 
@@ -32,6 +30,10 @@ class Advertisement(models.Model):
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
+class UtilisateurManager(BaseUserManager):
+    def get_by_natural_key(self, email):
+        return self.get(email=email)
+
 class Utilisateur(AbstractBaseUser, PermissionsMixin):
     firstname = models.CharField(max_length=50, null=False)
     lastname = models.CharField(max_length=50, null=False)
@@ -42,6 +44,8 @@ class Utilisateur(AbstractBaseUser, PermissionsMixin):
     permission = models.ForeignKey(Permission, on_delete=models.CASCADE)
     password = models.CharField(max_length=128, default='default_password')
 
+    objects = UtilisateurManager()
+    REQUIRED_FIELDS = ['password']
     USERNAME_FIELD = 'email'
 
 class Application(models.Model):
