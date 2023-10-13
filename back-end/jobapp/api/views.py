@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Company, Permission, Contract, Sex, Advertisement, Utilisateur, Application, Work, LANGUAGE_CHOICES, STYLE_CHOICES
-from .serializers import CompanySerializer, AdvertisementSerializer, ContractSerializer, PermissionSerializer, SexSerializer, UtilisateurSerializer, ApplicationSerializer, WorkSerializer
+from .models import Company, Permission, Contract, Sex, Advertisement, Unregister, Utilisateur, Application, LANGUAGE_CHOICES, STYLE_CHOICES
+from .serializers import CompanySerializer, AdvertisementSerializer, ContractSerializer, PermissionSerializer, SexSerializer, UnregisterSerializer, UtilisateurSerializer, ApplicationSerializer
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 
@@ -33,6 +33,6 @@ class SexViewSet(viewsets.ModelViewSet):
     queryset = Sex.objects.all()
     serializer_class = SexSerializer
 
-class WorkViewSet(viewsets.ModelViewSet):
-    queryset = Work.objects.all()
-    serializer_class = WorkSerializer
+class UnregisterViewSet(viewsets.ModelViewSet):
+    queryset = Unregister.objects.all()
+    serializer_class = UnregisterSerializer

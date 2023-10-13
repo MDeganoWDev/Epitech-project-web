@@ -27,7 +27,8 @@ class Advertisement(models.Model):
     quick_description = models.CharField(max_length=50, blank=True, null=True)
     working_time = models.CharField(max_length=50, null=False)
     wage = models.DecimalField(max_digits=15, decimal_places=2, null=False)
-    contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
+    isOnline = models.BooleanField(default=False)
+    contract = models.ForeignKey(Contract, on_delete=models.SET_NULL, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
 class UtilisateurManager(BaseUserManager):
@@ -40,13 +41,21 @@ class Utilisateur(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=50, null=False)
     email = models.EmailField(unique=True, null=False)
     cv = models.CharField(max_length=50, blank=True, null=True)
-    sex = models.ForeignKey(Sex, on_delete=models.CASCADE)
-    permission = models.ForeignKey(Permission, on_delete=models.CASCADE)
+    sex = models.ForeignKey(Sex, on_delete=models.SET_NULL, null=True)
+    permission = models.ForeignKey(Permission, on_delete=models.SET_NULL, null=True)
     password = models.CharField(max_length=128, default='default_password')
 
     objects = UtilisateurManager()
     REQUIRED_FIELDS = ['password']
     USERNAME_FIELD = 'email'
+
+class Unregister(models.Model):
+    firstname = models.CharField(max_length=50, null=False)
+    lastname = models.CharField(max_length=50, null=False)
+    phone = models.CharField(max_length=50, null=False)
+    email = models.EmailField(max_length=50, null=False)
+    cv = models.CharField(max_length=50, null=False)
+    sex = models.ForeignKey(Sex, on_delete=models.SET_NULL, null=True)
 
 class Application(models.Model):
     message = models.CharField(max_length=50, null=False)
@@ -57,11 +66,5 @@ class Application(models.Model):
     email = models.EmailField(blank=True, null=True)
     cv = models.CharField(max_length=50, blank=True, null=True)
     user = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, blank=True, null=True)
+    unregisterUser = models.ForeignKey(Unregister, on_delete=models.SET_NULL, blank=True, null=True)
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE)
-
-class Work(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    user = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ['company', 'user']
