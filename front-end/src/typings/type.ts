@@ -18,19 +18,19 @@ export type AdvertisementType = {
 
 export type UtilisateurType = {
     id? : number
-    token? : number
-    last_login? : string
-    is_superuser? : false,
     firstname : string
     lastname : string
-    phone : string,
     email : string
+    phone : string,
     cv : string
-    password : string
     sex : SexType
     permission : PermissionType
-    groups : null
-    user_permissions : null
+    password? : string
+    is_superuser? : false,
+    last_login? : string
+    token? : number
+    groups? : null
+    user_permissions? : null
 }
 
 export type ApplicationType = {
