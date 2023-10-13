@@ -1,6 +1,6 @@
 from rest_framework.authtoken.models import Token
 from rest_framework import serializers
-from .models import Company, Permission, Contract, Sex, Advertisement, Utilisateur, Application, Work, LANGUAGE_CHOICES, STYLE_CHOICES
+from .models import Company, Permission, Contract, Sex, Advertisement, Unregister, Utilisateur, Application, LANGUAGE_CHOICES, STYLE_CHOICES
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,6 +20,12 @@ class ContractSerializer(serializers.ModelSerializer):
 class SexSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sex
+        fields = '__all__'
+
+class UnregisterSerializer(serializers.ModelSerializer):
+    sex = SexSerializer()
+    class Meta:
+        model = Unregister
         fields = '__all__'
 
 class AdvertisementSerializer(serializers.ModelSerializer):
@@ -52,14 +58,8 @@ class UtilisateurSerializer(serializers.ModelSerializer):
 
 class ApplicationSerializer(serializers.ModelSerializer):
     user = UtilisateurSerializer()
+    unregisterUser = UnregisterSerializer()
     advertisement = AdvertisementSerializer()
     class Meta:
         model = Application
-        fields = '__all__'
-
-class WorkSerializer(serializers.ModelSerializer):
-    company = CompanySerializer()
-    user = UtilisateurSerializer()
-    class Meta:
-        model = Work
         fields = '__all__'
