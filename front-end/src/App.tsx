@@ -1,6 +1,6 @@
 import MainContent from "./components/MainContent";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AdminBackOffice from "./components/AdminBackOffice";
+import AdminBackOffice from "./components/backOffice/AdminBackOffice";
 import Layout from "./Layout";
 
 function App() {
