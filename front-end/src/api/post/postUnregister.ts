@@ -1,7 +1,7 @@
-import type { ContractType } from "../../typings/type";
+import type { UnregisterType } from "../../typings/type";
 
-export const postContract = async (values : ContractType) => {
-    return fetch('http://localhost:8000/contract/', {
+export const postUnregister = async (values : UnregisterType) => {
+    return fetch('http://localhost:8000/unregisters/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

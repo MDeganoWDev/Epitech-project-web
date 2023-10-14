@@ -4,12 +4,14 @@ import { getCompany } from "../../api/get/getCompany"
 import { getContract } from "../../api/get/getContract"
 import { getPermission } from "../../api/get/getPermission"
 import { getSex } from "../../api/get/getSex"
+import { getUnregister } from "../../api/get/getUnregister"
 import { getUtilisateur } from "../../api/get/getUtilisateur"
 import SelectTableButton from "./SelectTableButton"
 
 const SelectTable = () => {
     const allTable = [
         {name : "Utilisateurs", fetch : getUtilisateur},
+        {name : "Unregisters", fetch : getUnregister},
         {name : "Companies", fetch : getCompany},
         {name : "Advertisements", fetch : getAdvertisement},
         {name : "Applications", fetch : getApplication},

@@ -1,6 +1,6 @@
 import type { CompanyType } from "../../typings/type";
 
-const postCompany = async (values : CompanyType) => {
+export const postCompany = async (values : CompanyType) => {
     return fetch('http://localhost:8000/companies/', {
         method: 'POST',
         headers: {
@@ -22,5 +22,3 @@ const postCompany = async (values : CompanyType) => {
         throw error;
     });
 }
-
-export default postCompany

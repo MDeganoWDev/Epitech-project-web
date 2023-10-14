@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useTableStore } from "../../store/tableStore";
 
 type FetchFunction = () => Promise<[]>;
@@ -9,7 +10,10 @@ type SelectTableButtonProps = {
 
 const SelectTableButton = ({method, name} : SelectTableButtonProps) => {
     const [setSelectedTable, setSelectedTableName] = useTableStore((state)=> [state.setSelectedTable, state.setSelectedTableName])
+    const navigate = useNavigate();
+
     const handleGetMethod = async () => {
+        navigate('/admin');
         const data = await method();
         setSelectedTable(data)
         setSelectedTableName(name)

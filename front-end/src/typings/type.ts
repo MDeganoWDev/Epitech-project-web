@@ -33,6 +33,16 @@ export type UtilisateurType = {
     user_permissions? : null
 }
 
+export type UnregisterType = {
+    id? : number
+    firstname : string
+    lastname : string
+    email : string
+    phone : string,
+    cv : string
+    sex : SexType
+}
+
 export type ApplicationType = {
     id? : number
     message : string

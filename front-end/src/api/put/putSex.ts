@@ -1,7 +1,7 @@
 import type { SexType } from "../../typings/type";
 
-const putCompany = async (values : SexType) => {
-    return fetch(`http://localhost:8000/sex/${values.id}/`, {
+export const putSex = async (id : number, values : SexType) => {
+    return fetch(`http://localhost:8000/sex/${id}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -22,5 +22,3 @@ const putCompany = async (values : SexType) => {
         throw error;
     });
 }
-
-export default putCompany

@@ -1,6 +1,6 @@
 import type { UtilisateurType } from "../../typings/type";
 
-const postCompany = async (values : UtilisateurType) => {
+export const postUtilisateur = async (values : UtilisateurType) => {
     return fetch('http://localhost:8000/utilisateurs/', {
         method: 'POST',
         headers: {
@@ -22,5 +22,3 @@ const postCompany = async (values : UtilisateurType) => {
         throw error;
     });
 }
-
-export default postCompany

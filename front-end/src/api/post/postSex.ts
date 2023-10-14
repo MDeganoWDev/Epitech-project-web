@@ -1,6 +1,6 @@
 import type { SexType } from "../../typings/type";
 
-const postCompany = async (values : SexType) => {
+export const postSex = async (values : SexType) => {
     return fetch('http://localhost:8000/sex/', {
         method: 'POST',
         headers: {
@@ -22,5 +22,3 @@ const postCompany = async (values : SexType) => {
         throw error;
     });
 }
-
-export default postCompany

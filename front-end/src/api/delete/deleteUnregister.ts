@@ -1,5 +1,5 @@
-export const deleteCompany = async (id? : number) => {
-    return fetch(`http://localhost:8000/companies/${id}`, {
+export const deleteUnregister = async (id? : number) => {
+    return fetch(`http://localhost:8000/unregisters/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
