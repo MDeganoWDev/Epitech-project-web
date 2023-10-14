@@ -1,12 +1,11 @@
-import type { ContractType } from "../../typings/type";
-
-export const postContract = async (values : ContractType) => {
-    return fetch('http://localhost:8000/contract/', {
-        method: 'POST',
+export const getUnregister = async (id? : number) => { 
+    const url = id ? `http://localhost:8000/unregisters/${id}` : `http://localhost:8000/unregisters`;
+    
+    return fetch(url, {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
-        body : JSON.stringify(values)
     })
     .then(response => {
         if (!response.ok) {
@@ -21,4 +20,4 @@ export const postContract = async (values : ContractType) => {
         console.error("Error : ", error);
         throw error;
     });
-}
+} 

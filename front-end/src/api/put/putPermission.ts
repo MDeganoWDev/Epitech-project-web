@@ -1,7 +1,7 @@
 import type { PermissionType } from "../../typings/type";
 
-const putCompany = async (values : PermissionType) => {
-    return fetch(`http://localhost:8000/permission/${values.id}/`, {
+export const putPermission = async (id : number, values : PermissionType) => {
+    return fetch(`http://localhost:8000/permission/${id}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -22,5 +22,3 @@ const putCompany = async (values : PermissionType) => {
         throw error;
     });
 }
-
-export default putCompany

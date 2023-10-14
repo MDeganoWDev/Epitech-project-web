@@ -1,6 +1,6 @@
 import type { PermissionType } from "../../typings/type";
 
-const postCompany = async (values : PermissionType) => {
+export const postPermission = async (values : PermissionType) => {
     return fetch('http://localhost:8000/permission/', {
         method: 'POST',
         headers: {
@@ -22,5 +22,3 @@ const postCompany = async (values : PermissionType) => {
         throw error;
     });
 }
-
-export default postCompany

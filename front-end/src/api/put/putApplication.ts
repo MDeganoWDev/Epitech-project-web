@@ -1,7 +1,7 @@
 import type { ApplicationType } from "../../typings/type";
 
-const putCompany = async (values : ApplicationType) => {
-    return fetch(`http://localhost:8000/applications/${values.id}/`, {
+export const putApplication = async (id : number, values : ApplicationType) => {
+    return fetch(`http://localhost:8000/applications/${id}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -22,5 +22,3 @@ const putCompany = async (values : ApplicationType) => {
         throw error;
     });
 }
-
-export default putCompany

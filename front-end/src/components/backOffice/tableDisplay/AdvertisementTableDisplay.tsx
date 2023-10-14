@@ -1,16 +1,28 @@
-import type { AdvertisementType } from "../../typings/type"
-import CreateTableButton from "./CreateTableButton"
-import DeleteTableButton from "./DeleteTableButton"
-import PutTableButton from "./PutTableButton"
+import { useNavigate } from "react-router-dom";
+import type { AdvertisementType } from "../../../typings/type"
+import { deleteAdvertisement } from "../../../api/delete/deleteAdvertissement";
 
 type AdvertisementTableDisplayProps = {
     advertisements : AdvertisementType[]
 }
 
 const AdvertisementTableDisplay = ({advertisements}: AdvertisementTableDisplayProps) => {
+    const navigate = useNavigate();
+
+    const handleCreateNewAdvertissement = () => {
+        navigate(`advertissement-form`);        
+    }
+    
+    const handleEditAdvertissement = (id? : number) => {
+        navigate(`advertissement-form/${id}`);
+    }
+
+    const handleDeleteAdvertissement = (id? : number) => {
+        deleteAdvertisement(id)
+    }
     return (
         <div>
-           <CreateTableButton/>
+           <button onClick={handleCreateNewAdvertissement}>Create new advertissement</button>
             <table>
                 <thead>
                     <tr>
@@ -35,8 +47,8 @@ const AdvertisementTableDisplay = ({advertisements}: AdvertisementTableDisplayPr
                             <td>{advertisement.contract?.name}</td>
                             <td>{advertisement.wage}</td>
                             <td>{advertisement.working_time}</td>
-                            <td><PutTableButton/></td>
-                            <td><DeleteTableButton/></td>
+                            <td><button onClick={()=> handleEditAdvertissement(advertisement.id)}>Modifier</button></td>
+                            <td><button onClick={()=> handleDeleteAdvertissement(advertisement.id)}>Supprimer</button></td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,6 +1,6 @@
 import type { AdvertisementType } from "../../typings/type";
 
-const postCompany = async (values : AdvertisementType) => {
+export const postAdvertisement = async (values : AdvertisementType) => {
     return fetch('http://localhost:8000/advertisements/', {
         method: 'POST',
         headers: {
@@ -22,5 +22,3 @@ const postCompany = async (values : AdvertisementType) => {
         throw error;
     });
 }
-
-export default postCompany

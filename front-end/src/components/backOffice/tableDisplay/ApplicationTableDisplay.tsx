@@ -1,16 +1,28 @@
-import type { ApplicationType } from "../../typings/type"
-import CreateTableButton from "./CreateTableButton"
-import DeleteTableButton from "./DeleteTableButton"
-import PutTableButton from "./PutTableButton"
+import { useNavigate } from "react-router-dom";
+import type { ApplicationType } from "../../../typings/type"
+import { deleteApplications } from "../../../api/delete/deleteApplication";
 
 type ApplicationTableDisplayProps = {
     applications : ApplicationType[]
 }
 
 const ApplicationTableDisplay = ({applications}: ApplicationTableDisplayProps) => {
+    const navigate = useNavigate();
+
+    const handleCreateNewApplication = () => {
+        navigate(`application-form`);        
+    }
+    
+    const handleEditApplication = (id? : number) => {
+        navigate(`application-form/${id}`);
+    }
+
+    const handleDeleteApplication = (id? : number) => {
+        deleteApplications(id)
+    }
     return (
         <div>
-            <CreateTableButton/>
+            <button onClick={handleCreateNewApplication}>Create new application</button>
             <table>
                 <thead>
                     <tr>
@@ -41,8 +53,8 @@ const ApplicationTableDisplay = ({applications}: ApplicationTableDisplayProps) =
                             <td>{application.email}</td>
                             <td>{application.phone}</td>
                             <td>{application.cv}</td>
-                            <td><PutTableButton/></td>
-                            <td><DeleteTableButton/></td>
+                            <td> <button onClick={() => handleEditApplication(application.id)}></button></td>
+                            <td> <button onClick={() => handleDeleteApplication(application.id)}></button></td>
                         </tr>
                     ))}
                 </tbody>

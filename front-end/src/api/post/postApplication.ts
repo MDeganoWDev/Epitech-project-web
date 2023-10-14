@@ -1,6 +1,6 @@
 import type { ApplicationType } from "../../typings/type";
 
-const postCompany = async (values : ApplicationType) => {
+export const postApplication = async (values : ApplicationType) => {
     return fetch('http://localhost:8000/applications/', {
         method: 'POST',
         headers: {
@@ -22,5 +22,3 @@ const postCompany = async (values : ApplicationType) => {
         throw error;
     });
 }
-
-export default postCompany
