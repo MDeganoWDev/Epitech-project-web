@@ -43,7 +43,8 @@
         "pk": 1,
         "fields": {
             "name": "Company1",
-            "address": "123 Company St."
+            "address": "123 Company St.",
+            "user": 1
         }
     },
     {
@@ -51,7 +52,8 @@
         "pk": 2,
         "fields": {
             "name": "Company2",
-            "address": "124 Company St."
+            "address": "124 Company St.",
+            "user": 2
         }
     },
     {
@@ -86,7 +88,8 @@
         "fields": {
             "offer_date": "2023-10-11T10:00:00Z",
             "title": "Job1",
-            "description": "Description for Job1",
+            "quick_description": "Description for Job1",
+            "full_description": "Description for Job1 zdzaedzdzd",
             "working_time": "9am-5pm",
             "wage": "5000.00",
             "contract": 1,
@@ -99,7 +102,8 @@
         "fields": {
             "offer_date": "2023-10-12T10:00:00Z",
             "title": "Job2",
-            "description": "Description for Job2",
+            "quick_description": "Description for Job2",
+            "full_description": "Description for Job1 zdzaedzdzd",
             "working_time": "10am-6pm",
             "wage": "5500.00",
             "contract": 2,

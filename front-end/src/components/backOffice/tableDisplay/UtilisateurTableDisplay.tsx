@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import type { UtilisateurType } from "../../../typings/type"
 import { deleteUtilisateur } from "../../../api/delete/deleteUtilisateur";
+import type { UtilisateurType } from "../../../typings/type"
 
 type UtilisateurTableDisplayProps = {
     utilisateurs : UtilisateurType[]
@@ -29,10 +29,10 @@ const UtilisateurTableDisplay = ({utilisateurs} : UtilisateurTableDisplayProps) 
                     <th>ID</th>
                     <th>Firstname</th>
                     <th>Lastname</th>
-                    <th>Gender</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>CV</th>
+                    <th>Sex</th>
                     <th>Type</th>
                 </tr>
             </thead>
@@ -42,11 +42,11 @@ const UtilisateurTableDisplay = ({utilisateurs} : UtilisateurTableDisplayProps) 
                         <td>{utilisateur.id}</td>
                         <td>{utilisateur.firstname}</td>
                         <td>{utilisateur.lastname}</td>
-                        <td>{utilisateur.sex.name}</td>
                         <td>{utilisateur.email}</td>
                         <td>{utilisateur.phone}</td>
                         <td>{utilisateur.cv}</td>
-                        <td>{utilisateur.permission.name}</td>
+                        <td>{utilisateur.sex?.name}</td>
+                        <td>{utilisateur.permission?.name}</td>
                         <td><button onClick={() => handleEditUtilisateur(utilisateur.id)}>Modifier</button></td>
                         <td><button onClick={() => handleDeleteUtilisateur(utilisateur.id)}>Supprimer</button></td>
                     </tr>

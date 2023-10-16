@@ -20,6 +20,7 @@ const AdvertisementTableDisplay = ({advertisements}: AdvertisementTableDisplayPr
     const handleDeleteAdvertissement = (id? : number) => {
         deleteAdvertisement(id)
     }
+    
     return (
         <div>
            <button onClick={handleCreateNewAdvertissement}>Create new advertissement</button>
@@ -28,12 +29,13 @@ const AdvertisementTableDisplay = ({advertisements}: AdvertisementTableDisplayPr
                     <tr>
                         <th>ID</th>
                         <th>Date</th>
-                        <th>Company</th>
                         <th>Title</th>
-                        <th>Description</th>
-                        <th>Contract</th>
                         <th>Wage</th>
-                        <th>Hour</th>
+                        <th>Working time</th>
+                        <th>Quick description</th>
+                        <th>Full description</th>
+                        <th>Contract</th>
+                        <th>Company</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,12 +43,13 @@ const AdvertisementTableDisplay = ({advertisements}: AdvertisementTableDisplayPr
                         <tr key={advertisement.id}>
                             <td>{advertisement.id}</td>
                             <td>{advertisement.offerDate}</td>
-                            <td>{advertisement.company?.name}</td>
                             <td>{advertisement.title}</td>
-                            <td>{advertisement.quick_description}</td>
-                            <td>{advertisement.contract?.name}</td>
                             <td>{advertisement.wage}</td>
                             <td>{advertisement.working_time}</td>
+                            <td>{advertisement.quick_description}</td>
+                            <td>{advertisement.full_description}</td>
+                            <td>{advertisement.contract?.name}</td>
+                            <td>{advertisement.company?.id}</td>
                             <td><button onClick={()=> handleEditAdvertissement(advertisement.id)}>Modifier</button></td>
                             <td><button onClick={()=> handleDeleteAdvertissement(advertisement.id)}>Supprimer</button></td>
                         </tr>

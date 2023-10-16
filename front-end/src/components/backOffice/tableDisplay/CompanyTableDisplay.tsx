@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { CompanyType } from "../../../typings/type"
 import { deleteCompany } from "../../../api/delete/deleteCompany";
 
@@ -29,6 +29,7 @@ const CompanyTableDisplay = ({companies} : CompanyTableDisplayProps) => {
                       <th>ID</th>
                       <th>Name</th>
                       <th>Adress</th>
+                      <th>User id</th>
                   </tr>
               </thead>
               <tbody>
@@ -37,6 +38,7 @@ const CompanyTableDisplay = ({companies} : CompanyTableDisplayProps) => {
                           <td>{company.id}</td>
                           <td>{company.name}</td>
                           <td>{company.address}</td>
+                          <td><Link to={`/admin/utilisateur-form/${company.user?.id}`}>{company.user?.id}</Link></td>
                           <td><button onClick={() => handleEditCompany(company.id)}>Modifier</button></td>
                           <td><button onClick={() => handleDeleteCompany(company.id)}>Supprimer</button></td>
                       </tr>
