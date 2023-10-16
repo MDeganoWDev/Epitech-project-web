@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { SexType, PermissionType } from "../typings/type";
+import { useAuthStore } from "../store/authStore";
 
 const RegisterPage = () => {
+    const navigate = useNavigate();
+    const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
     const [isLogin, setIsLogin] = useState(true);
     const [email, setemail] = useState("");
     const [password, setPassword] = useState("");
@@ -80,6 +84,8 @@ const RegisterPage = () => {
             if (response.ok) {
                 const data = await response.json();
                 document.cookie = `token=${data.token}`;
+                setAuthenticated(true);
+                navigate('/');
             } else {
                 const errorData = await response.json();
                 console.error("Login failed:", errorData);
@@ -115,6 +121,8 @@ const RegisterPage = () => {
                 const data = await response.json();
                 console.log("Registration successful:", data);
                 document.cookie = `token=${data.token}`;
+                setAuthenticated(true);
+                navigate('/');
             } else {
                 const errorData = await response.json();
                 console.error("Registration failed:", errorData);
