@@ -53,8 +53,8 @@ const ApplicationTableDisplay = ({applications}: ApplicationTableDisplayProps) =
                             <td>{application.email}</td>
                             <td>{application.phone}</td>
                             <td>{application.cv}</td>
-                            <td> <button onClick={() => handleEditApplication(application.id)}></button></td>
-                            <td> <button onClick={() => handleDeleteApplication(application.id)}></button></td>
+                            <td> <button onClick={() => handleEditApplication(application.id)}>Modifier</button></td>
+                            <td> <button onClick={() => handleDeleteApplication(application.id)}>Supprimer</button></td>
                         </tr>
                     ))}
                 </tbody>

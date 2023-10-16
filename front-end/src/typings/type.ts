@@ -2,6 +2,8 @@ export type CompanyType = {
     id? : number
     name : string
     address : string
+    user? : UtilisateurType
+    user_id? : number
 }
 
 export type AdvertisementType = {
@@ -13,7 +15,9 @@ export type AdvertisementType = {
     working_time : string
     wage : string
     contract? : ContractType
+    contract_id? : number
     company? : CompanyType
+    company_id? : number
 }
 
 export type UtilisateurType = {
@@ -23,8 +27,10 @@ export type UtilisateurType = {
     email : string
     phone : string,
     cv : string
-    sex : SexType
-    permission : PermissionType
+    sex? : SexType
+    sex_id? : number
+    permission? : PermissionType
+    permission_id? : number
     password? : string
     is_superuser? : false,
     last_login? : string
@@ -40,7 +46,8 @@ export type UnregisterType = {
     email : string
     phone : string,
     cv : string
-    sex : SexType
+    sex? : SexType
+    sex_id? : number
 }
 
 export type ApplicationType = {
@@ -52,8 +59,10 @@ export type ApplicationType = {
     phone : string
     email : string
     cv : string
-    user : UtilisateurType
-    advertisement : AdvertisementType
+    user? : UtilisateurType
+    user_id? : number
+    advertisement? : AdvertisementType
+    advertisement_id? : number
 }
 
 export type SexType = {

@@ -22,6 +22,10 @@ const SexForm = () => {
       idSex != undefined ? response = await putSex(idSex, values) : response = await postSex(values); 
       if (response) navigate(`/admin`);
     }
+
+    const HandleCancel = () => {
+      navigate(`/admin`);
+    }
     
     useEffect(()=>{
       if (id != undefined){      
@@ -56,6 +60,7 @@ const SexForm = () => {
           onChange={e => setName(e.target.value)}  
           />
         <button type="submit">Enregister</button>
+        <button onClick={HandleCancel}>Annuler</button>
       </form>
     </div>
   )

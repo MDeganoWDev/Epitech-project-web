@@ -4,22 +4,11 @@ from .serializers import CompanySerializer, AdvertisementSerializer, ContractSer
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 
-class CompanyViewSet(viewsets.ModelViewSet):
-    queryset = Company.objects.all()
-    serializer_class = CompanySerializer
-
-class AdvertisementViewSet(viewsets.ModelViewSet):
-    queryset = Advertisement.objects.all()
-    serializer_class = AdvertisementSerializer
 
 class UtilisateurViewSet(viewsets.ModelViewSet):
     queryset = Utilisateur.objects.all()
     serializer_class = UtilisateurSerializer
     # permission_classes = [IsAuthenticated]
-
-class ApplicationViewSet(viewsets.ModelViewSet):
-    queryset = Application.objects.all()
-    serializer_class = ApplicationSerializer
 
 class PermissionViewSet(viewsets.ModelViewSet):
     queryset = Permission.objects.all()
@@ -36,3 +25,15 @@ class SexViewSet(viewsets.ModelViewSet):
 class UnregisterViewSet(viewsets.ModelViewSet):
     queryset = Unregister.objects.all()
     serializer_class = UnregisterSerializer
+
+class CompanyViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+class AdvertisementViewSet(viewsets.ModelViewSet):
+    queryset = Advertisement.objects.all()
+    serializer_class = AdvertisementSerializer
+
+class ApplicationViewSet(viewsets.ModelViewSet):
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer

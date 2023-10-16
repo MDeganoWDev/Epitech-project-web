@@ -2,11 +2,6 @@ from rest_framework.authtoken.models import Token
 from rest_framework import serializers
 from .models import Company, Permission, Contract, Sex, Advertisement, Unregister, Utilisateur, Application, LANGUAGE_CHOICES, STYLE_CHOICES
 
-class CompanySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Company
-        fields = '__all__'
-
 class PermissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
@@ -23,21 +18,18 @@ class SexSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UnregisterSerializer(serializers.ModelSerializer):
-    sex = SexSerializer()
+    sex = SexSerializer(read_only=True)
+    sex_id = serializers.PrimaryKeyRelatedField(queryset=Sex.objects.all(), source='sex', write_only=True)
     class Meta:
         model = Unregister
         fields = '__all__'
 
-class AdvertisementSerializer(serializers.ModelSerializer):
-    company = CompanySerializer()
-    contract = ContractSerializer()
-    class Meta:
-        model = Advertisement
-        fields = '__all__'
 
 class UtilisateurSerializer(serializers.ModelSerializer):
-    sex = SexSerializer()
-    permission = PermissionSerializer()
+    sex = SexSerializer(read_only=True)
+    sex_id = serializers.PrimaryKeyRelatedField(queryset=Sex.objects.all(), source='sex', write_only=True)
+    permission = PermissionSerializer(read_only=True)
+    permission_id = serializers.PrimaryKeyRelatedField(queryset=Permission.objects.all(), source='permission', write_only=True)
     token = serializers.SerializerMethodField()
     class Meta:
         model = Utilisateur
@@ -56,10 +48,30 @@ class UtilisateurSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+class CompanySerializer(serializers.ModelSerializer):
+    user = UtilisateurSerializer(read_only=True)
+    user_id = serializers.PrimaryKeyRelatedField(queryset=Utilisateur.objects.all(), source='user', write_only=True)
+    class Meta:
+        model = Company
+        fields = '__all__'
+
+class AdvertisementSerializer(serializers.ModelSerializer):
+    company = CompanySerializer(read_only=True)
+    company_id = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all(), source='company', write_only=True)
+    contract = ContractSerializer(read_only=True)
+    contract_id = serializers.PrimaryKeyRelatedField(queryset=Contract.objects.all(), source='contract', write_only=True)
+    class Meta:
+        model = Advertisement
+        fields = '__all__'
+
 class ApplicationSerializer(serializers.ModelSerializer):
-    user = UtilisateurSerializer()
-    unregisterUser = UnregisterSerializer()
-    advertisement = AdvertisementSerializer()
+    user = UtilisateurSerializer(read_only=True)
+    user_id = serializers.PrimaryKeyRelatedField(queryset=Utilisateur.objects.all(), source='user', write_only=True)
+    unregisterUser = UnregisterSerializer(read_only=True)
+    unregisterUser_id = serializers.PrimaryKeyRelatedField(queryset=Unregister.objects.all(), source='unregisterUser', write_only=True)
+    advertisement = AdvertisementSerializer(read_only=True)
+    advertisement_id = serializers.PrimaryKeyRelatedField(queryset=Advertisement.objects.all(), source='advertisement', write_only=True)
     class Meta:
         model = Application
         fields = '__all__'
+        
