@@ -34,8 +34,9 @@ const AdvertisementTableDisplay = ({advertisements}: AdvertisementTableDisplayPr
                         <th>Working time</th>
                         <th>Quick description</th>
                         <th>Full description</th>
+                        <th>Status</th>
                         <th>Contract</th>
-                        <th>Company</th>
+                        <th>Company ID</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +49,7 @@ const AdvertisementTableDisplay = ({advertisements}: AdvertisementTableDisplayPr
                             <td>{advertisement.working_time}</td>
                             <td>{advertisement.quick_description}</td>
                             <td>{advertisement.full_description}</td>
+                            <td>{advertisement.isOnline}</td>
                             <td>{advertisement.contract?.name}</td>
                             <td>{advertisement.company?.id}</td>
                             <td><button onClick={()=> handleEditAdvertissement(advertisement.id)}>Modifier</button></td>

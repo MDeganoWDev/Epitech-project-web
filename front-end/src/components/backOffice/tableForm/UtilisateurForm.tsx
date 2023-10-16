@@ -116,6 +116,15 @@ return (
         // onChange={handleFileChange}
       />
 
+      <label htmlFor="password">Password</label>
+      <input 
+        type="password" 
+        name="password" 
+        id="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}  
+      />
+
       <label htmlFor="permission_id">Permission id</label>
       <input 
         type="number" 

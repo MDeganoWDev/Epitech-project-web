@@ -28,15 +28,9 @@ const ApplicationTableDisplay = ({applications}: ApplicationTableDisplayProps) =
                     <tr>
                         <th>ID</th>
                         <th>Date</th>
-                        <th>Title</th>
-                        <th>Company</th>
-                        <th>Description</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
                         <th>Message</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>CV</th>
+                        <th>User ID</th>
+                        <th>Company ID</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,15 +38,9 @@ const ApplicationTableDisplay = ({applications}: ApplicationTableDisplayProps) =
                         <tr key={application.id}>
                             <td>{application.id}</td>
                             <td>{application.apply_date}</td>
-                            <td>{application.advertisement.title}</td>
-                            <td>{application.advertisement.company?.name}</td>
-                            <td>{application.advertisement.quick_description}</td>
-                            <td>{application.firstname}</td>
-                            <td>{application.lastname}</td>
                             <td>{application.message}</td>
-                            <td>{application.email}</td>
-                            <td>{application.phone}</td>
-                            <td>{application.cv}</td>
+                            <td>{application.user ? "Registered : " + application.user.id : "Unregistered : " + application.unregisterUser?.id}</td>
+                            <td>{application.advertisement?.company?.id}</td>
                             <td> <button onClick={() => handleEditApplication(application.id)}>Modifier</button></td>
                             <td> <button onClick={() => handleDeleteApplication(application.id)}>Supprimer</button></td>
                         </tr>

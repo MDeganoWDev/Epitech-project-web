@@ -59,13 +59,8 @@ class Advertisement(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
 class Application(models.Model):
-    message = models.CharField(max_length=50, null=False)
     apply_date = models.DateTimeField(null=False)
-    firstname = models.CharField(max_length=50, blank=True, null=True)
-    lastname = models.CharField(max_length=50, blank=True, null=True)
-    phone = models.CharField(max_length=50, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    cv = models.CharField(max_length=50, blank=True, null=True)
+    message = models.CharField(max_length=50, null=False)
     user = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, blank=True, null=True)
     unregisterUser = models.ForeignKey(Unregister, on_delete=models.SET_NULL, blank=True, null=True)
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE)

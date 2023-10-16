@@ -14,6 +14,7 @@ export type AdvertisementType = {
     quick_description : string
     working_time : string
     wage : string
+    isOnline : boolean
     contract? : ContractType
     contract_id? : number
     company? : CompanyType
@@ -53,12 +54,9 @@ export type UnregisterType = {
 export type ApplicationType = {
     id? : number
     message : string
-    apply_date : string
-    firstname : string
-    lastname : string
-    phone : string
-    email : string
-    cv : string
+    apply_date? : string
+    unregisterUser? : UnregisterType
+    unregisterUser_id? : number
     user? : UtilisateurType
     user_id? : number
     advertisement? : AdvertisementType
