@@ -17,3 +17,34 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+/* Apply some basic styles to the table */
+table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Style the table header (table headings) */
+th {
+  background-color: #f2f2f2;
+  color: black;
+  text-align: left;
+  padding: 10px;
+}
+
+/* Style the table rows */
+/* tr {
+  background-color: #ffffff;
+}
+
+/* Add some hover effect to table rows */
+/* tr:hover {
+  background-color: #f5f5f5;
+} */ */
+
+/* Style the table cells */
+td:not(:last-child):not(:nth-last-child(2)) {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}

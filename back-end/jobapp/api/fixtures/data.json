@@ -10,19 +10,12 @@
         "model": "api.Permission",
         "pk": 2,
         "fields" : {
-            "name": "companyAdmin"
-        }
-    },
-    {
-        "model": "api.Permission",
-        "pk": 3,
-        "fields" : {
             "name": "company"
         }
     },
     {
         "model": "api.Permission",
-        "pk": 4,
+        "pk": 3,
         "fields" : {
             "name": "worker"
         }

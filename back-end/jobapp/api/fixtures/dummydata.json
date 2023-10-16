@@ -8,8 +8,8 @@
             "phone": "123-456-7890",
             "email": "admin@example.com",
             "cv": "AdminCV.pdf",
-            "sex": 1,
-            "permission": 1
+            "sex_id": 1,
+            "permission_id": 1
         }
     },
     {
@@ -21,8 +21,8 @@
             "phone": "123-456-7891",
             "email": "johndawa@example.com",
             "cv": "JohnDoeCV.pdf",
-            "sex": 1,
-            "permission": 4
+            "sex_id": 1,
+            "permission_id": 3
         }
     },
     {
@@ -34,8 +34,8 @@
             "phone": "123-456-7892",
             "email": "janesmith@example.com",
             "cv": "JaneSmithCV.pdf",
-            "sex": 2,
-            "permission": 4
+            "sex_id": 2,
+            "permission_id": 3
         }
     },
     {
@@ -44,7 +44,7 @@
         "fields": {
             "name": "Company1",
             "address": "123 Company St.",
-            "user": 1
+            "user_id": 1
         }
     },
     {
@@ -53,33 +53,33 @@
         "fields": {
             "name": "Company2",
             "address": "124 Company St.",
-            "user": 2
+            "user_id": 2
         }
     },
     {
         "model": "api.Utilisateur",
-        "pk": 21,
+        "pk": 1,
         "fields": {
             "firstname": "WorkerAdmin1",
             "lastname": "ForCompany1",
             "phone": "234-567-8901",
             "email": "workeradmin1@example.com",
             "cv": "WorkerAdmin1CV.pdf",
-            "sex": 1,
-            "permission": 2
+            "sex_id": 1,
+            "permission_id": 2
         }
     },
     {
         "model": "api.Utilisateur",
-        "pk": 22,
+        "pk": 2,
         "fields": {
             "firstname": "WorkerAdmin2",
             "lastname": "ForCompany2",
             "phone": "234-567-8902",
             "email": "workeradmin2@example.com",
             "cv": "WorkerAdmin2CV.pdf",
-            "sex": 2,
-            "permission": 2
+            "sex_id": 2,
+            "permission_id": 2
         }
     },
     {
@@ -92,8 +92,8 @@
             "full_description": "Description for Job1 zdzaedzdzd",
             "working_time": "9am-5pm",
             "wage": "5000.00",
-            "contract": 1,
-            "company": 1
+            "contract_id": 1,
+            "company_id": 1
         }
     },
     {
@@ -106,8 +106,8 @@
             "full_description": "Description for Job1 zdzaedzdzd",
             "working_time": "10am-6pm",
             "wage": "5500.00",
-            "contract": 2,
-            "company": 2
+            "contract_id": 2,
+            "company_id": 2
         }
     },
     {
@@ -116,13 +116,8 @@
         "fields": {
             "message": "I am interested in this job.",
             "apply_date": "2023-10-11T11:00:00Z",
-            "firstname": "John",
-            "lastname": "Doe",
-            "phone": "123-456-7891",
-            "email": "johndoe@example.com",
-            "cv": "JohnDoeCV.pdf",
-            "user": 2,
-            "advertisement": 1
+            "user_id": 1,
+            "advertisement_id": 1
         }
     },
     {
@@ -131,13 +126,8 @@
         "fields": {
             "message": "Looking forward to this opportunity.",
             "apply_date": "2023-10-12T11:30:00Z",
-            "firstname": null,
-            "lastname": null,
-            "phone": null,
-            "email": null,
-            "cv": null,
-            "user": null,
-            "advertisement": 2
+            "user_id": 2,
+            "advertisement_id": 2
         }
     }
 ]

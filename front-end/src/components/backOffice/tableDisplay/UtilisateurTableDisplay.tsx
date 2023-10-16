@@ -33,7 +33,7 @@ const UtilisateurTableDisplay = ({utilisateurs} : UtilisateurTableDisplayProps) 
                     <th>Phone</th>
                     <th>CV</th>
                     <th>Sex</th>
-                    <th>Type</th>
+                    <th>Role</th>
                 </tr>
             </thead>
             <tbody>
