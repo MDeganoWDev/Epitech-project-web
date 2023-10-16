@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import type { AdvertisementType } from "../../../typings/type"
-import { deleteAdvertisement } from "../../../api/delete/deleteAdvertissement";
+import { deleteAdvertisement } from "../../../api/delete/deleteAdvertisement";
 
 type AdvertisementTableDisplayProps = {
     advertisements : AdvertisementType[]

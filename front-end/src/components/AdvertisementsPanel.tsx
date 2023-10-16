@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAdvertisement } from "../api/get/getAdvertissement";
+import { getAdvertisement } from "../api/get/getAdvertisement";
 import CardAdvertisement from "./ui/CardAdvertisement";
 import type { AdvertisementType } from "../typings/type";
 

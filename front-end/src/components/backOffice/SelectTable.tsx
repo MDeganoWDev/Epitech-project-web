@@ -1,4 +1,4 @@
-import { getAdvertisement } from "../../api/get/getAdvertissement"
+import { getAdvertisement } from "../../api/get/getAdvertisement"
 import { getApplication } from "../../api/get/getApplication"
 import { getCompany } from "../../api/get/getCompany"
 import { getContract } from "../../api/get/getContract"

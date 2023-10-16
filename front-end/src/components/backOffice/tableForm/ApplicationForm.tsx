@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { ApplicationType } from '../../../typings/type';
-import { putApplication } from '../../../api/put/putApplication';
-import { postApplication } from '../../../api/post/postApplication';
 import { getApplication } from '../../../api/get/getApplication';
 import { useParams, useNavigate } from 'react-router-dom';
+import { postApplication } from '../../../api/post/postApplication';
+import { putApplication } from '../../../api/put/putApplication';
 
 const ApplicationForm = () => {
   const { id } = useParams();

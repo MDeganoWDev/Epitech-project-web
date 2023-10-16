@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { AdvertisementType } from '../../../typings/type';
-import { putAdvertissement } from '../../../api/put/putAdvertisement';
-import { postAdvertisement } from '../../../api/post/postAdvertisement';
-import { getAdvertisement } from '../../../api/get/getAdvertissement';
 import { useParams, useNavigate } from 'react-router-dom';
+import { postAdvertisement } from '../../../api/post/postAdvertisement';
+import { putAdvertisement } from '../../../api/put/putAdvertisement';
+import { getAdvertisement } from '../../../api/get/getAdvertisement';
 
 const AdvertisementForm = () => {
   const { id } = useParams();
@@ -33,7 +33,7 @@ const AdvertisementForm = () => {
       company_id : idCompany
     }
     
-    idPermission != undefined ? response = await putAdvertissement(idPermission, values) : response = await postAdvertisement(values); 
+    idPermission != undefined ? response = await putAdvertisement(idPermission, values) : response = await postAdvertisement(values); 
     if (response) navigate(`/admin`);
   }
   
