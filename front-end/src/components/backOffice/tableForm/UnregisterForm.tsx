@@ -3,7 +3,6 @@ import { putUnregister } from '../../../api/put/putUnregister';
 import { postUnregister } from '../../../api/post/postUnregister';
 import { getUnregister } from '../../../api/get/getUnregister';
 import { useParams, useNavigate } from 'react-router-dom';
-import type { UnregisterType } from '../../../typings/type';
 
 const UnregisterForm = () => {
   const { id } = useParams();
@@ -14,25 +13,32 @@ const UnregisterForm = () => {
   const [lastname, setLastname] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [cv, setCv] = useState("");
+  const [cv, setCv] = useState<File>();
   const [idSex, setIdSex] = useState<number | undefined>();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let response
-    const values : UnregisterType = {
-      firstname : firstname,
-      lastname : lastname,
-      phone : phone,
-      email : email,
-      cv : cv,
-      sex_id : idSex
-    }
-    
-    idUnregister != undefined ? response = await putUnregister(idUnregister, values) : response = await postUnregister(values); 
+
+    const formData = new FormData();
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    if (cv) formData.append("cv", cv);
+    if (idSex) formData.append("sex_id", idSex.toString());
+
+    idUnregister != undefined ? response = await putUnregister(idUnregister, formData) : response = await postUnregister(formData); 
     if (response) navigate(`/admin`);
   }
-  
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+        setCv(files[0]);
+    }
+  };
+
   const HandleCancel = () => {
     navigate(`/admin`);
   }
@@ -108,7 +114,7 @@ return (
         accept=".pdf"
         name="cv"
         id="cv"
-        // onChange={handleFileChange}
+        onChange={handleFileChange}
       />
 
       <label htmlFor="sex_id">Sex id</label>

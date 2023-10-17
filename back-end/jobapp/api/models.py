@@ -26,7 +26,7 @@ class Utilisateur(AbstractBaseUser, PermissionsMixin):
     lastname = models.CharField(max_length=50, null=False)
     phone = models.CharField(max_length=50, null=False)
     email = models.EmailField(unique=True, null=False)
-    cv = models.CharField(max_length=50, blank=True, null=True)
+    cv = models.FileField(upload_to='storage/cv/')
     sex = models.ForeignKey(Sex, on_delete=models.SET_NULL, null=True)
     permission = models.ForeignKey(Permission, on_delete=models.SET_NULL, null=True)
     password = models.CharField(max_length=128, default='default_password')
@@ -40,7 +40,7 @@ class Unregister(models.Model):
     lastname = models.CharField(max_length=50, null=False)
     phone = models.CharField(max_length=50, null=False)
     email = models.EmailField(max_length=50, null=False)
-    cv = models.CharField(max_length=50, null=False)
+    cv = models.FileField(upload_to='storage/cv/')
     sex = models.ForeignKey(Sex, on_delete=models.SET_NULL, null=True)
 
 class Company(models.Model):

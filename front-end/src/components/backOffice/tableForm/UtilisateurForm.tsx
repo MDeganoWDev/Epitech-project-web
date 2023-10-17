@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { putUtilisateur } from '../../../api/put/putUtilisateur';
 import { postUtilisateur } from '../../../api/post/postUtilisateur';
-import { UtilisateurType } from '../../../typings/type';
 import { getUtilisateur } from '../../../api/get/getUtilisateur';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ const UtilisateurForm = () => {
   const [lastname, setLastname] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [cv, setCv] = useState("");
+  const [cv, setCv] = useState<File>();
   const [password, setPassword] = useState("");
   const [idPermission, setIdPermission] = useState<number | undefined>();
   const [idSex, setIdSex] = useState<number | undefined>();
@@ -22,20 +21,27 @@ const UtilisateurForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let response
-    const values : UtilisateurType = {
-      firstname : firstname,
-      lastname : lastname,
-      phone : phone,
-      email : email,
-      cv : cv,
-      password : password,
-      permission_id : idPermission,
-      sex_id : idSex
-    }
+
+    const formData = new FormData();
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("password", password);
+    if (cv) formData.append("cv", cv);
+    if (idPermission) formData.append("permission_id", idPermission.toString());
+    if (idSex) formData.append("sex_id", idSex.toString());
     
-    idUnregister != undefined ? response = await putUtilisateur(idUnregister, values) : response = await postUtilisateur(values); 
+    idUnregister != undefined ? response = await putUtilisateur(idUnregister, formData) : response = await postUtilisateur(formData); 
     if (response) navigate(`/admin`);
   }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+        setCv(files[0]);
+    }
+  };
   
   const HandleCancel = () => {
     navigate(`/admin`);
@@ -113,7 +119,7 @@ return (
         accept=".pdf"
         name="cv"
         id="cv"
-        // onChange={handleFileChange}
+        onChange={handleFileChange}
       />
 
       <label htmlFor="password">Password</label>

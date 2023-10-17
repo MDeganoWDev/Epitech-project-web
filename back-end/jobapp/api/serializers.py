@@ -18,6 +18,7 @@ class SexSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UnregisterSerializer(serializers.ModelSerializer):
+    cv = serializers.FileField(required=False)
     sex = SexSerializer(read_only=True)
     sex_id = serializers.PrimaryKeyRelatedField(queryset=Sex.objects.all(), source='sex', write_only=True)
     class Meta:
@@ -26,6 +27,7 @@ class UnregisterSerializer(serializers.ModelSerializer):
 
 
 class UtilisateurSerializer(serializers.ModelSerializer):
+    cv = serializers.FileField(required=False)
     sex = SexSerializer(read_only=True)
     sex_id = serializers.PrimaryKeyRelatedField(queryset=Sex.objects.all(), source='sex', write_only=True)
     permission = PermissionSerializer(read_only=True)
