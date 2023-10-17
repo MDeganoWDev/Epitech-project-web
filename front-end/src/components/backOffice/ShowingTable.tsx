@@ -17,33 +17,28 @@ const ShowingTable = () => {
         setLoading(!selectedTable);
     }, [selectedTable]);
 
-    if (loading) {
-        return <div>Loading</div>;
-    } else if (!selectedTable.length) {
-        return <div>No data available</div>;
-    } else {
-        switch (SelectedTableName){
-            case "Advertisements" :
-                return <AdvertisementTableDisplay advertisements={selectedTable}/>
-            case "Applications" :
-                return <ApplicationTableDisplay applications={selectedTable}/>
-            case "Utilisateurs" :
-                return <UtilisateurTableDisplay utilisateurs={selectedTable}/>
-            case "Unregisters" :
-                return <UnregisterTableDisplay unregisters={selectedTable}/>
-            case "Companies" :
-                return <CompanyTableDisplay companies={selectedTable}/>
-            case "Contract" :
-                return <ContractTableDisplay contracts={selectedTable}/>
-            case "Permission" :
-                return <PermissionTableDisplay permissions={selectedTable}/>
-            case "Sex" :
-                return <SexTableDisplay sex={selectedTable}/>
-            default :
-                return <div>Error table not found</div>
-           
-        }
-    }  
+    if (loading) return <div>Loading</div>;
+   
+    switch (SelectedTableName){
+        case "Advertisements" :
+            return <AdvertisementTableDisplay advertisements={selectedTable}/>
+        case "Applications" :
+            return <ApplicationTableDisplay applications={selectedTable}/>
+        case "Utilisateurs" :
+            return <UtilisateurTableDisplay utilisateurs={selectedTable}/>
+        case "Unregisters" :
+            return <UnregisterTableDisplay unregisters={selectedTable}/>
+        case "Companies" :
+            return <CompanyTableDisplay companies={selectedTable}/>
+        case "Contract" :
+            return <ContractTableDisplay contracts={selectedTable}/>
+        case "Permission" :
+            return <PermissionTableDisplay permissions={selectedTable}/>
+        case "Sex" :
+            return <SexTableDisplay sex={selectedTable}/>
+        default :
+            return <div>Error table not found</div>    
+    }
 };
 
 export default ShowingTable;

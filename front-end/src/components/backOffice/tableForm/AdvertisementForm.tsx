@@ -60,6 +60,7 @@ const AdvertisementForm = () => {
           setIsOnline(existingAdvertisement.isOnline)
           setIdContract(existingAdvertisement.contract.id);
           setIdCompany(existingAdvertisement.company.id);
+          setLoading(false)
       }      
 
       fetchData()

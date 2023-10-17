@@ -1,12 +1,10 @@
-import type { UtilisateurType } from "../../typings/type";
-
-export const postUtilisateur = async (values : UtilisateurType) => {
+export const postUtilisateur = async (formData : FormData) => {
     return fetch('http://localhost:8000/utilisateurs/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body : JSON.stringify(values)
+        body : formData
     })
     .then(response => {
         if (!response.ok) {

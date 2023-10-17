@@ -27,13 +27,13 @@ export type UtilisateurType = {
     lastname : string
     email : string
     phone : string,
-    cv : string
+    cv? : File
     sex? : SexType
     sex_id? : number
     permission? : PermissionType
     permission_id? : number
     password? : string
-    is_superuser? : false,
+    is_superuser? : false
     last_login? : string
     token? : number
     groups? : null
@@ -45,8 +45,8 @@ export type UnregisterType = {
     firstname : string
     lastname : string
     email : string
-    phone : string,
-    cv : string
+    phone : string
+    cv? : File 
     sex? : SexType
     sex_id? : number
 }
