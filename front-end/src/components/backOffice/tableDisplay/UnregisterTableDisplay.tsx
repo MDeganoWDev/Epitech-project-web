@@ -43,7 +43,7 @@ const UnregisterTableDisplay = ({unregisters} : UnregisterTableDisplayProps) => 
                         <td>{unregister.lastname}</td>
                         <td>{unregister.email}</td>
                         <td>{unregister.phone}</td>
-                        <td>{unregister.cv}</td>
+                        <td><embed src={unregister.cv} width="800px" height="600px" /></td>
                         <td>{unregister.sex?.name}</td>
                         <td><button onClick={() => handleEditUnregister(unregister.id)}>Modifier</button></td>
                         <td><button onClick={() => handleDeleteUnregister(unregister.id)}>Supprimer</button></td>

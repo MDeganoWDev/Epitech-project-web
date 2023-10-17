@@ -1,12 +1,7 @@
-import type { UnregisterType } from "../../typings/type";
-
-export const postUnregister = async (values : UnregisterType) => {
+export const postUnregister = async (formData : FormData) => {
     return fetch('http://localhost:8000/unregisters/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body : JSON.stringify(values)
+        body: formData
     })
     .then(response => {
         if (!response.ok) {

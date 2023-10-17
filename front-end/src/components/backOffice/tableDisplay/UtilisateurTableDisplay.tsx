@@ -44,7 +44,7 @@ const UtilisateurTableDisplay = ({utilisateurs} : UtilisateurTableDisplayProps) 
                         <td>{utilisateur.lastname}</td>
                         <td>{utilisateur.email}</td>
                         <td>{utilisateur.phone}</td>
-                        <td>{utilisateur.cv}</td>
+                        <td><embed src={utilisateur.cv} width="800px" height="600px" /></td>
                         <td>{utilisateur.sex?.name}</td>
                         <td>{utilisateur.permission?.name}</td>
                         <td><button onClick={() => handleEditUtilisateur(utilisateur.id)}>Modifier</button></td>
