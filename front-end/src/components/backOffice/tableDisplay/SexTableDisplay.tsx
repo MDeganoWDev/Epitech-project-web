@@ -1,24 +1,38 @@
 import { useNavigate } from 'react-router-dom'
 import { deleteSex } from '../../../api/delete/deleteSex'
+import { useEffect, useState } from 'react'
+import { getSex } from '../../../api/get/getSex'
 import type { SexType } from '../../../typings/type'
 
-type UnregisterTableDisplayProps = {
-    sex : SexType[]
-}
-
-const SexTableDisplay = ({sex} : UnregisterTableDisplayProps) => {
+const SexTableDisplay = () => {
     const navigate = useNavigate();
-
+    const [loading, setLoading] = useState(true);
+    const [sex, setSex] = useState<SexType[]>([]);
+       
     const handleCreateNewSex = () => {
-        navigate(`sex-form`);        
+        navigate(`form`);        
     }
     
     const handleEditSex = (id? : number) => {
-        navigate(`sex-form/${id}`);
+        navigate(`form/${id}`);
     }
 
     const handleDeleteSex = (id? : number) => {
         deleteSex(id)
+    }
+
+    useEffect(()=>{
+        const fetchData = async () => {
+          const sexData = await getSex();
+          setSex(sexData);
+        setLoading(false);
+        }
+    
+        fetchData()
+      }, [])
+    
+    if (loading) {
+        return <div>Loading</div>
     }
 
     return (

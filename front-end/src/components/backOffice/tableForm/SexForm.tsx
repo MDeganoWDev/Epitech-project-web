@@ -20,11 +20,11 @@ const SexForm = () => {
       }
       
       idSex != undefined ? response = await putSex(idSex, values) : response = await postSex(values); 
-      if (response) navigate(`/admin`);
+      if (response) navigate(`/admin/sex`);
     }
 
     const HandleCancel = () => {
-      navigate(`/admin`);
+      navigate(`/admin/sex`);
     }
     
     useEffect(()=>{

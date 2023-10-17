@@ -1,25 +1,38 @@
 import { useNavigate } from "react-router-dom";
 import { deleteContract } from "../../../api/delete/deleteContract";
 import type { ContractType } from "../../../typings/type";
+import { getContract } from "../../../api/get/getContract";
+import { useState, useEffect } from "react";
 
-type ContractTableDisplayProps = {
-  contracts : ContractType[]
-}
-
-const ContractTableDisplay = ({contracts} : ContractTableDisplayProps) => {
+const ContractTableDisplay = () => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true);
+  const [contracts, setContracts] = useState<ContractType[]>([]);
   const handleCreateNewContract = () => {
-      navigate(`contract-form`);        
-  }
+      navigate(`form`);        
+    }
   
   const handleEditContract = (id? : number) => {
-      navigate(`contract-form/${id}`);
-  }
+      navigate(`form/${id}`);
+    }
 
-  const handleDeleteContract = (id? : number) => {
+    const handleDeleteContract = (id? : number) => {
       deleteContract(id)
-  }
+    }
+
+    useEffect(()=>{
+      const fetchData = async () => {
+        const contractData = await getContract();
+        setContracts(contractData);
+      setLoading(false);
+      }
+    
+      fetchData()
+    }, [])
+    
+    if (loading) {
+        return <div>Loading</div>
+    }
 
   return (
       <div>

@@ -34,11 +34,11 @@ const AdvertisementForm = () => {
     }
     
     idPermission != undefined ? response = await putAdvertisement(idPermission, values) : response = await postAdvertisement(values); 
-    if (response) navigate(`/admin`);
+    if (response) navigate(`/admin/advertisement`);
   }
   
   const HandleCancel = () => {
-    navigate(`/admin`);
+    navigate(`/admin/advertisement`);
   }
 
   const handleCheckboxChange = () => {

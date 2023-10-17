@@ -24,14 +24,14 @@ const ApplicationForm = () => {
     isRegistered ? values.user_id = idUser : values.unregisterUser_id = idUser
     
     idUnregister != undefined ? response = await putApplication(idUnregister, values) : response = await postApplication(values); 
-    if (response) navigate(`/admin`);
+    if (response) navigate(`/admin/application`);
   }
   
   const handleIsRegistered = () =>{
     setIsRegistered(!isRegistered)
   }
   const HandleCancel = () => {
-    navigate(`/admin`);
+    navigate(`/admin/application`);
   }
 
   useEffect(()=>{

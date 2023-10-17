@@ -1,27 +1,42 @@
 import { useNavigate } from "react-router-dom";
 import { deleteUtilisateur } from "../../../api/delete/deleteUtilisateur";
+import { getUtilisateur } from "../../../api/get/getUtilisateur";
+import { useState, useEffect } from "react";
 import type { UtilisateurType } from "../../../typings/type"
 
-type UtilisateurTableDisplayProps = {
-    utilisateurs : UtilisateurType[]
-}
-
-const UtilisateurTableDisplay = ({utilisateurs} : UtilisateurTableDisplayProps) => {
+const UtilisateurTableDisplay = () => {
     const navigate = useNavigate();
-
+    const [loading, setLoading] = useState(true);
+    const [utilisateurs, setUtilisateurs] = useState<UtilisateurType[]>([]);
+    
     const handleCreateNewUtilisateur = () => {
-        navigate(`utilisateur-form`);        
+        navigate(`form`);        
     }
     
     const handleEditUtilisateur = (id? : number) => {
-        navigate(`utilisateur-form/${id}`);
+        navigate(`form/${id}`);
     }
 
     const handleDeleteUtilisateur = (id? : number) => {
         deleteUtilisateur(id)
     }
+
+    useEffect(()=>{
+      const fetchData = async () => {
+        const utilisateurData = await getUtilisateur();
+        setUtilisateurs(utilisateurData);
+      setLoading(false);
+      }
+    
+      fetchData()
+    }, [])
+    
+    if (loading) {
+      return <div>Loading</div>
+    }
+
   return (
-    <div>
+      <div>
         <button onClick={handleCreateNewUtilisateur}>Create new user</button>
         <table>
             <thead>

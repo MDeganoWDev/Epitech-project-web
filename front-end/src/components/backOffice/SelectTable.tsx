@@ -1,23 +1,15 @@
-import { getAdvertisement } from "../../api/get/getAdvertisement"
-import { getApplication } from "../../api/get/getApplication"
-import { getCompany } from "../../api/get/getCompany"
-import { getContract } from "../../api/get/getContract"
-import { getPermission } from "../../api/get/getPermission"
-import { getSex } from "../../api/get/getSex"
-import { getUnregister } from "../../api/get/getUnregister"
-import { getUtilisateur } from "../../api/get/getUtilisateur"
 import SelectTableButton from "./SelectTableButton"
 
 const SelectTable = () => {
     const allTable = [
-        {name : "Utilisateurs", fetch : getUtilisateur},
-        {name : "Unregisters", fetch : getUnregister},
-        {name : "Companies", fetch : getCompany},
-        {name : "Advertisements", fetch : getAdvertisement},
-        {name : "Applications", fetch : getApplication},
-        {name : "Permission", fetch : getPermission},
-        {name : "Contract", fetch : getContract},
-        {name : "Sex", fetch : getSex},
+        {name : "Utilisateurs", route : "utilisateur"},
+        {name : "Unregisters", route : "unregister"},
+        {name : "Companies", route : "company"},
+        {name : "Advertisements", route : "advertisement"},
+        {name : "Applications", route : "application"},
+        {name : "Permission", route : "permission"},
+        {name : "Contract", route : "contract"},
+        {name : "Sex", route : "sex"},
     ]
     
 
@@ -26,7 +18,7 @@ const SelectTable = () => {
         {allTable.map((table)=>(
             <SelectTableButton 
                 key={table.name}
-                method={table.fetch} 
+                route={table.route} 
                 name={table.name}
             />
         ))}

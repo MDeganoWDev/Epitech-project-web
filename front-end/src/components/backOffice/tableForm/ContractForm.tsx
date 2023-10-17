@@ -20,11 +20,11 @@ const ContractForm = () => {
     }
     
     idContract != undefined ? response = await putContract(idContract, values) : response = await postContract(values); 
-    if (response) navigate(`/admin`);
+    if (response) navigate(`/admin/contract`);
   }
   
   const HandleCancel = () => {
-    navigate(`/admin`);
+    navigate(`/admin/contract`);
   }
 
   useEffect(()=>{

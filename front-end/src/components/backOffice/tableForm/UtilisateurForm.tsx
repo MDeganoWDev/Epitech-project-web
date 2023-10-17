@@ -33,7 +33,7 @@ const UtilisateurForm = () => {
     if (idSex) formData.append("sex_id", idSex.toString());
     
     idUnregister != undefined ? response = await putUtilisateur(idUnregister, formData) : response = await postUtilisateur(formData); 
-    if (response) navigate(`/admin`);
+    if (response) navigate(`/admin/utilisateur`);
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +44,7 @@ const UtilisateurForm = () => {
   };
   
   const HandleCancel = () => {
-    navigate(`/admin`);
+    navigate(`/admin/utilisateur`);
   }
 
   useEffect(()=>{

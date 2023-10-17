@@ -24,11 +24,11 @@ const CompanyForm = () => {
     }
     
     idCompany != undefined ? response = await putCompany(idCompany, values) : response = await postCompany(values); 
-    if (response) navigate(`/admin`);
+    if (response) navigate(`/admin/company`);
   }
   
   const HandleCancel = () => {
-    navigate(`/admin`);
+    navigate(`/admin/company`);
   }
 
   useEffect(()=>{

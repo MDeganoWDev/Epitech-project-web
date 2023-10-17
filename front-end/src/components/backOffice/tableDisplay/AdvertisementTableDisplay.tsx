@@ -1,24 +1,38 @@
 import { useNavigate } from "react-router-dom";
-import type { AdvertisementType } from "../../../typings/type"
 import { deleteAdvertisement } from "../../../api/delete/deleteAdvertisement";
+import { useEffect, useState } from "react";
+import { AdvertisementType } from "../../../typings/type";
+import { getAdvertisement } from "../../../api/get/getAdvertisement";
 
-type AdvertisementTableDisplayProps = {
-    advertisements : AdvertisementType[]
-}
-
-const AdvertisementTableDisplay = ({advertisements}: AdvertisementTableDisplayProps) => {
-    const navigate = useNavigate();
-
+const AdvertisementTableDisplay = () => {
+    const navigate = useNavigate();    
+    const [loading, setLoading] = useState(true);
+    const [advertisements, setAdvertisements] = useState<AdvertisementType[]>([]);
+    
     const handleCreateNewAdvertissement = () => {
-        navigate(`advertissement-form`);        
+        navigate(`form`);        
     }
     
     const handleEditAdvertissement = (id? : number) => {
-        navigate(`advertissement-form/${id}`);
+        navigate(`form/${id}`);
     }
 
     const handleDeleteAdvertissement = (id? : number) => {
         deleteAdvertisement(id)
+    }
+    
+    useEffect(()=>{
+        const fetchData = async () => {
+          const advertisementData = await getAdvertisement();
+          setAdvertisements(advertisementData);
+        setLoading(false);
+        }
+    
+        fetchData()
+      }, [])
+    
+    if (loading) {
+        return <div>Loading</div>
     }
     
     return (

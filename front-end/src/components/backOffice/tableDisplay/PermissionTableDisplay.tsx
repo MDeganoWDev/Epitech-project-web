@@ -1,25 +1,39 @@
 import { useNavigate } from "react-router-dom";
 import type { PermissionType } from "../../../typings/type";
 import { deletePermission } from "../../../api/delete/deletePermission";
+import { getPermission } from "../../../api/get/getPermission";
+import { useEffect, useState } from "react";
 
-type PermissionTableDisplayProps = {
-  permissions : PermissionType[]
-}
-
-const PermissionTableDisplay = ({permissions} : PermissionTableDisplayProps) => {
+const PermissionTableDisplay = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [permissions, setPermissions] = useState<PermissionType[]>([]);
 
   const handleCreateNewPermission = () => {
-      navigate(`permission-form`);        
-  }
+      navigate(`form`);        
+    }
   
   const handleEditPermission = (id? : number) => {
-      navigate(`permission-form/${id}`);
+      navigate(`form/${id}`);
   }
 
   const handleDeletePermission = (id? : number) => {
       deletePermission(id)
-  }
+    }
+
+    useEffect(()=>{
+      const fetchData = async () => {
+        const permissionData = await getPermission();
+        setPermissions(permissionData);
+      setLoading(false);
+      }
+    
+      fetchData()
+    }, [])
+    
+    if (loading) {
+      return <div>Loading</div>
+    }
 
   return (
       <div>

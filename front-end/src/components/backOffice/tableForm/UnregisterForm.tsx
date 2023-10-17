@@ -29,7 +29,7 @@ const UnregisterForm = () => {
     if (idSex) formData.append("sex_id", idSex.toString());
 
     idUnregister != undefined ? response = await putUnregister(idUnregister, formData) : response = await postUnregister(formData); 
-    if (response) navigate(`/admin`);
+    if (response) navigate(`/admin/unregister`);
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +40,7 @@ const UnregisterForm = () => {
   };
 
   const HandleCancel = () => {
-    navigate(`/admin`);
+    navigate(`/admin/unregister`);
   }
 
   useEffect(()=>{

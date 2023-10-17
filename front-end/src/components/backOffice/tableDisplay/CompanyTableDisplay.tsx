@@ -1,24 +1,39 @@
 import { Link, useNavigate } from "react-router-dom";
 import type { CompanyType } from "../../../typings/type"
 import { deleteCompany } from "../../../api/delete/deleteCompany";
+import { getCompany } from "../../../api/get/getCompany";
+import { useState, useEffect } from "react";
 
-type CompanyTableDisplayProps = {
-  companies : CompanyType[]
-}
-const CompanyTableDisplay = ({companies} : CompanyTableDisplayProps) => {
-  const navigate = useNavigate();
+const CompanyTableDisplay = () => {
+  const navigate = useNavigate();  
+  const [loading, setLoading] = useState(true);
+  const [companies, setCompanies] = useState<CompanyType[]>([]);
 
   const handleCreateNewCompany = () => {
-      navigate(`company-form`);        
+      navigate(`form`);        
   }
   
   const handleEditCompany = (id? : number) => {
-      navigate(`company-form/${id}`);
+      navigate(`form/${id}`);
   }
 
   const handleDeleteCompany = (id? : number) => {
       deleteCompany(id)
   }
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      const companiesData = await getCompany();
+      setCompanies(companiesData);
+    setLoading(false);
+    }
+
+    fetchData()
+  }, [])
+
+if (loading) {
+    return <div>Loading</div>
+}
 
   return (
       <div>

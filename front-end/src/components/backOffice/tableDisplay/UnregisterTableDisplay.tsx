@@ -1,27 +1,42 @@
 import { useNavigate } from "react-router-dom";
 import { deleteUnregister } from "../../../api/delete/deleteUnregister";
+import { getUnregister } from "../../../api/get/getUnregister";
+import { useState, useEffect } from "react";
 import type { UnregisterType } from "../../../typings/type"
 
-type UnregisterTableDisplayProps = {
-    unregisters : UnregisterType[]
-}
-
-const UnregisterTableDisplay = ({unregisters} : UnregisterTableDisplayProps) => {
+const UnregisterTableDisplay = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [unregisters, setUnregisters] = useState<UnregisterType[]>([]);
 
     const handleCreateNewUnregister = () => {
-        navigate(`unregister-form`);        
+        navigate(`form`);        
     }
     
     const handleEditUnregister = (id? : number) => {
-        navigate(`unregister-form/${id}`);
+        navigate(`form/${id}`);
     }
 
     const handleDeleteUnregister = (id? : number) => {
         deleteUnregister(id)
     }
-  return (
-    <div>
+    
+    useEffect(()=>{
+      const fetchData = async () => {
+        const unregistersData = await getUnregister();
+        setUnregisters(unregistersData);
+      setLoading(false);
+      }
+    
+      fetchData()
+    }, [])
+    
+    if (loading) {
+      return <div>Loading</div>
+    }
+
+    return (
+        <div>
         <button onClick={handleCreateNewUnregister}>Create new unregister user</button>
         <table>
             <thead>

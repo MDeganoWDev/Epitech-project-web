@@ -20,11 +20,11 @@ const PermissionForm = () => {
     }
     
     idPermission != undefined ? response = await putPermission(idPermission, values) : response = await postPermission(values); 
-    if (response) navigate(`/admin`);
+    if (response) navigate(`/admin/permission`);
   }
   
   const HandleCancel = () => {
-    navigate(`/admin`);
+    navigate(`/admin/permission`);
   }
 
   useEffect(()=>{
