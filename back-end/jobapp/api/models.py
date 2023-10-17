@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
+from django.core.exceptions import ValidationError
 
 LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
@@ -64,3 +65,14 @@ class Application(models.Model):
     user = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, blank=True, null=True)
     unregisterUser = models.ForeignKey(Unregister, on_delete=models.SET_NULL, blank=True, null=True)
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE)
+
+    def clean(self):
+        if not self.user and not self.unregisterUser:
+            raise ValidationError("Either user or unregisterUser must be provided")
+        if self.user and self.unregisterUser:
+            raise ValidationError("Cannot provide both user and unregisterUser")
+
+    def save(self, *args, **kwargs):
+        if self.user:
+            self.unregisterUser = None
+        super().save(*args, **kwargs)

@@ -85,7 +85,7 @@ const RegisterPage = () => {
                 const data = await response.json();
                 document.cookie = `token=${data.token}`;
                 setAuthenticated(true);
-                navigate('/');
+                navigate(-1);
             } else {
                 const errorData = await response.json();
                 console.error("Login failed:", errorData);
@@ -122,7 +122,7 @@ const RegisterPage = () => {
                 console.log("Registration successful:", data);
                 document.cookie = `token=${data.token}`;
                 setAuthenticated(true);
-                navigate('/');
+                navigate(-1);
             } else {
                 const errorData = await response.json();
                 console.error("Registration failed:", errorData);

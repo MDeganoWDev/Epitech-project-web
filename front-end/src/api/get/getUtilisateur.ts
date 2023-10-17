@@ -1,6 +1,7 @@
-export const getUtilisateur = async (id? : number) => { 
-    const url = id ? `http://localhost:8000/utilisateurs/${id}` : `http://localhost:8000/utilisateurs`;
-    
+export const getUtilisateur = async (id? : number, token? : string) => {
+    const url = id ? `http://localhost:8000/utilisateurs/${id}` : token ? `http://localhost:8000/utilisateurs/auth_token/${token}` : `http://localhost:8000/utilisateurs/`;
+
+
     return fetch(url, {
         method: 'GET',
         headers: {
@@ -20,4 +21,4 @@ export const getUtilisateur = async (id? : number) => {
         console.error("Error : ", error);
         throw error;
     });
-} 
+}
