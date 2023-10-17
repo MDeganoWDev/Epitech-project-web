@@ -2,12 +2,12 @@ from rest_framework import viewsets
 from .models import Company, Permission, Contract, Sex, Advertisement, Unregister, Utilisateur, Application, LANGUAGE_CHOICES, STYLE_CHOICES
 from .serializers import CompanySerializer, AdvertisementSerializer, ContractSerializer, PermissionSerializer, SexSerializer, UnregisterSerializer, UtilisateurSerializer, ApplicationSerializer
 from .permissions import ReadOnly, HasAdminPermission, HasOfferingPermission, HasSearchingPermission
-from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import IsAuthenticated
+from .mixins import MultipleFieldLookupMixin
 
-class UtilisateurViewSet(viewsets.ModelViewSet):
+class UtilisateurViewSet(MultipleFieldLookupMixin, viewsets.ModelViewSet):
     queryset = Utilisateur.objects.all()
     serializer_class = UtilisateurSerializer
+    lookup_fields = ['auth_token', 'pk']
     # permission_classes = [IsAuthenticated]
 
 class PermissionViewSet(viewsets.ModelViewSet):

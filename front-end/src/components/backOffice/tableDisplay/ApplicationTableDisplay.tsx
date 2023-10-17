@@ -10,9 +10,9 @@ const ApplicationTableDisplay = ({applications}: ApplicationTableDisplayProps) =
     const navigate = useNavigate();
 
     const handleCreateNewApplication = () => {
-        navigate(`application-form`);        
+        navigate(`application-form`);
     }
-    
+
     const handleEditApplication = (id? : number) => {
         navigate(`application-form/${id}`);
     }
@@ -36,16 +36,16 @@ const ApplicationTableDisplay = ({applications}: ApplicationTableDisplayProps) =
                 <tbody>
                     {applications.map((application)=>(
                         <tr key={application.id}>
-                            <td>{application.id}</td>
-                            <td>{application.apply_date}</td>
-                            <td>{application.message}</td>
-                            <td>{application.user ? "Registered : " + application.user.id : "Unregistered : " + application.unregisterUser?.id}</td>
-                            <td>{application.advertisement?.company?.id}</td>
-                            <td> <button onClick={() => handleEditApplication(application.id)}>Modifier</button></td>
-                            <td> <button onClick={() => handleDeleteApplication(application.id)}>Supprimer</button></td>
-                        </tr>
-                    ))}
-                </tbody>
+                                        <td>{application.id}</td>
+                                        <td>{application.apply_date ? application.apply_date.toLocaleDateString() : ""}</td>
+                                        <td>{application.message}</td>
+                                        <td>{application.user ? "Registered : " + application.user.id : "Unregistered : " + application.unregisterUser?.id}</td>
+                                        <td>{application.advertisement?.company?.id}</td>
+                                        <td> <button onClick={() => handleEditApplication(application.id)}>Modifier</button></td>
+                                        <td> <button onClick={() => handleDeleteApplication(application.id)}>Supprimer</button></td>
+                                    </tr>
+                                ))}
+                            </tbody>
             </table>
         </div>
       )

@@ -54,7 +54,7 @@ export type UnregisterType = {
 export type ApplicationType = {
     id? : number
     message : string
-    apply_date? : string
+    apply_date? : Date
     unregisterUser? : UnregisterType
     unregisterUser_id? : number
     user? : UtilisateurType

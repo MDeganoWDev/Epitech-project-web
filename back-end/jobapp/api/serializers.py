@@ -67,13 +67,12 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    user = UtilisateurSerializer(read_only=True)
-    user_id = serializers.PrimaryKeyRelatedField(queryset=Utilisateur.objects.all(), source='user', write_only=True)
-    unregisterUser = UnregisterSerializer(read_only=True)
-    unregisterUser_id = serializers.PrimaryKeyRelatedField(queryset=Unregister.objects.all(), source='unregisterUser', write_only=True)
+    user = UtilisateurSerializer(read_only=True, required=False)
+    user_id = serializers.PrimaryKeyRelatedField(queryset=Utilisateur.objects.all(), source='user', write_only=True, required=False)
+    unregisterUser = UnregisterSerializer(read_only=True, required=False)
+    unregisterUser_id = serializers.PrimaryKeyRelatedField(queryset=Unregister.objects.all(), source='unregisterUser', write_only=True, required=False)
     advertisement = AdvertisementSerializer(read_only=True)
     advertisement_id = serializers.PrimaryKeyRelatedField(queryset=Advertisement.objects.all(), source='advertisement', write_only=True)
     class Meta:
         model = Application
         fields = '__all__'
-        
