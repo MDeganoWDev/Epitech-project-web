@@ -8,7 +8,9 @@ const UnregisterTableDisplay = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [unregisters, setUnregisters] = useState<UnregisterType[]>([]);
-
+    const [fiteredId, setFiteredId] = useState<number[]>([]);
+    const filteredUnregisters = unregisters.filter(element => !fiteredId.includes(element.id));
+    
     const handleCreateNewUnregister = () => {
         navigate(`form`);        
     }
@@ -16,9 +18,10 @@ const UnregisterTableDisplay = () => {
     const handleEditUnregister = (id? : number) => {
         navigate(`form/${id}`);
     }
-
+    
     const handleDeleteUnregister = (id? : number) => {
         deleteUnregister(id)
+        if (id) setFiteredId(prevState => [...prevState, id]);
     }
     
     useEffect(()=>{
@@ -51,7 +54,7 @@ const UnregisterTableDisplay = () => {
                 </tr>
             </thead>
             <tbody>
-                {unregisters.map((unregister)=>(
+                {filteredUnregisters.map((unregister)=>(
                     <tr key={unregister.id}>
                         <td>{unregister.id}</td>
                         <td>{unregister.firstname}</td>

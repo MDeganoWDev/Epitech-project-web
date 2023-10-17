@@ -8,6 +8,8 @@ const SexTableDisplay = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [sex, setSex] = useState<SexType[]>([]);
+    const [fiteredId, setFiteredId] = useState<number[]>([]);
+    const filteredSex = sex.filter(element => !fiteredId.includes(element.id));
        
     const handleCreateNewSex = () => {
         navigate(`form`);        
@@ -19,6 +21,7 @@ const SexTableDisplay = () => {
 
     const handleDeleteSex = (id? : number) => {
         deleteSex(id)
+        if (id) setFiteredId(prevState => [...prevState, id]);
     }
 
     useEffect(()=>{
@@ -46,7 +49,7 @@ const SexTableDisplay = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {sex.map((element)=>(
+                    {filteredSex.map((element)=>(
                         <tr key={element.id}>
                             <td>{element.id}</td>
                             <td>{element.name}</td>

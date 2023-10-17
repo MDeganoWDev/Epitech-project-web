@@ -8,16 +8,20 @@ const ContractTableDisplay = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [contracts, setContracts] = useState<ContractType[]>([]);
+  const [fiteredId, setFiteredId] = useState<number[]>([]);
+  const filteredContracts = contracts.filter(element => !fiteredId.includes(element.id));
+
   const handleCreateNewContract = () => {
-      navigate(`form`);        
-    }
+    navigate(`form`);        
+  }
   
   const handleEditContract = (id? : number) => {
-      navigate(`form/${id}`);
-    }
-
-    const handleDeleteContract = (id? : number) => {
-      deleteContract(id)
+    navigate(`form/${id}`);
+  }
+  
+  const handleDeleteContract = (id? : number) => {
+    deleteContract(id)
+    if (id) setFiteredId(prevState => [...prevState, id]);
     }
 
     useEffect(()=>{
@@ -45,7 +49,7 @@ const ContractTableDisplay = () => {
                   </tr>
               </thead>
               <tbody>
-                  {contracts.map((contract)=>(
+                  {filteredContracts.map((contract)=>(
                       <tr key={contract.id}>
                           <td>{contract.id}</td>
                           <td>{contract.name}</td>

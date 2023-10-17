@@ -8,6 +8,8 @@ const AdvertisementTableDisplay = () => {
     const navigate = useNavigate();    
     const [loading, setLoading] = useState(true);
     const [advertisements, setAdvertisements] = useState<AdvertisementType[]>([]);
+    const [fiteredId, setFiteredId] = useState<number[]>([]);
+    const filteredAdvertisement = advertisements.filter(element => !fiteredId.includes(element.id));
     
     const handleCreateNewAdvertissement = () => {
         navigate(`form`);        
@@ -19,6 +21,7 @@ const AdvertisementTableDisplay = () => {
 
     const handleDeleteAdvertissement = (id? : number) => {
         deleteAdvertisement(id)
+        if (id) setFiteredId(prevState => [...prevState, id]);
     }
     
     useEffect(()=>{
@@ -54,7 +57,7 @@ const AdvertisementTableDisplay = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {advertisements.map((advertisement)=>(
+                    {filteredAdvertisement.map((advertisement)=>(
                         <tr key={advertisement.id}>
                             <td>{advertisement.id}</td>
                             <td>{advertisement.offerDate}</td>
