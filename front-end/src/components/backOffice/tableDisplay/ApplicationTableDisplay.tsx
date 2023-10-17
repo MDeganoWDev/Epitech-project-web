@@ -37,7 +37,7 @@ const ApplicationTableDisplay = ({applications}: ApplicationTableDisplayProps) =
                     {applications.map((application)=>(
                         <tr key={application.id}>
                                         <td>{application.id}</td>
-                                        <td>{application.apply_date ? application.apply_date.toLocaleDateString() : ""}</td>
+                                        <td>{application.apply_date}</td>
                                         <td>{application.message}</td>
                                         <td>{application.user ? "Registered : " + application.user.id : "Unregistered : " + application.unregisterUser?.id}</td>
                                         <td>{application.advertisement?.company?.id}</td>

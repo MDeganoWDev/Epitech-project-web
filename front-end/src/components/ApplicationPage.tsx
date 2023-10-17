@@ -52,7 +52,7 @@ const ApplicationPage = () => {
             if (isAuthenticated) {
               const application: ApplicationType = {
                 user_id: user.id,
-                apply_date: new Date(),
+                apply_date: new Date().toLocaleDateString() ,
                 advertisement_id: parseInt(id as string),
                 ...data,
               };
@@ -66,7 +66,7 @@ const ApplicationPage = () => {
               const unregisterUser = await postUnregister(data as UnregisterType);
               const application: ApplicationType = {
                 unregisterUser_id: unregisterUser.id,
-                apply_date: new Date(),
+                apply_date: new Date().toLocaleDateString() ,
                 advertisement_id: parseInt(id as string),
                 ...data,
               };
