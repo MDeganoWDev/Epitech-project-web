@@ -8,6 +8,8 @@ const UtilisateurTableDisplay = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [utilisateurs, setUtilisateurs] = useState<UtilisateurType[]>([]);
+    const [fiteredId, setFiteredId] = useState<number[]>([]);
+    const filteredUtilisateurs = utilisateurs.filter(element => !fiteredId.includes(element.id));
     
     const handleCreateNewUtilisateur = () => {
         navigate(`form`);        
@@ -19,6 +21,7 @@ const UtilisateurTableDisplay = () => {
 
     const handleDeleteUtilisateur = (id? : number) => {
         deleteUtilisateur(id)
+        if (id) setFiteredId(prevState => [...prevState, id]);
     }
 
     useEffect(()=>{
@@ -52,7 +55,7 @@ const UtilisateurTableDisplay = () => {
                 </tr>
             </thead>
             <tbody>
-                {utilisateurs.map((utilisateur)=>(
+                {filteredUtilisateurs.map((utilisateur)=>(
                     <tr key={utilisateur.id}>
                         <td>{utilisateur.id}</td>
                         <td>{utilisateur.firstname}</td>

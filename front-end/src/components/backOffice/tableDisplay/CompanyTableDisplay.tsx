@@ -8,17 +8,20 @@ const CompanyTableDisplay = () => {
   const navigate = useNavigate();  
   const [loading, setLoading] = useState(true);
   const [companies, setCompanies] = useState<CompanyType[]>([]);
-
+  const [fiteredId, setFiteredId] = useState<number[]>([]);
+  const filteredCompanies = companies.filter(element => !fiteredId.includes(element.id));
+  
   const handleCreateNewCompany = () => {
       navigate(`form`);        
   }
   
   const handleEditCompany = (id? : number) => {
       navigate(`form/${id}`);
-  }
-
-  const handleDeleteCompany = (id? : number) => {
-      deleteCompany(id)
+    }
+    
+    const handleDeleteCompany = (id? : number) => {
+        deleteCompany(id)
+        if (id) setFiteredId(prevState => [...prevState, id]);
   }
 
   useEffect(()=>{
@@ -48,7 +51,7 @@ if (loading) {
                   </tr>
               </thead>
               <tbody>
-                  {companies.map((company)=>(
+                  {filteredCompanies.map((company)=>(
                       <tr key={company.id}>
                           <td>{company.id}</td>
                           <td>{company.name}</td>

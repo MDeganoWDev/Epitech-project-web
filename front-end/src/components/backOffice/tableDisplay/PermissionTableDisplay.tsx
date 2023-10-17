@@ -8,17 +8,20 @@ const PermissionTableDisplay = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [permissions, setPermissions] = useState<PermissionType[]>([]);
-
+  const [fiteredId, setFiteredId] = useState<number[]>([]);
+  const filteredPermissions = permissions.filter(element => !fiteredId.includes(element.id));
+  
   const handleCreateNewPermission = () => {
-      navigate(`form`);        
+    navigate(`form`);        
     }
   
   const handleEditPermission = (id? : number) => {
       navigate(`form/${id}`);
-  }
+    }
 
   const handleDeletePermission = (id? : number) => {
       deletePermission(id)
+      if (id) setFiteredId(prevState => [...prevState, id]);
     }
 
     useEffect(()=>{
@@ -46,7 +49,7 @@ const PermissionTableDisplay = () => {
                   </tr>
               </thead>
               <tbody>
-                  {permissions.map((permission)=>(
+                  {filteredPermissions.map((permission)=>(
                       <tr key={permission.id}>
                           <td>{permission.id}</td>
                           <td>{permission.name}</td>

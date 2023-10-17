@@ -9,17 +9,20 @@ const ApplicationTableDisplay = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [applications, setApplications] = useState<ApplicationType[]>([]);
-
+    const [fiteredId, setFiteredId] = useState<number[]>([]);
+    const filteredApplication = applications.filter(element => !fiteredId.includes(element.id));
+    
     const handleCreateNewApplication = () => {
         navigate(`form`);
     }
-
+    
     const handleEditApplication = (id? : number) => {
         navigate(`form/${id}`);
     }
-
+    
     const handleDeleteApplication = (id? : number) => {
         deleteApplications(id)
+        if (id) setFiteredId(prevState => [...prevState, id]);
     }
 
     useEffect(()=>{
@@ -50,7 +53,7 @@ const ApplicationTableDisplay = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {applications.map((application)=>(
+                    {filteredApplication.map((application)=>(
                         <tr key={application.id}>
                             <td>{application.id}</td>
                             <td>{application.apply_date instanceof Date ? application.apply_date.toISOString() : ""}</td>
