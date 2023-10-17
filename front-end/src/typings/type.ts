@@ -46,7 +46,7 @@ export type UnregisterType = {
     lastname : string
     email : string
     phone : string
-    cv? : File 
+    cv? : File
     sex? : SexType
     sex_id? : number
 }
@@ -54,7 +54,7 @@ export type UnregisterType = {
 export type ApplicationType = {
     id? : number
     message : string
-    apply_date? : Date
+    apply_date? : string
     unregisterUser? : UnregisterType
     unregisterUser_id? : number
     user? : UtilisateurType
