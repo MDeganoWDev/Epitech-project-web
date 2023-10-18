@@ -1,6 +1,6 @@
-export const getApplication = async (id? : number) => { 
-    const url = id ? `http://localhost:8000/applications/${id}` : `http://localhost:8000/applications`;
-    
+export const getApplication = async (id? : number) => {
+    const url = id ? `http://localhost:8000/applications/${id}` : `http://localhost:8000/applications/`;
+
     return fetch(url, {
         method: 'GET',
         headers: {
@@ -20,4 +20,4 @@ export const getApplication = async (id? : number) => {
         console.error("Error : ", error);
         throw error;
     });
-} 
+}

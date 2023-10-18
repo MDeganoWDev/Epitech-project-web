@@ -14,7 +14,7 @@ const Header = ({isAuthenticated, onDisconnect}:HeadersProps) => {
             <Link to="/admin">Admin</Link>
             {isAuthenticated ? (
                 <>
-                    <Link to="/user">Profile</Link>
+                    <Link to="/user/profile">Profile</Link>
                     <button onClick={onDisconnect}>Disconnect</button>
                 </>
             ) : (

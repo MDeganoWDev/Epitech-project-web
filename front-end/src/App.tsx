@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AdminBackOffice from "./components/backOffice/AdminBackOffice";
 import ApplicationPage from "./components/ApplicationPage";
 import RegisterPage from "./components/RegisterPage";
+import UserOffice from "./components/UserOffice";
 import Layout from "./Layout";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<MainContent />} />
           <Route path="admin/*" element={<AdminBackOffice />} />
-          <Route path="user/*" element={<RegisterPage />} />
+          <Route path="user/" element={<RegisterPage />} />
+          <Route path="user/profile/" element={<UserOffice />} />
           <Route path="apply/:id" element={<ApplicationPage />} />
         </Route>
       </Routes>
