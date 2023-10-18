@@ -54,7 +54,7 @@ class Advertisement(models.Model):
     full_description = models.CharField(max_length=500, blank=True, null=True)
     quick_description = models.CharField(max_length=50, blank=True, null=True)
     working_time = models.CharField(max_length=50, null=False)
-    wage = models.DecimalField(max_digits=15, decimal_places=2, null=False)
+    wage = models.CharField(max_length=50, null=False)
     isOnline = models.BooleanField(default=False)
     contract = models.ForeignKey(Contract, on_delete=models.SET_NULL, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)

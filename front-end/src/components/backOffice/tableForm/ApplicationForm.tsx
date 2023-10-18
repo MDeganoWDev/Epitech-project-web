@@ -11,6 +11,7 @@ const ApplicationForm = () => {
   const [loading, setLoading] = useState(true);
   const [idUnregister, setIdUnregister] = useState<number | undefined>(undefined)
   const [message, setMessage] = useState("");
+  const [idAdvertissement, setIdAdvertissement] = useState<number | undefined>();
   const [isRegistered, setIsRegistered] = useState(false);
   const [idUser, setIdUser] = useState<number | undefined>();
 
@@ -19,8 +20,10 @@ const ApplicationForm = () => {
     let response
     const values : ApplicationType = {
       message : message,
+      advertisement_id : idAdvertissement
     }
 
+    if (!idUnregister) values.apply_date = new Date().toISOString()
     isRegistered ? values.user_id = idUser : values.unregisterUser_id = idUser
     
     idUnregister != undefined ? response = await putApplication(idUnregister, values) : response = await postApplication(values); 
@@ -73,6 +76,17 @@ return (
         onChange={e => setMessage(e.target.value)}
         required  
       />
+        
+      <label htmlFor="idAdvertissement">Advertissement ID</label>
+       <input
+         type="number"
+         name="idAdvertissement"
+         id="idAdvertissement"
+         value={idAdvertissement}
+         onChange={e => setIdAdvertissement(Number(e.target.value))}
+         required
+         min={1}
+       />
 
      <label htmlFor="isRegistered">Is Registered</label>
       <input

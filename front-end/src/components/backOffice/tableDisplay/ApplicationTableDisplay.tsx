@@ -56,7 +56,7 @@ const ApplicationTableDisplay = () => {
                     {filteredApplication.map((application)=>(
                         <tr key={application.id}>
                             <td>{application.id}</td>
-                            <td>{application.apply_date instanceof Date ? application.apply_date.toISOString() : ""}</td>
+                            <td>{application.apply_date}</td>
                             <td>{application.message}</td>
                             <td>{application.user ? "Registered : " + application.user.id : "Unregistered : " + application.unregisterUser?.id}</td>
                             <td>{application.advertisement?.company?.id}</td>

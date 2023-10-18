@@ -3,11 +3,14 @@ import { putUnregister } from '../../../api/put/putUnregister';
 import { postUnregister } from '../../../api/post/postUnregister';
 import { getUnregister } from '../../../api/get/getUnregister';
 import { useParams, useNavigate } from 'react-router-dom';
+import type { SexType } from '../../../typings/type';
+import { getSex } from '../../../api/get/getSex';
 
 const UnregisterForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)  
+  const [sex, setSex] = useState<SexType[]>([])
   const [idUnregister, setIdUnregister] = useState<number | undefined>(undefined)
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -66,6 +69,11 @@ const UnregisterForm = () => {
     } else {
       setLoading(false)
     }
+    const fetchOption = async () => {
+      const sex = await getSex();
+      setSex(sex)
+    }
+    fetchOption()
   }, [id])
 
   if (loading) {
@@ -124,15 +132,23 @@ return (
         onChange={handleFileChange}
       />
 
-      <label htmlFor="sex_id">Sex id</label>
-      <input 
-        type="number" 
-        name="sex_id" 
-        id="sex_id"
+ 
+      <label htmlFor="sex">Sex</label>
+      <select
+        name="sex"
+        id="sex"
         value={idSex}
         onChange={e => setIdSex(Number(e.target.value))}
         required
-        />
+      >
+        <option value="">Select Sex</option>
+        {sex.map((value)=>(
+          <option 
+          key={value.id}
+          value={value.id}
+          >{value.name}</option>
+        ))}
+      </select>
 
       <button type="submit">Enregister</button>
       <button onClick={HandleCancel}>Annuler</button>

@@ -60,13 +60,13 @@ const AdvertisementTableDisplay = () => {
                     {filteredAdvertisement.map((advertisement)=>(
                         <tr key={advertisement.id}>
                             <td>{advertisement.id}</td>
-                            <td>{advertisement.offerDate}</td>
+                            <td>{advertisement.offer_date}</td>
                             <td>{advertisement.title}</td>
                             <td>{advertisement.wage}</td>
                             <td>{advertisement.working_time}</td>
                             <td>{advertisement.quick_description}</td>
                             <td>{advertisement.full_description}</td>
-                            <td>{advertisement.isOnline}</td>
+                            <td>{advertisement.isOnline ? "Online" : "Offline"}</td>
                             <td>{advertisement.contract?.name}</td>
                             <td>{advertisement.company?.id}</td>
                             <td><button onClick={()=> handleEditAdvertissement(advertisement.id)}>Modifier</button></td>
