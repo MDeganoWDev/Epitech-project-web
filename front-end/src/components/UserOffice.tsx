@@ -67,8 +67,7 @@ const UserOffice = () => {
             email: formData.get('email')?.toString() || user?.email || '',
             phone: formData.get('phone')?.toString() || user?.phone || '',
             permission: user?.permission || { id: 0, name: '' },
-            // sex_id: user?.sex_id,
-            // permission_id: user?.permission_id,
+            sex_id: parseInt(formData.get('sex')?.toString() || '1') || user?.sex_id || 0,
         };
         const formDataEditedUser = new FormData();
         Object.entries(editedUser).forEach(([key, value]) => {
@@ -110,11 +109,11 @@ const UserOffice = () => {
                     <input type="tel" id="phone" name="phone" defaultValue={user?.phone} />
                     <br />
                     <label htmlFor="sex">Gender:</label>
-                        <select value={sex} onChange={(event) => setSex(parseInt(event.target.value))}>
+                        <select id="sex" name="sex" value={sex} onChange={(event) => setSex(parseInt(event.target.value))}>
                             <option value="">Select...</option>
                             {sexOptions.map((option) => (
                                 <option key={option.id} value={option.id}>
-                                    {option.name}
+                                    {option.id}
                                 </option>
                             ))}
                         </select>
