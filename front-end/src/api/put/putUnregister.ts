@@ -1,9 +1,6 @@
 export const putUnregister = async (id : number, formData : FormData) => {
     return fetch(`http://localhost:8000/unregisters/${id}/`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        method: 'PATCH',
         body: formData
     })
     .then(response => {

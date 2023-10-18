@@ -58,9 +58,9 @@ const RegisterPage = () => {
 
     const getPermissionLabel = (permissionId: number | undefined): string => {
         switch (permissionId) {
-            case 3:
+            case 2:
                 return "post offers. I'm a company";
-            case 4:
+            case 3:
                 return "apply to offers";
             default:
                 return "";
@@ -105,7 +105,7 @@ const RegisterPage = () => {
             lastname: lastName,
             sex_id: sex,
             phone: phone,
-            permission_id: 4,
+            permission_id: selectedPermission,
         };
 
         try {

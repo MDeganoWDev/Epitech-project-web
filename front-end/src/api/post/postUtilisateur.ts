@@ -1,9 +1,6 @@
 export const postUtilisateur = async (formData : FormData) => {
     return fetch('http://localhost:8000/utilisateurs/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         body : formData
     })
     .then(response => {
