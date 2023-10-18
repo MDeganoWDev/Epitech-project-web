@@ -8,7 +8,7 @@ export type CompanyType = {
 
 export type AdvertisementType = {
     id? : number
-    offerDate? : string
+    offer_date? : string
     title : string
     full_description : string
     quick_description : string

@@ -3,11 +3,16 @@ import { putUtilisateur } from '../../../api/put/putUtilisateur';
 import { postUtilisateur } from '../../../api/post/postUtilisateur';
 import { getUtilisateur } from '../../../api/get/getUtilisateur';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getPermission } from '../../../api/get/getPermission';
+import { getSex } from '../../../api/get/getSex';
+import type { PermissionType, SexType } from '../../../typings/type';
 
 const UtilisateurForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [permissions, setPermissions] = useState<PermissionType[]>([])
+  const [sex, setSex] = useState<SexType[]>([])
   const [idUnregister, setIdUnregister] = useState<number | undefined>(undefined)
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -66,11 +71,17 @@ const UtilisateurForm = () => {
           setIdSex(existingUnregister.sex.id)
           setLoading(false);
       }      
-
       fetchData()
     } else {
       setLoading(false)
     }
+    const fetchOption = async () => {
+      const permission = await getPermission();
+      const sex = await getSex();
+      setPermissions(permission)
+      setSex(sex)
+    }
+    fetchOption()
   }, [id])
 
   if (loading) {
@@ -139,27 +150,40 @@ return (
         required 
       />
 
-      <label htmlFor="permission_id">Permission id</label>
-      <input 
-        type="number" 
-        name="permission_id" 
-        id="permission_id"
+      <label htmlFor="permission">Permission</label>
+      <select
+        name="permission"
+        id="permission"
         value={idPermission}
         onChange={e => setIdPermission(Number(e.target.value))}
         required
-        min={1}  
-        />
+      >
+        <option value="">Select Permission</option>
+        {permissions.map((permission)=>(
+          <option 
+          key={permission.id}
+          value={permission.id}
+          >{permission.name}</option>
+        ))}
+      </select>
 
-      <label htmlFor="sex_id">Sex id</label>
-      <input 
-        type="number" 
-        name="sex_id" 
-        id="sex_id"
+      <label htmlFor="sex">Sex</label>
+      <select
+        name="sex"
+        id="sex"
         value={idSex}
-        onChange={e => setIdSex(Number(e.target.value))} 
+        onChange={e => setIdSex(Number(e.target.value))}
         required
-        min={1}
-        />
+      >
+        <option value="">Select Sex</option>
+        {sex.map((value)=>(
+          <option 
+          key={value.id}
+          value={value.id}
+          >{value.name}</option>
+        ))}
+      </select>
+
 
       <button type="submit">Enregister</button>
       <button onClick={HandleCancel}>Annuler</button>

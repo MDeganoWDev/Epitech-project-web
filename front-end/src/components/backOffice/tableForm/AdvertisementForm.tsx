@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { AdvertisementType } from '../../../typings/type';
 import { useParams, useNavigate } from 'react-router-dom';
 import { postAdvertisement } from '../../../api/post/postAdvertisement';
 import { putAdvertisement } from '../../../api/put/putAdvertisement';
 import { getAdvertisement } from '../../../api/get/getAdvertisement';
+import { getContract } from '../../../api/get/getContract';
+import type{ AdvertisementType, ContractType } from '../../../typings/type';
 
 const AdvertisementForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [idPermission, setIdPermission] = useState<number | undefined>(undefined)
+  const [fullDescription, setFullDescription] = useState("");
   const [title, setTitle] = useState("");
   const [quickDescription, setQuickDescription] = useState("");
-  const [fullDescription, setFullDescription] = useState("");
+  const [, setDate] = useState();
   const [hour, setHour] = useState("");
   const [wage, setWage] = useState("");
   const [isOnline, setIsOnline] = useState(false);
   const [idContract, setIdContract] = useState<number | undefined>();
-  const [idCompany, setIdCompany] = useState<number | undefined>();
+  const [idCompany, setIdCompany] = useState<number>();
+  const [contracts, setContracts] = useState<ContractType[]>([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +36,7 @@ const AdvertisementForm = () => {
       company_id : idCompany
     }
     
+    if (!idPermission) values.offer_date = new Date().toISOString()
     idPermission != undefined ? response = await putAdvertisement(idPermission, values) : response = await postAdvertisement(values); 
     if (response) navigate(`/admin/advertisement`);
   }
@@ -53,6 +57,7 @@ const AdvertisementForm = () => {
       const fetchData = async () => {
           const existingAdvertisement = await getAdvertisement(currentId);
           setTitle(existingAdvertisement.title)
+          setDate(existingAdvertisement.offerDate)
           setQuickDescription(existingAdvertisement.quick_description)
           setFullDescription(existingAdvertisement.full_description)
           setHour(existingAdvertisement.hour)
@@ -61,12 +66,17 @@ const AdvertisementForm = () => {
           setIdContract(existingAdvertisement.contract.id);
           setIdCompany(existingAdvertisement.company.id);
           setLoading(false)
-      }      
-
-      fetchData()
-    } else {
-      setLoading(false)
-    }
+        }      
+        
+        fetchData()
+      } else {
+        setLoading(false)
+      }
+      const fetchOption = async () => {
+        const constracts = await getContract();
+        setContracts(constracts)
+      }
+      fetchOption()
   }, [id])
 
   if (loading) {
@@ -126,16 +136,22 @@ return (
         onChange={handleCheckboxChange}
       />
       
-      <label htmlFor="contract">Contract ID</label>
-      <input
-        type="number"
+      <label htmlFor="contract">Contract</label>
+      <select
         name="contract"
         id="contract"
         value={idContract}
         onChange={e => setIdContract(Number(e.target.value))}
         required
-        min={1}
-      />
+      >
+        <option value="">Select Contract</option>
+        {contracts.map((contract)=>(
+          <option 
+          key={contract.id}
+          value={contract.id}
+          >{contract.name}</option>
+        ))}
+      </select>
 
       <label htmlFor="company">Company ID</label>
       <input

@@ -41,7 +41,7 @@ const RegisterPage = () => {
                     const data: PermissionType[] = await response.json();
                     console.log("Permission Options:", data);
                     // Filter and set the permission options (id 3 and 4)
-                    const filteredOptions = data.filter(option => option.id === 3 || option.id === 4);
+                    const filteredOptions = data.filter(option => option.id === 2 || option.id === 3);
                     setPermissionsOptions(filteredOptions);
                 } else {
                     console.error("Error getting permission options");
@@ -85,7 +85,7 @@ const RegisterPage = () => {
                 const data = await response.json();
                 document.cookie = `token=${data.token}`;
                 setAuthenticated(true);
-                navigate(-1);
+                navigate('/');
             } else {
                 const errorData = await response.json();
                 console.error("Login failed:", errorData);
@@ -122,7 +122,7 @@ const RegisterPage = () => {
                 console.log("Registration successful:", data);
                 document.cookie = `token=${data.token}`;
                 setAuthenticated(true);
-                navigate(-1);
+                navigate('/');
             } else {
                 const errorData = await response.json();
                 console.error("Registration failed:", errorData);
