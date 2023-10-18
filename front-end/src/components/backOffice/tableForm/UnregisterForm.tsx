@@ -13,6 +13,7 @@ const UnregisterForm = () => {
   const [lastname, setLastname] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [, setOldCv] = useState("");
   const [cv, setCv] = useState<File>();
   const [idSex, setIdSex] = useState<number | undefined>();
 
@@ -34,7 +35,9 @@ const UnregisterForm = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files && files.length > 0) {
+    if (typeof files === "string") {
+       setOldCv(files);
+    }else if (files && files.length > 0) {
         setCv(files[0]);
     }
   };
@@ -54,7 +57,7 @@ const UnregisterForm = () => {
           setLastname(existingUnregister.lastname)
           setPhone(existingUnregister.phone)
           setEmail(existingUnregister.email)
-          setCv(existingUnregister.cv)
+          setOldCv(existingUnregister.cv)
           setIdSex(existingUnregister.sex.id)
           setLoading(false);
       }      
@@ -78,7 +81,8 @@ return (
         name="firstname" 
         id="firstname"
         value={firstname}
-        onChange={e => setFirstname(e.target.value)}  
+        onChange={e => setFirstname(e.target.value)} 
+        required
       />
 
       <label htmlFor="lastname">Lastname</label>
@@ -87,7 +91,8 @@ return (
         name="lastname" 
         id="lastname"
         value={lastname}
-        onChange={e => setLastname(e.target.value)}  
+        onChange={e => setLastname(e.target.value)} 
+        required
       />
 
       <label htmlFor="phone">Phone</label>
@@ -96,7 +101,8 @@ return (
         name="phone" 
         id="phone"
         value={phone}
-        onChange={e => setPhone(e.target.value)}  
+        onChange={e => setPhone(e.target.value)}
+        required  
       />
       
       <label htmlFor="email">Email</label>
@@ -105,7 +111,8 @@ return (
         name="email" 
         id="email"
         value={email}
-        onChange={e => setEmail(e.target.value)}  
+        onChange={e => setEmail(e.target.value)}
+        required 
       />
 
       <label htmlFor="cv">CV (PDF)</label>
@@ -123,7 +130,8 @@ return (
         name="sex_id" 
         id="sex_id"
         value={idSex}
-        onChange={e => setIdSex(Number(e.target.value))}  
+        onChange={e => setIdSex(Number(e.target.value))}
+        required
         />
 
       <button type="submit">Enregister</button>

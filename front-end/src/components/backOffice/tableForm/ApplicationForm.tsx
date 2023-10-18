@@ -70,7 +70,8 @@ return (
         name="message" 
         id="message"
         value={message}
-        onChange={e => setMessage(e.target.value)}  
+        onChange={e => setMessage(e.target.value)}
+        required  
       />
 
      <label htmlFor="isRegistered">Is Registered</label>
@@ -80,6 +81,7 @@ return (
         id="isRegistered"
         checked={isRegistered}
         onChange={handleIsRegistered}
+        
       />
 
      <label htmlFor="idUser">User ID</label>
@@ -88,7 +90,9 @@ return (
         name="idUser"
         id="idUser"
         value={idUser}
-        onChange={e => setIdUser(Number(e.target.value))} 
+        onChange={e => setIdUser(Number(e.target.value))}
+        required
+        min={1}
       />
 
       <button type="submit">Enregister</button>

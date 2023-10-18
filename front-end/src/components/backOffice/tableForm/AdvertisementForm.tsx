@@ -83,7 +83,8 @@ return (
         name="title" 
         id="title"
         value={title}
-        onChange={e => setTitle(e.target.value)}  
+        onChange={e => setTitle(e.target.value)}
+        required
       />
 
       <label htmlFor="quick_description">Quick description</label>
@@ -92,7 +93,8 @@ return (
         name="quick_description" 
         id="quick_description"
         value={quickDescription}
-        onChange={e => setQuickDescription(e.target.value)}  
+        onChange={e => setQuickDescription(e.target.value)} 
+        required
       />
 
       <label htmlFor="hour">Work hour</label>
@@ -101,7 +103,8 @@ return (
         name="hour" 
         id="hour"
         value={hour}
-        onChange={e => setHour(e.target.value)}  
+        onChange={e => setHour(e.target.value)}
+        required 
       />
 
       <label htmlFor="wage">Wage</label>
@@ -110,7 +113,8 @@ return (
         name="wage" 
         id="wage"
         value={wage}
-        onChange={e => setWage(e.target.value)}  
+        onChange={e => setWage(e.target.value)}
+        required 
       />
 
       <label htmlFor="isOnline">Is Online</label>
@@ -128,7 +132,9 @@ return (
         name="contract"
         id="contract"
         value={idContract}
-        onChange={e => setIdContract(Number(e.target.value))} 
+        onChange={e => setIdContract(Number(e.target.value))}
+        required
+        min={1}
       />
 
       <label htmlFor="company">Company ID</label>
@@ -137,7 +143,9 @@ return (
         name="company"
         id="company"
         value={idCompany}
-        onChange={e => setIdCompany(Number(e.target.value))}  
+        onChange={e => setIdCompany(Number(e.target.value))}
+        required
+        min={1}
       />
 
       <label htmlFor="full_description">Full Description</label>
@@ -145,7 +153,8 @@ return (
         name="full_description" 
         id="full_description"
         value={fullDescription}
-        onChange={e => setFullDescription(e.target.value)}  
+        onChange={e => setFullDescription(e.target.value)} 
+        required
       />
 
       <button type="submit">Enregister</button>

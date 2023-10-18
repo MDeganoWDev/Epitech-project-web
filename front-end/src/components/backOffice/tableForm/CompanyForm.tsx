@@ -63,7 +63,8 @@ return (
         name="name" 
         id="name"
         value={name}
-        onChange={e => setName(e.target.value)}  
+        onChange={e => setName(e.target.value)} 
+        required
         />
 
       <label htmlFor="address">Adress</label>
@@ -72,7 +73,8 @@ return (
         name="address" 
         id="address"
         value={adress}
-        onChange={e => setAdress(e.target.value)}  
+        onChange={e => setAdress(e.target.value)}
+        required 
         />
 
       <label htmlFor="user_id">User id</label>
@@ -81,7 +83,9 @@ return (
         name="user_id" 
         id="user_id"
         value={adress}
-        onChange={e => setIdUser(Number(e.target.value))}  
+        onChange={e => setIdUser(Number(e.target.value))}
+        required 
+        min={1} 
         />
 
       <button type="submit">Enregister</button>

@@ -13,6 +13,7 @@ const UtilisateurForm = () => {
   const [lastname, setLastname] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [, setOldCv] = useState("");
   const [cv, setCv] = useState<File>();
   const [password, setPassword] = useState("");
   const [idPermission, setIdPermission] = useState<number | undefined>();
@@ -38,9 +39,11 @@ const UtilisateurForm = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files && files.length > 0) {
-        setCv(files[0]);
-    }
+    if (typeof files === "string") {
+      setOldCv(files);
+   }else if (files && files.length > 0) {
+       setCv(files[0]);
+   }
   };
   
   const HandleCancel = () => {
@@ -58,7 +61,7 @@ const UtilisateurForm = () => {
           setLastname(existingUnregister.lastname)
           setPhone(existingUnregister.phone)
           setEmail(existingUnregister.email)
-          setCv(existingUnregister.cv)
+          setOldCv(existingUnregister.cv)
           setIdPermission(existingUnregister.permission.id)
           setIdSex(existingUnregister.sex.id)
           setLoading(false);
@@ -83,7 +86,8 @@ return (
         name="firstname" 
         id="firstname"
         value={firstname}
-        onChange={e => setFirstname(e.target.value)}  
+        onChange={e => setFirstname(e.target.value)} 
+        required
       />
 
       <label htmlFor="lastname">Lastname</label>
@@ -92,7 +96,8 @@ return (
         name="lastname" 
         id="lastname"
         value={lastname}
-        onChange={e => setLastname(e.target.value)}  
+        onChange={e => setLastname(e.target.value)} 
+        required
       />
 
       <label htmlFor="phone">Phone</label>
@@ -101,7 +106,8 @@ return (
         name="phone" 
         id="phone"
         value={phone}
-        onChange={e => setPhone(e.target.value)}  
+        onChange={e => setPhone(e.target.value)} 
+        required
       />
       
       <label htmlFor="email">Email</label>
@@ -111,6 +117,7 @@ return (
         id="email"
         value={email}
         onChange={e => setEmail(e.target.value)}  
+        required
       />
 
       <label htmlFor="cv">CV (PDF)</label>
@@ -128,7 +135,8 @@ return (
         name="password" 
         id="password"
         value={password}
-        onChange={e => setPassword(e.target.value)}  
+        onChange={e => setPassword(e.target.value)}
+        required 
       />
 
       <label htmlFor="permission_id">Permission id</label>
@@ -137,7 +145,9 @@ return (
         name="permission_id" 
         id="permission_id"
         value={idPermission}
-        onChange={e => setIdPermission(Number(e.target.value))}  
+        onChange={e => setIdPermission(Number(e.target.value))}
+        required
+        min={1}  
         />
 
       <label htmlFor="sex_id">Sex id</label>
@@ -146,7 +156,9 @@ return (
         name="sex_id" 
         id="sex_id"
         value={idSex}
-        onChange={e => setIdSex(Number(e.target.value))}  
+        onChange={e => setIdSex(Number(e.target.value))} 
+        required
+        min={1}
         />
 
       <button type="submit">Enregister</button>
