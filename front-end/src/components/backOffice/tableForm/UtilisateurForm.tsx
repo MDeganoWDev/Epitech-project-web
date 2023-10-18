@@ -33,10 +33,10 @@ const UtilisateurForm = () => {
     formData.append("lastname", lastname);
     formData.append("phone", phone);
     formData.append("email", email);
-    formData.append("password", password);
     if (cv) formData.append("cv", cv);
-    if (idPermission) formData.append("permission_id", idPermission.toString());
     if (idSex) formData.append("sex_id", idSex.toString());
+    if (idPermission) formData.append("permission_id", idPermission.toString());
+    if (!idUnregister) formData.append("password", password);
     
     idUnregister != undefined ? response = await putUtilisateur(idUnregister, formData) : response = await postUtilisateur(formData); 
     if (response) navigate(`/admin/utilisateur`);
@@ -140,15 +140,19 @@ return (
         onChange={handleFileChange}
       />
 
-      <label htmlFor="password">Password</label>
-      <input 
-        type="password" 
-        name="password" 
-        id="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        required 
-      />
+      {!idUnregister && (
+        <>
+          <label htmlFor="password">Password</label>
+          <input 
+            type="password" 
+            name="password" 
+            id="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required 
+          />
+        </>
+      )}  
 
       <label htmlFor="permission">Permission</label>
       <select
