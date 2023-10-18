@@ -16,7 +16,7 @@ const RegisterPage = () => {
     const [sexOptions, setSexOptions] = useState<SexType[]>([]);
     const [permissionsOptions, setPermissionsOptions] = useState<PermissionType[]>([]);
     const [selectedPermission, setSelectedPermission] = useState<number | string>('');
-
+    const [companyName, setCompanyName] = useState("");
 
     useEffect(() => {
         const fetchSexOptions = async () => {
@@ -24,7 +24,6 @@ const RegisterPage = () => {
                 const response = await fetch("http://localhost:8000/sex/");
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("Sex Options:", data);
                     setSexOptions(data);
                 } else {
                     console.error("Error getting sex options");
@@ -39,8 +38,6 @@ const RegisterPage = () => {
                 const response = await fetch("http://localhost:8000/permission/");
                 if (response.ok) {
                     const data: PermissionType[] = await response.json();
-                    console.log("Permission Options:", data);
-                    // Filter and set the permission options (id 3 and 4)
                     const filteredOptions = data.filter(option => option.id === 2 || option.id === 3);
                     setPermissionsOptions(filteredOptions);
                 } else {
@@ -84,6 +81,7 @@ const RegisterPage = () => {
             if (response.ok) {
                 const data = await response.json();
                 document.cookie = `token=${data.token}`;
+                useAuthStore.setState({token: data.token });
                 setAuthenticated(true);
                 navigate('/');
             } else {
@@ -121,6 +119,7 @@ const RegisterPage = () => {
                 const data = await response.json();
                 console.log("Registration successful:", data);
                 document.cookie = `token=${data.token}`;
+                useAuthStore.setState({token: data.token });
                 setAuthenticated(true);
                 navigate('/');
             } else {
@@ -202,6 +201,16 @@ const RegisterPage = () => {
                             ))}
                         </select>
                     </label>
+                    {selectedPermission === 'company' && (
+                        <label>
+                            Company Name:
+                            <input
+                                type="text"
+                                value={companyName}
+                                onChange={(event) => setCompanyName(event.target.value)}
+                            />
+                        </label>
+                    )}
                 </>}
                 <br />
                 <button type="submit">{isLogin ? "Login" : "Register"}</button>

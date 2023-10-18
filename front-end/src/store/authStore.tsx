@@ -20,6 +20,7 @@ export const useAuthStore = create<AthenticationState & AuthenticationAction>((s
         set({ isAuthenticated: false });
         document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         document.cookie = 'csrftoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        set({ token: undefined });
     },
     setId: (id?: number) => set({ id }),
   }));
