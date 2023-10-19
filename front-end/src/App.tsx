@@ -20,6 +20,7 @@ function App() {
           <Route path="user/" element={<RegisterPage />} />
           <Route path="user/profile/" element={<UserOffice />} />
           <Route path="advertisement/create/:company" element={<AdvertisementPage />} />
+          <Route path="advertisement/:id" element={<AdvertisementPage />} />
           <Route path="apply/:id" element={<ApplicationPage />} />
         </Route>
       </Routes>
