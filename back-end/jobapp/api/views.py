@@ -28,14 +28,17 @@ class UtilisateurViewSet(MultipleFieldLookupMixin, viewsets.ModelViewSet):
 class PermissionViewSet(viewsets.ModelViewSet):
     queryset = Permission.objects.all().order_by('id')
     serializer_class = PermissionSerializer
+    permission_classes = [HasAdminPermission|ReadOnly]
 
 class ContractViewSet(viewsets.ModelViewSet):
     queryset = Contract.objects.all().order_by('id')
     serializer_class = ContractSerializer
+    permission_classes = [HasAdminPermission|ReadOnly]
 
 class SexViewSet(viewsets.ModelViewSet):
     queryset = Sex.objects.all().order_by('id')
     serializer_class = SexSerializer
+    permission_classes = [HasAdminPermission|ReadOnly]
 
 class UnregisterViewSet(viewsets.ModelViewSet):
     queryset = Unregister.objects.all().order_by('id')
@@ -53,7 +56,7 @@ class AllCompanyViewSet(viewsets.ModelViewSet):
 class AdvertisementViewSet(viewsets.ModelViewSet):
     queryset = Advertisement.objects.all().order_by('id')
     serializer_class = AdvertisementSerializer
-    #permission_classes = [HasSearchingPermission|ReadOnly]
+    permission_classes = [HasOfferingPermission|ReadOnly]
 
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all().order_by('id')
@@ -63,21 +66,25 @@ class AllPermissionViewSet(viewsets.ModelViewSet):
     queryset = Permission.objects.all().order_by('id')
     serializer_class = PermissionSerializer
     pagination_class = None
+    permission_classes = [HasAdminPermission|ReadOnly]
 
 class AllContractViewSet(viewsets.ModelViewSet):
     queryset = Contract.objects.all().order_by('id')
     serializer_class = ContractSerializer
     pagination_class = None
+    permission_classes = [HasAdminPermission|ReadOnly]
 
 class AllSexViewSet(viewsets.ModelViewSet):
     queryset = Sex.objects.all().order_by('id')
     serializer_class = SexSerializer
     pagination_class = None
+    permission_classes = [HasAdminPermission|ReadOnly]
 
 class AllAdvertisementViewSet(viewsets.ModelViewSet):
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
     pagination_class = None
+    permission_classes = [HasOfferingPermission|ReadOnly]
 
 class AllApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
