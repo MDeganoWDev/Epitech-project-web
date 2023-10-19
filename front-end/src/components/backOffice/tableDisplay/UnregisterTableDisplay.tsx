@@ -79,7 +79,7 @@ const UnregisterTableDisplay = () => {
                         <td>{unregister.lastname}</td>
                         <td>{unregister.email}</td>
                         <td>{unregister.phone}</td>
-                        <td><a href={unregister.cv} target="_blank">Link</a></td>
+                        <td><a href={unregister.cv} target="_blank">{unregister.cv ? "Link" : "no cv"}</a></td>
                         <td>{unregister.sex?.name}</td>
                         <td><button onClick={() => handleEditUnregister(unregister.id)}>Modifier</button></td>
                         <td><button onClick={() => handleDeleteUnregister(unregister.id)}>Supprimer</button></td>

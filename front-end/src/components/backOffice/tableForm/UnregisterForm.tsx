@@ -3,8 +3,8 @@ import { putUnregister } from '../../../api/put/putUnregister';
 import { postUnregister } from '../../../api/post/postUnregister';
 import { getUnregister } from '../../../api/get/getUnregister';
 import { useParams, useNavigate } from 'react-router-dom';
-import type { SexType } from '../../../typings/type';
 import { getNPSex } from '../../../api/get/getNPSex';
+import type { SexType } from '../../../typings/type';
 
 const UnregisterForm = () => {
   const { id } = useParams();
