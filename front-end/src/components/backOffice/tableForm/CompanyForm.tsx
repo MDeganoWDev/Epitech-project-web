@@ -82,7 +82,7 @@ return (
         type="number" 
         name="user_id" 
         id="user_id"
-        value={adress}
+        value={idUser}
         onChange={e => setIdUser(Number(e.target.value))}
         required 
         min={1} 
