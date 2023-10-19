@@ -45,9 +45,9 @@ const Header = ({isAuthenticated, onDisconnect}:HeadersProps) => {
             return (
                 <header className="p-20 bg-slate-300 flex justify-between items-center py-4">
                     <h1 className="text-blue-700 text-2xl font-bold"><Link to="/">Job board</Link></h1>
-                    <button onClick={redirectForCreateAdvertisement}>Create an advertisement</button>
-                    <Link to="/user/profile">Profile</Link>
-                    <button onClick={handleDisconnect}>Disconnect</button>
+                    <button onClick={redirectForCreateAdvertisement} className="text-gray-700">Create an advertisement</button>
+                    <Link to="/user/profile" className="text-gray-700">Profile</Link>
+                    <button onClick={handleDisconnect} className="text-gray-700">Disconnect</button>
                 </header>
             );
         }
@@ -55,8 +55,8 @@ const Header = ({isAuthenticated, onDisconnect}:HeadersProps) => {
             return (
                 <header className="p-20 bg-slate-300 flex justify-between items-center py-4">
                     <h1 className="text-blue-700 text-2xl font-bold"><Link to="/">Job board</Link></h1>
-                    <Link to="/admin">Admin</Link>
-                    <button onClick={handleDisconnect}>Disconnect</button>
+                    <Link to="/admin" className="text-gray-700">Admin</Link>
+                    <button onClick={handleDisconnect} className="text-gray-700">Disconnect</button>
                 </header>
             );
         }
@@ -66,11 +66,11 @@ const Header = ({isAuthenticated, onDisconnect}:HeadersProps) => {
             <h1 className="text-blue-700 text-2xl font-bold"><Link to="/">Job board</Link></h1>
             {isAuthenticated ? (
                 <>
-                    <Link to="/user/profile">Profile</Link>
-                    <button onClick={handleDisconnect}>Disconnect</button>
+                    <Link to="/user/profile" className="text-gray-700">Profile</Link>
+                    <button onClick={handleDisconnect} className="text-gray-700">Disconnect</button>
                 </>
             ) : (
-                <Link to="/user">Login/Register</Link>
+                <Link to="/user" className="text-gray-700">Login/Register</Link>
             )}
 
         </header>

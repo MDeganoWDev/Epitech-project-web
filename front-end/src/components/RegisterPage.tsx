@@ -107,13 +107,13 @@ const RegisterPage = () => {
                 setAuthenticated(true);
 
                 if (selectedPermission === 2 && companyName) {
-                    const companyFormData:CompanyType = {
-                      name: companyName,
-                      user_id: data.id,
-                      address: "",
+                    const companyFormData: CompanyType = {
+                        name: companyName,
+                        user_id: data.id,
+                        address: "",
                     };
                     await postCompany(companyFormData);
-                  }
+                }
                 navigate('/');
             } else {
                 const errorData = await response.json();
@@ -125,92 +125,138 @@ const RegisterPage = () => {
     };
 
     return (
-        <div>
-            <h1>{isLogin ? "Login" : "Register"}</h1>
-            <form onSubmit={(event) => isLogin ? handleLogin(event) : handleRegister(event)}>
-                <label>
-                    email:
+        <div className="flex flex-col items-center justify-center h-screen">
+            <h1 className="text-4xl font-bold mb-8">{isLogin ? "Login" : "Register"}</h1>
+            <form className="w-full max-w-md" onSubmit={(event) => isLogin ? handleLogin(event) : handleRegister(event)}>
+                <div className="mb-4">
+                    <label className="block text-gray-300 font-bold mb-2" htmlFor="email">
+                        Email:
+                    </label>
                     <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                        id="email"
                         type="text"
                         value={email}
                         onChange={(event) => setemail(event.target.value)}
                     />
-                </label>
-                <br />
-                <label>
-                    Password:
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-300 font-bold mb-2" htmlFor="password">
+                        Password:
+                    </label>
                     <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password"
                         type="password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                     />
-                </label>
-                {!isLogin && <>
-                    <label>
-                        First name:
-                        <input
-                            type="firstName"
-                            value={firstName}
-                            onChange={(event) => setFirst(event.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Last name:
-                        <input
-                            type="lastName"
-                            value={lastName}
-                            onChange={(event) => setLast(event.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Phone:
-                        <input
-                            type="phone"
-                            value={phone}
-                            onChange={(event) => setPhone(event.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Sex:
-
-                        <select value={sex} onChange={(event) => setSex(parseInt(event.target.value))}>
-                            <option value="">Select...</option>
-                            {sexOptions.map((option) => (
-                                <option key={option.id} value={option.id}>
-                                    {option.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <br />
-                    <label>
-                        I want to:
-                        <select value={selectedPermission ?? ""} onChange={(event) => setSelectedPermission(parseInt(event.target.value))}>
-                            <option value="">Select...</option>
-                            {permissionsOptions.map((option) => (
-                                <option key={option.id} value={option.id}>
-                                    {getPermissionLabel(option.id)}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    {selectedPermission === 2 && (
-                        <label>
-                            Company Name:
+                </div>
+                {!isLogin && (
+                    <>
+                        <div className="mb-4">
+                            <label className="block text-gray-300 font-bold mb-2" htmlFor="firstName">
+                                First name:
+                            </label>
                             <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                id="firstName"
                                 type="text"
-                                value={companyName}
-                                onChange={(event) => setCompanyName(event.target.value)}
+                                value={firstName}
+                                onChange={(event) => setFirst(event.target.value)}
                             />
-                        </label>
-                    )}
-                </>}
-                <br />
-                <button type="submit">{isLogin ? "Login" : "Register"}</button>
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-300 font-bold mb-2" htmlFor="lastName">
+                                Last name:
+                            </label>
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                id="lastName"
+                                type="text"
+                                value={lastName}
+                                onChange={(event) => setLast(event.target.value)}
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-300 font-bold mb-2" htmlFor="phone">
+                                Phone:
+                            </label>
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                id="phone"
+                                type="text"
+                                value={phone}
+                                onChange={(event) => setPhone(event.target.value)}
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-300 font-bold mb-2" htmlFor="sex">
+                                Sex:
+                            </label>
+                            <select
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                id="sex"
+                                value={sex}
+                                onChange={(event) => setSex(parseInt(event.target.value))}
+                            >
+                                <option value="">Select...</option>
+                                {sexOptions.map((option) => (
+                                    <option key={option.id} value={option.id}>
+                                        {option.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-300 font-bold mb-2" htmlFor="permission">
+                                I want to:
+                            </label>
+                            <select
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                id="permission"
+                                value={selectedPermission ?? ""}
+                                onChange={(event) => setSelectedPermission(parseInt(event.target.value))}
+                            >
+                                <option value="">Select...</option>
+                                {permissionsOptions.map((option) => (
+                                    <option key={option.id} value={option.id}>
+                                        {getPermissionLabel(option.id)}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        {selectedPermission === 2 && (
+                            <div className="mb-4">
+                                <label className="block text-gray-300 font-bold mb-2" htmlFor="companyName">
+                                    Company Name:
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="companyName"
+                                    type="text"
+                                    value={companyName}
+                                    onChange={(event) => setCompanyName(event.target.value)}
+                                />
+                            </div>
+                        )}
+                    </>
+                )}
+                <div className="flex items-center justify-between">
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit"
+                    >
+                        {isLogin ? "Login" : "Register"}
+                    </button>
+                    <button
+                        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                        onClick={() => setIsLogin(!isLogin)}
+                    >
+                        {isLogin ? "No account? Register here" : "I already have an account. Login here"}
+                    </button>
+                </div>
             </form>
-            <button onClick={() => setIsLogin(!isLogin)}>
-                {isLogin ? "No account? Register here" : "I already have an account. Login here"}
-            </button>
         </div>
     );
 };
