@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { UtilisateurType } from "../typings/type";
 import { getUtilisateur } from "../api/get/getUtilisateur";
 import { useAuthStore } from "../store/authStore";
-import { getCompany } from "../api/get/getCompany";
+import { getNPCompany } from "../api/get/getNPCompany";
 import { CompanyType } from "../typings/type";
 
 type HeadersProps = {
@@ -34,8 +34,9 @@ const Header = ({isAuthenticated, onDisconnect}:HeadersProps) => {
           fetchUser();
         }, [token]);
         const redirectForCreateAdvertisement = async () => {
-            const allCompanies:CompanyType[] = await getCompany();
+            const allCompanies:CompanyType[] = await getNPCompany();
             const userCompany = allCompanies.filter(company => company.user?.id === user?.id);
+            console.log(allCompanies);
             navigate(`/advertisement/create/${userCompany[0].id}`);
         }
 

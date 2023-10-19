@@ -2,7 +2,7 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from api.views import AllContractViewSet, AllPermissionViewSet, AllSexViewSet, CompanyViewSet, AdvertisementViewSet, UnregisterViewSet, UtilisateurViewSet, ApplicationViewSet, SexViewSet, ContractViewSet, PermissionViewSet
+from api.views import AllCompanyViewSet, AllApplicationViewSet, AllAdvertisementViewSet, AllContractViewSet, AllPermissionViewSet, AllSexViewSet, CompanyViewSet, AdvertisementViewSet, UnregisterViewSet, UtilisateurViewSet, ApplicationViewSet, SexViewSet, ContractViewSet, PermissionViewSet
 from rest_framework.authtoken.views import obtain_auth_token
 from api.serializers import UtilisateurSerializer
 from rest_framework.generics import RetrieveAPIView
@@ -19,6 +19,9 @@ router.register(r'permission', PermissionViewSet)
 router.register(r'all-permission', AllPermissionViewSet)
 router.register(r'all-contract', AllContractViewSet)
 router.register(r'all-sex', AllSexViewSet)
+router.register(r'all-application', AllApplicationViewSet)
+router.register(r'all-advertisement', AllAdvertisementViewSet)
+router.register(r'all-companies', AllCompanyViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

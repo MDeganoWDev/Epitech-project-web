@@ -28,7 +28,7 @@ const SelectedAdvertisement = () => {
 
   return (
     <div className="bg-white text-black rounded-2xl p-2">
-        <div>{advertisement?.offerDate}</div>
+        <div>{advertisement?.offer_date}</div>
         <div>{advertisement?.title}</div>
         <div>{advertisement?.wage}</div>
         <div>{advertisement?.contract?.name}</div>

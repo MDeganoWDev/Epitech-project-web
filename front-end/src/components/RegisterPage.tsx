@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { SexType, PermissionType } from "../typings/type";
+import { SexType, PermissionType, CompanyType } from "../typings/type";
 import { useAuthStore } from "../store/authStore";
+import { getNPSex } from "../api/get/getNPSex";
+import { getNPPermission } from "../api/get/getNPPermission";
+import { postCompany } from "../api/post/postCompany";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
@@ -15,37 +18,18 @@ const RegisterPage = () => {
     const [sex, setSex] = useState(0);
     const [sexOptions, setSexOptions] = useState<SexType[]>([]);
     const [permissionsOptions, setPermissionsOptions] = useState<PermissionType[]>([]);
-    const [selectedPermission, setSelectedPermission] = useState<number | string>('');
+    const [selectedPermission, setSelectedPermission] = useState<number | null>(null);
     const [companyName, setCompanyName] = useState("");
 
     useEffect(() => {
         const fetchSexOptions = async () => {
-            try {
-                const response = await fetch("http://localhost:8000/sex/");
-                if (response.ok) {
-                    const data = await response.json();
-                    setSexOptions(data);
-                } else {
-                    console.error("Error getting sex options");
-                }
-            } catch (error) {
-                console.error("Error getting sex options:", error);
-            }
+            setSexOptions(await getNPSex());
         };
 
         const fetchPermissions = async () => {
-            try {
-                const response = await fetch("http://localhost:8000/permission/");
-                if (response.ok) {
-                    const data: PermissionType[] = await response.json();
-                    const filteredOptions = data.filter(option => option.id === 2 || option.id === 3);
-                    setPermissionsOptions(filteredOptions);
-                } else {
-                    console.error("Error getting permission options");
-                }
-            } catch (error) {
-                console.error("Error getting permission options:", error);
-            }
+            const npPerms = await getNPPermission();
+            const filteredOptions = npPerms.filter(option => option.id === 2 || option.id === 3);
+            setPermissionsOptions(filteredOptions);
         };
 
         fetchPermissions();
@@ -81,7 +65,7 @@ const RegisterPage = () => {
             if (response.ok) {
                 const data = await response.json();
                 document.cookie = `token=${data.token}`;
-                useAuthStore.setState({token: data.token });
+                useAuthStore.setState({ token: data.token });
                 setAuthenticated(true);
                 navigate('/');
             } else {
@@ -119,8 +103,17 @@ const RegisterPage = () => {
                 const data = await response.json();
                 console.log("Registration successful:", data);
                 document.cookie = `token=${data.token}`;
-                useAuthStore.setState({token: data.token });
+                useAuthStore.setState({ token: data.token });
                 setAuthenticated(true);
+
+                if (selectedPermission === 2 && companyName) {
+                    const companyFormData:CompanyType = {
+                      name: companyName,
+                      user_id: data.id,
+                      address: "",
+                    };
+                    await postCompany(companyFormData);
+                  }
                 navigate('/');
             } else {
                 const errorData = await response.json();
@@ -192,7 +185,7 @@ const RegisterPage = () => {
                     <br />
                     <label>
                         I want to:
-                        <select value={selectedPermission} onChange={(event) => setSelectedPermission(parseInt(event.target.value))}>
+                        <select value={selectedPermission ?? ""} onChange={(event) => setSelectedPermission(parseInt(event.target.value))}>
                             <option value="">Select...</option>
                             {permissionsOptions.map((option) => (
                                 <option key={option.id} value={option.id}>
@@ -201,7 +194,7 @@ const RegisterPage = () => {
                             ))}
                         </select>
                     </label>
-                    {selectedPermission === 'company' && (
+                    {selectedPermission === 2 && (
                         <label>
                             Company Name:
                             <input
