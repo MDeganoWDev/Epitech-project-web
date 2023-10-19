@@ -3,12 +3,27 @@ from .models import Company, Permission, Contract, Sex, Advertisement, Unregiste
 from .serializers import CompanySerializer, AdvertisementSerializer, ContractSerializer, PermissionSerializer, SexSerializer, UnregisterSerializer, UtilisateurSerializer, ApplicationSerializer
 from .permissions import ReadOnly, HasAdminPermission, HasOfferingPermission, HasSearchingPermission
 from .mixins import MultipleFieldLookupMixin
+from rest_framework.response import Response
+from rest_framework import status
 
 class UtilisateurViewSet(MultipleFieldLookupMixin, viewsets.ModelViewSet):
     queryset = Utilisateur.objects.all()
     serializer_class = UtilisateurSerializer
     lookup_fields = ['auth_token', 'pk']
     # permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            password = request.data.get('password')
+            user.set_password(password)
+            user.groups.set(request.data.get('groups', []))
+            user.save()
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PermissionViewSet(viewsets.ModelViewSet):
     queryset = Permission.objects.all()
