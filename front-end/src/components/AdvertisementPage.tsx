@@ -18,31 +18,49 @@ export const AdvertisementPage = () => {
     }},[id]);
     if (id) {
         return (
-            <div>
-                <h2>Applicants</h2>
-                {applications.map((app) => (
-                    <div key={app.id}>
-                        {app.user &&
-                            <>
-                                <p>Name: {app.user?.lastname} {app.user?.firstname}</p>
-                                <p>Email: {app.user?.email}</p>
-                                <p>Phone: {app.user?.phone}</p>
-                                <a href={app.user?.cv} target="_blank">CV Link</a>
-                            </>
-                        }
-                        {app.unregisterUser &&
-                            <>
-                                <p>Name: {app.unregisterUser?.lastname} {app.unregisterUser?.firstname}</p>
-                                <p>Email: {app.unregisterUser?.email}</p>
-                                <p>Phone: {app.unregisterUser?.phone}</p>
-                                <a href={app.unregisterUser?.cv} target="_blank">CV Link</a>
-                            </>
-                        }
-                        <p>Message: {app.message}</p>
-
-                    </div>
-                ))}
-            </div>
+            <div className="bg-gray-700 p-4 rounded-md shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Applicants</h2>
+      {applications.length > 0 ? (
+        applications.map((app) => (
+          <div key={app.id} className="mb-4">
+            {app.user && (
+              <>
+                <p>
+                  <span className="font-bold">Name:</span> {app.user?.lastname} {app.user?.firstname}
+                </p>
+                <p>
+                  <span className="font-bold">Email:</span> {app.user?.email}
+                </p>
+                <p>
+                  <span className="font-bold">Phone:</span> {app.user?.phone}
+                </p>
+                <a href={app.user?.cv} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
+                  CV Link
+                </a>
+              </>
+            )}
+            {app.unregisterUser && (
+              <>
+                <p>
+                  <span className="font-bold">Name:</span> {app.unregisterUser?.lastname} {app.unregisterUser?.firstname}
+                </p>
+                <p>
+                  <span className="font-bold">Email:</span> {app.unregisterUser?.email}
+                </p>
+                <p>
+                  <span className="font-bold">Phone:</span> {app.unregisterUser?.phone}
+                </p>
+                <a href={app.unregisterUser?.cv} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
+                  CV Link
+                </a>
+              </>
+            )}
+          </div>
+        ))
+      ) : (
+        <p>No applications yet.</p>
+      )}
+    </div>
         );
     } else {
         return (
