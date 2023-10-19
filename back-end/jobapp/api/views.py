@@ -45,6 +45,11 @@ class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all().order_by('id')
     serializer_class = CompanySerializer
 
+class AllCompanyViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.all().order_by('id')
+    serializer_class = CompanySerializer
+    pagination_class = None
+
 class AdvertisementViewSet(viewsets.ModelViewSet):
     queryset = Advertisement.objects.all().order_by('id')
     serializer_class = AdvertisementSerializer
@@ -67,4 +72,14 @@ class AllContractViewSet(viewsets.ModelViewSet):
 class AllSexViewSet(viewsets.ModelViewSet):
     queryset = Sex.objects.all().order_by('id')
     serializer_class = SexSerializer
+    pagination_class = None
+
+class AllAdvertisementViewSet(viewsets.ModelViewSet):
+    queryset = Advertisement.objects.all()
+    serializer_class = AdvertisementSerializer
+    pagination_class = None
+
+class AllApplicationViewSet(viewsets.ModelViewSet):
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
     pagination_class = None

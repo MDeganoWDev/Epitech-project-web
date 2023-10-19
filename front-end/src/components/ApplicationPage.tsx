@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { UnregisterType, UtilisateurType } from '../typings/type';
+import { UtilisateurType } from '../typings/type';
 import { SexType } from "../typings/type";
 import { useAuthStore } from "../store/authStore";
 import { Link, useParams } from "react-router-dom";
-import { getSex } from "../api/get/getSex";
+import { getNPSex } from "../api/get/getNPSex";
 import { getUtilisateur } from '../api/get/getUtilisateur';
 import { ApplicationType } from '../typings/type';
 import { postApplication } from '../api/post/postApplication';
@@ -32,7 +32,7 @@ const ApplicationPage = () => {
     };
 
     const fetchSexOptions = async () => {
-      setSexOptions(await getSex());
+      setSexOptions(await getNPSex());
     };
     setFormValues({ ...user, message: '' });
     fetchSexOptions();

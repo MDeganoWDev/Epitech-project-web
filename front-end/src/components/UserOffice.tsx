@@ -4,8 +4,8 @@ import { AdvertisementType } from '../typings/type';
 import { ApplicationType } from '../typings/type';
 import { useAuthStore } from "../store/authStore";
 import { UtilisateurType } from '../typings/type';
-import { getAdvertisement } from '../api/get/getAdvertisement';
-import { getApplication } from '../api/get/getApplication';
+import { getNPAdvertisements } from '../api/get/getNPAdvertisements';
+import { getNPApplications } from '../api/get/getNPApplications';
 import { putUtilisateur } from '../api/put/putUtilisateur';
 import { SexType } from '../typings/type';
 import { getSex } from '../api/get/getSex';
@@ -28,24 +28,24 @@ const UserOffice = () => {
         const fetchSexOptions = async () => {
             setSexOptions(await getSex());
         }
-        const getAllApplications = async () => {
-            const allApplications = await getApplication();
-            setAllApplications(allApplications);
+        const fetchApplications = async () => {
+            const npApplications = await getNPApplications();
+            setAllApplications(npApplications);
         }
-        const getAllAdvertisements = async () => {
-            const allAdvertisements = await getAdvertisement();
-            setAllAdvertisements(allAdvertisements);
+        const fetchAdvertisements = async () => {
+            const npAdvertisements = await getNPAdvertisements();
+            setAllAdvertisements(npAdvertisements);
         }
         const fetchUser = async () => {
             const user = await getUtilisateur(undefined, token);
             setUser(user);
             if (user.permission.name === 'worker') {
-                await getAllApplications();
+                await fetchApplications();
                 const userApplications = allApplications.filter(app => app.user?.id === user?.id);
                 setApplications(userApplications);
                 setLoading(false);
             } else if (user.permission.name === 'company') {
-                await getAllAdvertisements();
+                await fetchAdvertisements();
                 const userAdvertisements = allAdvertisements.filter(ad => ad.company?.user?.id === user?.id);
                 setAdvertisements(userAdvertisements);
                 setLoading(false);
@@ -54,6 +54,9 @@ const UserOffice = () => {
         fetchSexOptions();
         fetchUser();
     }, [loading]);
+
+    console.log(allAdvertisements);
+    console.log(advertisements);
 
     const handleEdit = () => {
         editing ? setEditing(false) : setEditing(true);

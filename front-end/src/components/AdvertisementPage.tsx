@@ -2,7 +2,7 @@ import AdvertisementForm from "./backOffice/tableForm/AdvertisementForm";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ApplicationType } from "../typings/type";
-import { getApplication } from "../api/get/getApplication";
+import { getNPApplications } from "../api/get/getNPApplications";
 
 export const AdvertisementPage = () => {
     const { id } = useParams();
@@ -10,11 +10,11 @@ export const AdvertisementPage = () => {
 
     useEffect(() => {
     if (id) {
-        const getAllApplications = async () => {
-            const allApplications = await getApplication();
+        const fetchApplications = async () => {
+            const allApplications = await getNPApplications();
             setApplications(allApplications.filter(ap => ap.advertisement?.id === parseInt(id)));
         }
-        getAllApplications();
+        fetchApplications();
     }},[id]);
     if (id) {
         return (
