@@ -3,11 +3,15 @@ import { deleteAdvertisement } from "../../../api/delete/deleteAdvertisement";
 import { useEffect, useState } from "react";
 import { AdvertisementType } from "../../../typings/type";
 import { getAdvertisement } from "../../../api/get/getAdvertisement";
+import Pagination from "../../Pagination";
 
 const AdvertisementTableDisplay = () => {
     const navigate = useNavigate();    
     const [loading, setLoading] = useState(true);
     const [advertisements, setAdvertisements] = useState<AdvertisementType[]>([]);
+    const [nextPage, setNextPage] = useState(null);
+    const [prevPage, setPrevPage] = useState(null);
+    const [count, setCount] = useState(0);    
     const [fiteredId, setFiteredId] = useState<number[]>([]);
     const filteredAdvertisement = advertisements.filter(element => !fiteredId.includes(element.id));
     
@@ -26,13 +30,27 @@ const AdvertisementTableDisplay = () => {
     
     useEffect(()=>{
         const fetchData = async () => {
-          const advertisementData = await getAdvertisement();
-          setAdvertisements(advertisementData);
+          const advertissementData = await getAdvertisement();
+          setAdvertisements(advertissementData.results);
+          setNextPage(advertissementData.next);
+          setPrevPage(advertissementData.previous);
+          setCount(advertissementData.count);
         setLoading(false);
         }
-    
+      
         fetchData()
       }, [])
+    
+      function handlePageChange(url) {
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setAdvertisements(data.results);
+              setNextPage(data.next);
+              setPrevPage(data.previous);
+              setCount(data.count);
+            });
+        }
     
     if (loading) {
         return <div>Loading</div>
@@ -75,6 +93,7 @@ const AdvertisementTableDisplay = () => {
                     ))}
                 </tbody>
             </table>
+            <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
         </div>
       )
 }

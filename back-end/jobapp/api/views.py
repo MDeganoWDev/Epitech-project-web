@@ -26,30 +26,30 @@ class UtilisateurViewSet(MultipleFieldLookupMixin, viewsets.ModelViewSet):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PermissionViewSet(viewsets.ModelViewSet):
-    queryset = Permission.objects.all()
+    queryset = Permission.objects.all().order_by('id')
     serializer_class = PermissionSerializer
 
 class ContractViewSet(viewsets.ModelViewSet):
-    queryset = Contract.objects.all()
+    queryset = Contract.objects.all().order_by('id')
     serializer_class = ContractSerializer
 
 class SexViewSet(viewsets.ModelViewSet):
-    queryset = Sex.objects.all()
+    queryset = Sex.objects.all().order_by('id')
     serializer_class = SexSerializer
 
 class UnregisterViewSet(viewsets.ModelViewSet):
-    queryset = Unregister.objects.all()
+    queryset = Unregister.objects.all().order_by('id')
     serializer_class = UnregisterSerializer
 
 class CompanyViewSet(viewsets.ModelViewSet):
-    queryset = Company.objects.all()
+    queryset = Company.objects.all().order_by('id')
     serializer_class = CompanySerializer
 
 class AdvertisementViewSet(viewsets.ModelViewSet):
-    queryset = Advertisement.objects.all()
+    queryset = Advertisement.objects.all().order_by('id')
     serializer_class = AdvertisementSerializer
     #permission_classes = [HasSearchingPermission|ReadOnly]
 
 class ApplicationViewSet(viewsets.ModelViewSet):
-    queryset = Application.objects.all()
+    queryset = Application.objects.all().order_by('id')
     serializer_class = ApplicationSerializer

@@ -3,11 +3,15 @@ import { deleteUtilisateur } from "../../../api/delete/deleteUtilisateur";
 import { getUtilisateur } from "../../../api/get/getUtilisateur";
 import { useState, useEffect } from "react";
 import type { UtilisateurType } from "../../../typings/type"
+import Pagination from "../../Pagination";
 
 const UtilisateurTableDisplay = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [utilisateurs, setUtilisateurs] = useState<UtilisateurType[]>([]);
+    const [nextPage, setNextPage] = useState(null);
+    const [prevPage, setPrevPage] = useState(null);
+    const [count, setCount] = useState(0);    
     const [fiteredId, setFiteredId] = useState<number[]>([]);
     const filteredUtilisateurs = utilisateurs.filter(element => !fiteredId.includes(element.id));
     
@@ -27,13 +31,27 @@ const UtilisateurTableDisplay = () => {
     useEffect(()=>{
       const fetchData = async () => {
         const utilisateurData = await getUtilisateur();
-        setUtilisateurs(utilisateurData);
+        setUtilisateurs(utilisateurData.results);
+        setNextPage(utilisateurData.next);
+        setPrevPage(utilisateurData.previous);
+        setCount(utilisateurData.count);
       setLoading(false);
       }
     
       fetchData()
     }, [])
-    
+
+    function handlePageChange(url) {
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            setUtilisateurs(data.results);
+            setNextPage(data.next);
+            setPrevPage(data.previous);
+            setCount(data.count);
+          });
+      }
+      
     if (loading) {
       return <div>Loading</div>
     }
@@ -62,7 +80,7 @@ const UtilisateurTableDisplay = () => {
                         <td>{utilisateur.lastname}</td>
                         <td>{utilisateur.email}</td>
                         <td>{utilisateur.phone}</td>
-                        <td><embed src={utilisateur.cv} width="800px" height="600px" /></td>
+                        <td><a href={utilisateur.cv} target="_blank">Link</a></td>
                         <td>{utilisateur.sex?.name}</td>
                         <td>{utilisateur.permission?.name}</td>
                         <td><button onClick={() => handleEditUtilisateur(utilisateur.id)}>Modifier</button></td>
@@ -71,6 +89,7 @@ const UtilisateurTableDisplay = () => {
                 ))}
             </tbody>
         </table>
+       <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
     </div>
   )
 }

@@ -3,12 +3,16 @@ import { deleteApplications } from "../../../api/delete/deleteApplication";
 import { getApplication } from "../../../api/get/getApplication";
 import { ApplicationType } from "../../../typings/type";
 import { useEffect, useState } from "react";
+import Pagination from "../../Pagination";
 
 
 const ApplicationTableDisplay = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [applications, setApplications] = useState<ApplicationType[]>([]);
+    const [nextPage, setNextPage] = useState(null);
+    const [prevPage, setPrevPage] = useState(null);
+    const [count, setCount] = useState(0);    
     const [fiteredId, setFiteredId] = useState<number[]>([]);
     const filteredApplication = applications.filter(element => !fiteredId.includes(element.id));
     
@@ -27,13 +31,27 @@ const ApplicationTableDisplay = () => {
 
     useEffect(()=>{
         const fetchData = async () => {
-          const applicationData = await getApplication();
-          setApplications(applicationData);
+          const applicatioData = await getApplication();
+          setApplications(applicatioData.results);
+          setNextPage(applicatioData.next);
+          setPrevPage(applicatioData.previous);
+          setCount(applicatioData.count);
         setLoading(false);
         }
-    
+      
         fetchData()
       }, [])
+    
+      function handlePageChange(url) {
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setApplications(data.results);
+              setNextPage(data.next);
+              setPrevPage(data.previous);
+              setCount(data.count);
+            });
+        }
     
     if (loading) {
         return <div>Loading</div>
@@ -66,6 +84,7 @@ const ApplicationTableDisplay = () => {
                     ))}
                 </tbody>
             </table>
+            <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
         </div>
       )
 }
