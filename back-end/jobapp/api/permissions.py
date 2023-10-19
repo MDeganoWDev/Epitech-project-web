@@ -1,8 +1,8 @@
 from rest_framework import permissions
 
 class PermissionRoles:
-    SEARCH = 'searching'
-    OFFER = 'offering'
+    SEARCH = 'worker'
+    OFFER = 'company'
     ADMIN = 'admin'
 
 class ReadOnly(permissions.BasePermission):
