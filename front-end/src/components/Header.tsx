@@ -26,7 +26,6 @@ const Header = ({isAuthenticated, onDisconnect}:HeadersProps) => {
           const fetchUser = async () => {
             try {
               const response = await getUtilisateur(undefined, token);
-              console.log(response);
               setUser(response);
             } catch (error) {
               console.error(error);
@@ -37,8 +36,6 @@ const Header = ({isAuthenticated, onDisconnect}:HeadersProps) => {
         const redirectForCreateAdvertisement = async () => {
             const allCompanies:CompanyType[] = await getCompany();
             const userCompany = allCompanies.filter(company => company.user?.id === user?.id);
-            console.log(userCompany[0].id);
-            console.log("BDAJKDSOIQDJSQIJD")
             navigate(`/advertisement/create/${userCompany[0].id}`);
         }
 
