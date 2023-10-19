@@ -8,7 +8,7 @@ import { getNPAdvertisements } from '../api/get/getNPAdvertisements';
 import { getNPApplications } from '../api/get/getNPApplications';
 import { putUtilisateur } from '../api/put/putUtilisateur';
 import { SexType } from '../typings/type';
-import { getSex } from '../api/get/getSex';
+import { getNPSex } from '../api/get/getNPSex';
 import { useNavigate } from 'react-router-dom';
 
 const UserOffice = () => {
@@ -26,7 +26,7 @@ const UserOffice = () => {
 
     useEffect(() => {
         const fetchSexOptions = async () => {
-            setSexOptions(await getSex());
+            setSexOptions(await getNPSex());
         }
         const fetchApplications = async () => {
             const npApplications = await getNPApplications();
@@ -53,10 +53,7 @@ const UserOffice = () => {
         };
         fetchSexOptions();
         fetchUser();
-    }, [loading]);
-
-    console.log(allAdvertisements);
-    console.log(advertisements);
+    }, [loading, editing]);
 
     const handleEdit = () => {
         editing ? setEditing(false) : setEditing(true);
@@ -84,89 +81,135 @@ const UserOffice = () => {
         try {
             await putUtilisateur(editedUser.id!, formDataEditedUser); // add try-catch block
             setUser(editedUser);
+            setEditing(false);
         } catch (error) {
             console.error(error);
         }
     }
 
     const showApplicants = (id?: number) => () => {
+        console.log(id);
         navigate(`/advertisement/${id}`);
     }
 
     if (loading) {
         return <div>Loading...</div>;
     }
-
     return (
         <div>
-            {editing ? (
-                <form onSubmit={handleSubmit}>
-                    <h2>Edit User Information</h2>
-                    <label htmlFor="cv">CV:</label>
-                    <input type="file" name="cv" />
-                    <br />
-                    <label htmlFor="firstname">First Name:</label>
-                    <input type="text" id="firstname" name="firstname" defaultValue={user?.firstname} />
-                    <br />
-                    <label htmlFor="lastname">Last Name:</label>
-                    <input type="text" id="lastname" name="lastname" defaultValue={user?.lastname} />
-                    <br />
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" name="email" defaultValue={user?.email} />
-                    <br />
-                    <label htmlFor="phone">Phone:</label>
-                    <input type="tel" id="phone" name="phone" defaultValue={user?.phone} />
-                    <br />
-                    <label htmlFor="sex">Gender:</label>
-                        <select id="sex" name="sex" value={sex} onChange={(event) => setSex(parseInt(event.target.value))}>
-                            <option value="">Select...</option>
-                            {sexOptions.map((option) => (
-                                <option key={option.id} value={option.id}>
-                                    {option.id}
-                                </option>
-                            ))}
-                        </select>
-
-                     <button type="submit">Save</button>
-                </form>
-            ) : (
-                <div>
-                    <h2>User Information</h2>
-                    <p>First Name: {user?.firstname}</p>
-                    <p>Last Name: {user?.lastname}</p>
-                    <p>Email: {user?.email}</p>
-                    <p>Phone: {user?.phone}</p>
-                    <p>Gender: {user?.sex?.name}</p>
-                    <button onClick={handleEdit}>Edit Info</button> {/* added edit button */}
+          {editing ? (
+            <div className="bg-gray-700 p-4 rounded-md shadow-md mb-4">
+              <h2 className="text-2xl font-bold mb-4">Edit User Information</h2>
+              <form onSubmit={handleSubmit}>
+                <label htmlFor="cv" className="block mb-2">
+                  CV:
+                </label>
+                <input type="file" name="cv" className="mb-4" />
+                <label htmlFor="firstname" className="block mb-2">
+                  First Name:
+                </label>
+                <input type="text" id="firstname" name="firstname" defaultValue={user?.firstname} className="mb-4" />
+                <label htmlFor="lastname" className="block mb-2">
+                  Last Name:
+                </label>
+                <input type="text" id="lastname" name="lastname" defaultValue={user?.lastname} className="mb-4" />
+                <label htmlFor="email" className="block mb-2">
+                  Email:
+                </label>
+                <input type="email" id="email" name="email" defaultValue={user?.email} className="mb-4" />
+                <label htmlFor="phone" className="block mb-2">
+                  Phone:
+                </label>
+                <input type="tel" id="phone" name="phone" defaultValue={user?.phone} className="mb-4" />
+                <label htmlFor="sex" className="block mb-2">
+                  Gender:
+                </label>
+                <select
+                  id="sex"
+                  name="sex"
+                  value={sex}
+                  onChange={(event) => setSex(parseInt(event.target.value))}
+                  className="mb-4"
+                >
+                  <option value="">Select...</option>
+                  {sexOptions.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Save
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div className="bg-gray-700 p-4 rounded-md shadow-md mb-4">
+              <h2 className="text-2xl font-bold mb-4">User Information</h2>
+              <p className="mb-2">
+                <span className="font-bold">First Name:</span> {user?.firstname}
+              </p>
+              <p className="mb-2">
+                <span className="font-bold">Last Name:</span> {user?.lastname}
+              </p>
+              <p className="mb-2">
+                <span className="font-bold">Email:</span> {user?.email}
+              </p>
+              <p className="mb-2">
+                <span className="font-bold">Phone:</span> {user?.phone}
+              </p>
+              <p className="mb-2">
+                <span className="font-bold">Gender:</span> {user?.sex?.name}
+              </p>
+              <button
+                onClick={handleEdit}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+              >
+                Edit Info
+              </button>
+            </div>
+          )}
+          {applications.length > 0 && (
+            <div className="bg-gray-700 p-4 rounded-md shadow-md mb-4">
+              <h2 className="text-2xl font-bold mb-4">Applications</h2>
+              {applications.map((app) => (
+                <div key={app.id} className="mb-4">
+                  <p>
+                    <span className="font-bold">Company:</span> {app.advertisement?.company?.name}
+                  </p>
+                  <p>
+                    <span className="font-bold">Offer:</span> {app.advertisement?.title}
+                  </p>
+                  <p>
+                    <span className="font-bold">Description:</span> {app.advertisement?.quick_description}
+                  </p>
                 </div>
-            )}
-            {applications.length > 0 && (
-                <div>
-                    <h2>Applications</h2>
-                    {applications.map((app) => (
-                        <div key={app.id}>
-                            <p>Company: {app.advertisement?.company?.name}</p>
-                            <p>Offer: {app.advertisement?.title}</p>
-                            <p>Description: {app.advertisement?.quick_description}</p>
-                        </div>
-                    ))}
-                    <br />
+              ))}
+            </div>
+          )}
+          {advertisements.length > 0 && (
+            <div className="bg-gray-700 p-4 rounded-md shadow-md mb-4">
+              <h2 className="text-2xl font-bold mb-4">Advertisements</h2>
+              {advertisements.map((ad) => (
+                <div key={ad.id} className="mb-4">
+                  <p>
+                    <span className="font-bold">Title:</span> {ad.title}
+                  </p>
+                  <p>
+                    <span className="font-bold">Description:</span> {ad.quick_description}
+                  </p>
+                  <button
+                    onClick={showApplicants(ad.id)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                  >
+                    See applicants for this offer
+                  </button>
                 </div>
-            )}
-            {advertisements.length > 0 && (
-                <div>
-                    <h2>Advertisements</h2>
-                    {advertisements.map((ad) => (
-                        <div key={ad.id}>
-                            <p>Title: {ad.title}</p>
-                            <p>Description: {ad.quick_description}</p>
-                            <button onClick={showApplicants(ad.id)}>See applicants for this offer</button>
-                        </div>
-                    ))}
-                </div>
-            )}
+              ))}
+            </div>
+          )}
         </div>
-    );
+      );
 };
 
 export default UserOffice;

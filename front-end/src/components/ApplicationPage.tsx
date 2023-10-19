@@ -8,6 +8,7 @@ import { getUtilisateur } from '../api/get/getUtilisateur';
 import { ApplicationType } from '../typings/type';
 import { postApplication } from '../api/post/postApplication';
 import { postUnregister } from '../api/post/postUnregister';
+import { useNavigate } from 'react-router-dom';
 
 interface FormValues extends UtilisateurType {
   message: string;
@@ -15,6 +16,7 @@ interface FormValues extends UtilisateurType {
 
 const ApplicationPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [sexOptions, setSexOptions] = useState<SexType[]>([]);
   const [sex, setSex] = useState<SexType>({ id: 0, name: '' });
@@ -87,6 +89,7 @@ const ApplicationPage = () => {
     } catch (error) {
       console.error(error);
     }
+    navigate('/')
   };
 
   // Handle form input changes

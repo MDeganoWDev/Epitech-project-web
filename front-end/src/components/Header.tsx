@@ -36,7 +36,6 @@ const Header = ({isAuthenticated, onDisconnect}:HeadersProps) => {
         const redirectForCreateAdvertisement = async () => {
             const allCompanies:CompanyType[] = await getNPCompany();
             const userCompany = allCompanies.filter(company => company.user?.id === user?.id);
-            console.log(allCompanies);
             navigate(`/advertisement/create/${userCompany[0].id}`);
         }
 
