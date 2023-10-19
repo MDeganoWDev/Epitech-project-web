@@ -4,7 +4,7 @@ import { postUnregister } from '../../../api/post/postUnregister';
 import { getUnregister } from '../../../api/get/getUnregister';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { SexType } from '../../../typings/type';
-import { getSex } from '../../../api/get/getSex';
+import { getNPSex } from '../../../api/get/getNPSex';
 
 const UnregisterForm = () => {
   const { id } = useParams();
@@ -70,7 +70,7 @@ const UnregisterForm = () => {
       setLoading(false)
     }
     const fetchOption = async () => {
-      const sex = await getSex();
+      const sex = await getNPSex();
       setSex(sex)
     }
     fetchOption()
