@@ -7,17 +7,15 @@ import { getApplication } from "../api/get/getApplication";
 export const AdvertisementPage = () => {
     const { id } = useParams();
     const [applications, setApplications] = useState<ApplicationType[]>([]);
-    const [allApplications, setAllApplications] = useState<ApplicationType[]>([]);
 
     useEffect(() => {
     if (id) {
         const getAllApplications = async () => {
             const allApplications = await getApplication();
-            setAllApplications(allApplications);
+            setApplications(allApplications.filter(ap => ap.advertisement?.id === parseInt(id)));
         }
         getAllApplications();
-        setApplications(allApplications.filter(ap => ap.advertisement?.id === parseInt(id)));
-    }},[]);
+    }},[id]);
     if (id) {
         return (
             <div>
