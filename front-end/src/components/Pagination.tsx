@@ -21,9 +21,11 @@ function Pagination({ count, next, prev, onPageChange } : PaginationProps) {
 
   return (
     <div>
-      {count > 5 && <button onClick={handlePrevPage} disabled={!prev}>Previous Page</button>}
+      {count > 5 && 
+      <><button onClick={handlePrevPage} disabled={!prev}>Previous Page</button>
       <p>Page {pageCount} on {Math.ceil(count / 5)}</p>
-      {count > 5 && <button onClick={handleNextPage} disabled={!next}>Next Page</button>}
+      <button onClick={handleNextPage} disabled={!next}>Next Page</button>
+      </>}
     </div>
   );
 }

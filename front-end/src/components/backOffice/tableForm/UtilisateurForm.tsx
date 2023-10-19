@@ -3,9 +3,9 @@ import { putUtilisateur } from '../../../api/put/putUtilisateur';
 import { postUtilisateur } from '../../../api/post/postUtilisateur';
 import { getUtilisateur } from '../../../api/get/getUtilisateur';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getPermission } from '../../../api/get/getPermission';
-import { getSex } from '../../../api/get/getSex';
 import type { PermissionType, SexType } from '../../../typings/type';
+import { getNPPermission } from '../../../api/get/getNPPermission';
+import { getNPSex } from '../../../api/get/getNPSex';
 
 const UtilisateurForm = () => {
   const { id } = useParams();
@@ -76,8 +76,8 @@ const UtilisateurForm = () => {
       setLoading(false)
     }
     const fetchOption = async () => {
-      const permission = await getPermission();
-      const sex = await getSex();
+      const permission = await getNPPermission();
+      const sex = await getNPSex();
       setPermissions(permission)
       setSex(sex)
     }

@@ -53,3 +53,18 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all().order_by('id')
     serializer_class = ApplicationSerializer
+
+class AllPermissionViewSet(viewsets.ModelViewSet):
+    queryset = Permission.objects.all().order_by('id')
+    serializer_class = PermissionSerializer
+    pagination_class = None
+
+class AllContractViewSet(viewsets.ModelViewSet):
+    queryset = Contract.objects.all().order_by('id')
+    serializer_class = ContractSerializer
+    pagination_class = None
+
+class AllSexViewSet(viewsets.ModelViewSet):
+    queryset = Sex.objects.all().order_by('id')
+    serializer_class = SexSerializer
+    pagination_class = None

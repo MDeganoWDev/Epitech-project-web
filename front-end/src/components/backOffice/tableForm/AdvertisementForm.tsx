@@ -3,8 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { postAdvertisement } from '../../../api/post/postAdvertisement';
 import { putAdvertisement } from '../../../api/put/putAdvertisement';
 import { getAdvertisement } from '../../../api/get/getAdvertisement';
-import { getContract } from '../../../api/get/getContract';
 import type { AdvertisementType, ContractType } from '../../../typings/type';
+import { getNPContract } from '../../../api/get/getNPContract';
 
 const AdvertisementForm = () => {
   const navigate = useNavigate();
@@ -61,6 +61,7 @@ const AdvertisementForm = () => {
 
       const fetchData = async () => {
         const existingAdvertisement = await getAdvertisement(currentId);
+        console.log(existingAdvertisement)
         setTitle(existingAdvertisement.title)
         setDate(existingAdvertisement.offerDate)
         setQuickDescription(existingAdvertisement.quick_description)
@@ -78,7 +79,7 @@ const AdvertisementForm = () => {
       setLoading(false)
     }
     const fetchOption = async () => {
-      const constracts = await getContract();
+      const constracts = await getNPContract();
       setContracts(constracts)
     }
     fetchOption()
