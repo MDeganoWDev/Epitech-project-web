@@ -3,11 +3,15 @@ import { deleteSex } from '../../../api/delete/deleteSex'
 import { useEffect, useState } from 'react'
 import { getSex } from '../../../api/get/getSex'
 import type { SexType } from '../../../typings/type'
+import Pagination from '../../Pagination'
 
 const SexTableDisplay = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [sex, setSex] = useState<SexType[]>([]);
+    const [nextPage, setNextPage] = useState(null);
+    const [prevPage, setPrevPage] = useState(null);
+    const [count, setCount] = useState(0);    
     const [fiteredId, setFiteredId] = useState<number[]>([]);
     const filteredSex = sex.filter(element => !fiteredId.includes(element.id));
        
@@ -27,12 +31,26 @@ const SexTableDisplay = () => {
     useEffect(()=>{
         const fetchData = async () => {
           const sexData = await getSex();
-          setSex(sexData);
+          setSex(sexData.results);
+          setNextPage(sexData.next);
+          setPrevPage(sexData.previous);
+          setCount(sexData.count);
         setLoading(false);
         }
-    
+      
         fetchData()
       }, [])
+  
+      function handlePageChange(url) {
+          fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setSex(data.results);
+              setNextPage(data.next);
+              setPrevPage(data.previous);
+              setCount(data.count);
+            });
+        }
     
     if (loading) {
         return <div>Loading</div>
@@ -59,6 +77,7 @@ const SexTableDisplay = () => {
                     ))}
                 </tbody>
             </table>
+            <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
         </div>
       )
 }

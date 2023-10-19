@@ -3,11 +3,15 @@ import type { CompanyType } from "../../../typings/type"
 import { deleteCompany } from "../../../api/delete/deleteCompany";
 import { getCompany } from "../../../api/get/getCompany";
 import { useState, useEffect } from "react";
+import Pagination from "../../Pagination";
 
 const CompanyTableDisplay = () => {
   const navigate = useNavigate();  
   const [loading, setLoading] = useState(true);
   const [companies, setCompanies] = useState<CompanyType[]>([]);
+  const [nextPage, setNextPage] = useState(null);
+  const [prevPage, setPrevPage] = useState(null);
+  const [count, setCount] = useState(0);    
   const [fiteredId, setFiteredId] = useState<number[]>([]);
   const filteredCompanies = companies.filter(element => !fiteredId.includes(element.id));
   
@@ -27,12 +31,26 @@ const CompanyTableDisplay = () => {
   useEffect(()=>{
     const fetchData = async () => {
       const companiesData = await getCompany();
-      setCompanies(companiesData);
+      setCompanies(companiesData.results);
+      setNextPage(companiesData.next);
+      setPrevPage(companiesData.previous);
+      setCount(companiesData.count);
     setLoading(false);
     }
-
+  
     fetchData()
   }, [])
+
+  function handlePageChange(url) {
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            setCompanies(data.results);
+          setNextPage(data.next);
+          setPrevPage(data.previous);
+          setCount(data.count);
+        });
+    }
 
 if (loading) {
     return <div>Loading</div>
@@ -63,6 +81,7 @@ if (loading) {
                   ))}
               </tbody>
           </table>
+          <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
       </div>
     )
 }

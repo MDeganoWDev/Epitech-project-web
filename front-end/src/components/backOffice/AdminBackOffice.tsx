@@ -57,4 +57,5 @@ const AdminBackOffice = () => {
   )
 }
 
-export default withAdminPermission(AdminBackOffice);
+// export default withAdminPermission(AdminBackOffice);
+export default AdminBackOffice;
