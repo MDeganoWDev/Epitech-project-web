@@ -20,11 +20,13 @@ const Layout = () => {
   }, [clearAuthentication, setAuthenticated]);
 
   return (
-    <>
-      <Header isAuthenticated={isAuthenticated} onDisconnect={clearAuthentication} />
-      <Outlet />
-      <Footer />
-    </>
+    <div className="flex flex-col min-h-screen">
+      <Header isAuthenticated={isAuthenticated} onDisconnect={clearAuthentication} className="fixed top-0 left-0 right-0 z-10" />
+      <div className="flex-1">
+        <Outlet />
+      </div>
+      <Footer className="fixed bottom-0 left-0 right-0 z-10"/>
+    </div>
   )
 }
 
