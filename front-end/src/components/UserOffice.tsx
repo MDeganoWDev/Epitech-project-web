@@ -9,8 +9,10 @@ import { getApplication } from '../api/get/getApplication';
 import { putUtilisateur } from '../api/put/putUtilisateur';
 import { SexType } from '../typings/type';
 import { getSex } from '../api/get/getSex';
+import { useNavigate } from 'react-router-dom';
 
 const UserOffice = () => {
+    const navigate = useNavigate();
     const token = useAuthStore((state) => state.token);
     const [user, setUser] = useState<UtilisateurType>();
     const [applications, setApplications] = useState<ApplicationType[]>([]);
@@ -84,6 +86,10 @@ const UserOffice = () => {
         }
     }
 
+    const showApplicants = (id?: number) => () => {
+        navigate(`/advertisement/${id}`);
+    }
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -151,6 +157,7 @@ const UserOffice = () => {
                         <div key={ad.id}>
                             <p>Title: {ad.title}</p>
                             <p>Description: {ad.quick_description}</p>
+                            <button onClick={showApplicants(ad.id)}>See applicants for this offer</button>
                         </div>
                     ))}
                 </div>
