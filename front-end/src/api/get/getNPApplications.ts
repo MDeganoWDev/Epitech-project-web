@@ -1,3 +1,5 @@
+// get all applications with no pagination
+
 export const getNPApplications = async () => {
     const url = `http://localhost:8000/all-application/`;
 
