@@ -1,10 +1,13 @@
 import type { ContractType } from "../../typings/type";
+import { useAuthStore } from "../../store/authStore";
 
 export const putContract = async (id : number, values : ContractType) => {
+    const token = useAuthStore.getState().token;
     return fetch(`http://localhost:8000/contract/${id}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
         },
         body : JSON.stringify(values)
     })
