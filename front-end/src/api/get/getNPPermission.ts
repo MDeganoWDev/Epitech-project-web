@@ -1,6 +1,8 @@
-export const getNPPermission = async () => { 
+// get all advertisements with no pagination
+
+export const getNPPermission = async () => {
     const url = `http://localhost:8000/all-permission`;
-    
+
     return fetch(url, {
         method: 'GET',
         headers: {
@@ -20,4 +22,4 @@ export const getNPPermission = async () => {
         console.error("Error : ", error);
         throw error;
     });
-} 
+}

@@ -1,6 +1,8 @@
-export const getNPContract = async () => { 
+// get all contracts with no pagination
+
+export const getNPContract = async () => {
     const url = `http://localhost:8000/all-contract`;
-    
+
     return fetch(url, {
         method: 'GET',
         headers: {
@@ -20,4 +22,4 @@ export const getNPContract = async () => {
         console.error("Error : ", error);
         throw error;
     });
-} 
+}
