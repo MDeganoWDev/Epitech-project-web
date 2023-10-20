@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
 
 type SelectTableButtonProps = {
   name : string
@@ -13,10 +14,11 @@ const SelectTableButton = ({name, route} : SelectTableButtonProps) => {
     };
 
   return (
-    <button 
-    className=" bg-blue-700 text-white rounded-xl p-1 mx-1"
+    <Button 
+    className="text-secondary text-xl mx-3"
+    variant="link"
     onClick={handleGetMethod}
-    >{name}</button>
+    >{name}</Button>
   )
 }
 
