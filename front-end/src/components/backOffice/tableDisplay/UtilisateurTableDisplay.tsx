@@ -6,6 +6,7 @@ import Pagination from "../../Pagination";
 import { Button } from "../../ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
 import type { UtilisateurType } from "../../../typings/type"
+import { ArrowUpRightFromCircle, CircleOff, PlusSquare } from "lucide-react";
 
 const UtilisateurTableDisplay = () => {
     const navigate = useNavigate();
@@ -60,10 +61,7 @@ const UtilisateurTableDisplay = () => {
 
   return (
       <div className="pt-2">
-        <div className="flex items-center">
-        <h2>Utilisateur</h2>
-        <Button className="ml-2 bg-green-600 text-white rounded-full h-full" onClick={handleCreateNewUtilisateur}>+</Button>
-        </div>
+        <Button className="ml-2 bg-green-700" onClick={handleCreateNewUtilisateur}> <PlusSquare className="mr-2"/> Create new User</Button>
         <Table>
             <TableHeader >
                 <TableRow>
@@ -85,11 +83,24 @@ const UtilisateurTableDisplay = () => {
                         <TableCell >{utilisateur.lastname}</TableCell>
                         <TableCell >{utilisateur.email}</TableCell>
                         <TableCell >{utilisateur.phone}</TableCell>
-                        <TableCell ><a href={utilisateur.cv} target="_blank">{utilisateur.cv ? "Link" : "no cv"}</a></TableCell>
+                        <TableCell >
+                        {utilisateur.cv ?
+                          <a className="text-blue-700 hover:text-green-700" href={utilisateur.cv} target="_blank"> <ArrowUpRightFromCircle /></a> :
+                          <div className=" text-red-700"><CircleOff /></div>
+                        }
+                        </TableCell>
                         <TableCell >{utilisateur.sex?.name}</TableCell>
                         <TableCell >{utilisateur.permission?.name}</TableCell>
-                        <TableCell ><button onClick={() => handleEditUtilisateur(utilisateur.id)}>Modifier</button></TableCell>
-                        <TableCell ><button onClick={() => handleDeleteUtilisateur(utilisateur.id)}>Supprimer</button></TableCell>
+                        <TableCell >
+                          <Button 
+                          className="bg-blue-700 mr-2" 
+                          onClick={() => handleEditUtilisateur(utilisateur.id)}
+                          >Update</Button>
+                          <Button 
+                          className="bg-red-700"
+                          onClick={() => handleDeleteUtilisateur(utilisateur.id)}
+                          >Delete</Button>
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

@@ -1,9 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import type { CompanyType } from "../../../typings/type"
 import { deleteCompany } from "../../../api/delete/deleteCompany";
 import { getCompany } from "../../../api/get/getCompany";
 import { useState, useEffect } from "react";
 import Pagination from "../../Pagination";
+import { Button } from "../../ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
+import type { CompanyType } from "../../../typings/type"
+import { PlusSquare } from "lucide-react";
 
 const CompanyTableDisplay = () => {
   const navigate = useNavigate();  
@@ -57,30 +60,38 @@ if (loading) {
 }
 
   return (
-      <div>
-          <button onClick={handleCreateNewCompany}>Create new company</button>
-          <table>
-              <thead>
-                  <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Adress</th>
-                      <th>User id</th>
-                  </tr>
-              </thead>
-              <tbody>
+    <div className="pt-2">
+        <Button className="ml-2 bg-green-700" onClick={handleCreateNewCompany}><PlusSquare className="mr-2"/> Create new Company</Button>
+          <Table>
+              <TableHeader>
+                  <TableRow>
+                      <TableHead>ID</TableHead>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Adress</TableHead>
+                      <TableHead>User id</TableHead>
+                  </TableRow>
+              </TableHeader>
+              <TableBody>
                   {filteredCompanies.map((company)=>(
-                      <tr key={company.id}>
-                          <td>{company.id}</td>
-                          <td>{company.name}</td>
-                          <td>{company.address}</td>
-                          <td><Link to={`/admin/utilisateur-form/${company.user?.id}`}>{company.user?.id}</Link></td>
-                          <td><button onClick={() => handleEditCompany(company.id)}>Modifier</button></td>
-                          <td><button onClick={() => handleDeleteCompany(company.id)}>Supprimer</button></td>
-                      </tr>
+                      <TableRow key={company.id}>
+                          <TableCell>{company.id}</TableCell>
+                          <TableCell>{company.name}</TableCell>
+                          <TableCell>{company.address}</TableCell>
+                          <TableCell><Link to={`/admin/utilisateur-form/${company.user?.id}`}>{company.user?.id}</Link></TableCell>
+                          <TableCell >
+                          <Button 
+                          className="bg-blue-700 mr-2" 
+                          onClick={() => handleEditCompany(company.id)}
+                          >Update</Button>
+                          <Button 
+                          className="bg-red-700"
+                          onClick={() => handleDeleteCompany(company.id)}
+                          >Delete</Button>
+                        </TableCell>
+                      </TableRow>
                   ))}
-              </tbody>
-          </table>
+              </TableBody>
+          </Table>
           <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
       </div>
     )

@@ -3,9 +3,14 @@ import { putUtilisateur } from '../../../api/put/putUtilisateur';
 import { postUtilisateur } from '../../../api/post/postUtilisateur';
 import { getUtilisateur } from '../../../api/get/getUtilisateur';
 import { useParams, useNavigate } from 'react-router-dom';
-import type { PermissionType, SexType } from '../../../typings/type';
 import { getNPPermission } from '../../../api/get/getNPPermission';
 import { getNPSex } from '../../../api/get/getNPSex';
+import { Input } from '../../ui/input';
+import { Label } from '../../ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
+import type { PermissionType, SexType } from '../../../typings/type';
+import { Button } from '../../ui/button';
+import { ScrollArea } from '../../ui/scroll-area';
 
 const UtilisateurForm = () => {
   const { id } = useParams();
@@ -21,8 +26,8 @@ const UtilisateurForm = () => {
   const [, setOldCv] = useState("");
   const [cv, setCv] = useState<File>();
   const [password, setPassword] = useState("");
-  const [idPermission, setIdPermission] = useState<number | undefined>();
-  const [idSex, setIdSex] = useState<number | undefined>();
+  const [idPermission, setIdPermission] = useState<string | undefined>();
+  const [idSex, setIdSex] = useState<string | undefined>();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,8 +72,8 @@ const UtilisateurForm = () => {
           setPhone(existingUnregister.phone)
           setEmail(existingUnregister.email)
           setOldCv(existingUnregister.cv)
-          setIdPermission(existingUnregister.permission.id)
-          setIdSex(existingUnregister.sex.id)
+          setIdPermission(existingUnregister.permission.id.toString())
+          setIdSex(existingUnregister.sex.id.toString())
           setLoading(false);
       }      
       fetchData()
@@ -89,10 +94,14 @@ const UtilisateurForm = () => {
   }
 
 return (
-  <div>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="firstname">Firstname</label>
-      <input 
+  <div className=" mx-4">
+    <h1 className="text-3xl font-bold my-3">{idUnregister ? `Modifier l'utilisateur ${idUnregister}` : "Créer un nouvel Utilisateur"}</h1>
+    <form className=" max-w-md gap-3 flex flex-col" onSubmit={handleSubmit}>
+    <ScrollArea className="max-h-[70vh]">
+      <div className="mx-1">
+      <div>
+      <Label htmlFor="firstname">Firstname</Label>
+      <Input 
         type="text" 
         name="firstname" 
         id="firstname"
@@ -100,9 +109,10 @@ return (
         onChange={e => setFirstname(e.target.value)} 
         required
       />
-
-      <label htmlFor="lastname">Lastname</label>
-      <input 
+      </div>
+      <div>
+      <Label htmlFor="lastname">Lastname</Label>
+      <Input 
         type="text" 
         name="lastname" 
         id="lastname"
@@ -110,9 +120,10 @@ return (
         onChange={e => setLastname(e.target.value)} 
         required
       />
-
-      <label htmlFor="phone">Phone</label>
-      <input 
+      </div>
+      <div>
+      <Label htmlFor="phone">Phone</Label>
+      <Input 
         type="phone" 
         name="phone" 
         id="phone"
@@ -120,9 +131,10 @@ return (
         onChange={e => setPhone(e.target.value)} 
         required
       />
-      
-      <label htmlFor="email">Email</label>
-      <input 
+      </div>
+      <div>
+      <Label htmlFor="email">Email</Label>
+      <Input 
         type="email" 
         name="email" 
         id="email"
@@ -130,20 +142,22 @@ return (
         onChange={e => setEmail(e.target.value)}  
         required
       />
-
-      <label htmlFor="cv">CV (PDF)</label>
-      <input
+      </div>
+      <div>
+      <Label htmlFor="cv">CV (PDF)</Label>
+      <Input
         type="file"
         accept=".pdf"
         name="cv"
         id="cv"
         onChange={handleFileChange}
       />
-
+      </div>
+      <div>
       {!idUnregister && (
         <>
-          <label htmlFor="password">Password</label>
-          <input 
+          <Label htmlFor="password">Password</Label>
+          <Input 
             type="password" 
             name="password" 
             id="password"
@@ -153,44 +167,55 @@ return (
           />
         </>
       )}  
-
-      <label htmlFor="permission">Permission</label>
-      <select
+      </div>
+      <div>
+      <Label htmlFor="permission">Permission</Label>
+      <Select
         name="permission"
-        id="permission"
-        value={idPermission}
-        onChange={e => setIdPermission(Number(e.target.value))}
+        defaultValue={idPermission}
+        onValueChange={(value: string) => setIdPermission(value)}
         required
       >
-        <option value="">Select Permission</option>
-        {permissions.map((permission)=>(
-          <option 
-          key={permission.id}
-          value={permission.id}
-          >{permission.name}</option>
-        ))}
-      </select>
-
-      <label htmlFor="sex">Sex</label>
-      <select
+        <SelectTrigger>
+            <SelectValue placeholder="Permission" />
+        </SelectTrigger>
+        <SelectContent>
+          {permissions.map((permission)=>(
+            <SelectItem
+            key={permission.id}
+            value={permission.id.toString()}
+            >{permission.name}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      </div>
+      <div>
+      <Label htmlFor="sex">Sex</Label>
+      <Select
         name="sex"
-        id="sex"
-        value={idSex}
-        onChange={e => setIdSex(Number(e.target.value))}
+        defaultValue={idSex}
+        onValueChange={(value: string) => setIdSex(value)}
         required
       >
-        <option value="">Select Sex</option>
-        {sex.map((value)=>(
-          <option 
-          key={value.id}
-          value={value.id}
-          >{value.name}</option>
-        ))}
-      </select>
-
-
-      <button type="submit">Enregister</button>
-      <button onClick={HandleCancel}>Annuler</button>
+          <SelectTrigger>
+            <SelectValue placeholder="Gender" />
+          </SelectTrigger>
+        <SelectContent>
+          {sex.map((value)=>(
+            <SelectItem 
+            key={value.id}
+            value={value.id.toString()}
+            >{value.name}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      </div>
+      </div>
+      </ScrollArea>
+      <div className="grid grid-cols-2 w-full gap-2">
+      <Button className="bg-green-700" type="submit">Enregister</Button>
+      <Button className="bg-red-700" onClick={HandleCancel}>Annuler</Button>
+      </div>
     </form>
   </div>
 )

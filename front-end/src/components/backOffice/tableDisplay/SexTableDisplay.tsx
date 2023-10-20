@@ -2,8 +2,11 @@ import { useNavigate } from 'react-router-dom'
 import { deleteSex } from '../../../api/delete/deleteSex'
 import { useEffect, useState } from 'react'
 import { getSex } from '../../../api/get/getSex'
-import type { SexType } from '../../../typings/type'
 import Pagination from '../../Pagination'
+import { Button } from '../../ui/button'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../ui/table'
+import type { SexType } from '../../../typings/type'
+import { PlusSquare } from 'lucide-react'
 
 const SexTableDisplay = () => {
     const navigate = useNavigate();
@@ -57,26 +60,34 @@ const SexTableDisplay = () => {
     }
 
     return (
-        <div>
-            <button onClick={handleCreateNewSex}>Create new sex</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div className="pt-2">
+            <Button className="ml-2 bg-green-700" onClick={handleCreateNewSex}><PlusSquare className="mr-2"/> Create new Gender</Button>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>ID</TableHead>
+                        <TableHead>Name</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
                     {filteredSex.map((element)=>(
-                        <tr key={element.id}>
-                            <td>{element.id}</td>
-                            <td>{element.name}</td>
-                            <td><button onClick={() => handleEditSex(element.id)}>Modifier</button></td>
-                            <td><button onClick={() => handleDeleteSex(element.id)}>Supprimer</button></td>
-                        </tr>
+                        <TableRow key={element.id}>
+                            <TableCell>{element.id}</TableCell>
+                            <TableCell>{element.name}</TableCell>
+                            <TableCell >
+                                <Button 
+                                className="bg-blue-700 mr-2" 
+                                onClick={() => handleEditSex(element.id)}
+                                >Update</Button>
+                                <Button 
+                                className="bg-red-700"
+                                onClick={() => handleDeleteSex(element.id)}
+                                >Delete</Button>
+                            </TableCell>
+                        </TableRow>
                     ))}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
             <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
         </div>
       )

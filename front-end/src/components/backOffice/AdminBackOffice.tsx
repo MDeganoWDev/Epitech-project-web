@@ -12,6 +12,7 @@ import { getUtilisateur } from "../../api/get/getUtilisateur"
 import { useEffect, useState } from "react"
 import { useAuthStore } from "../../store/authStore"
 import { UtilisateurType } from "../../typings/type"
+import { AdminHome } from "./AdminHome"
 
 const withAdminPermission = (Component: React.ComponentType<any>) => {
   const WrappedComponent = (props: any) => {
@@ -43,7 +44,7 @@ const AdminBackOffice = () => {
     <div>
       <SelectTable/>
       <Routes>
-        <Route index element={<UtilisateurIndex />} />
+        <Route index element={<AdminHome />} />
         <Route path="sex/*" element={<SexIndex/>} />
         <Route path="advertisement/*" element={<AdvertisementIndex/>} />
         <Route path="application/*" element={<ApplicationIndex/>} />
