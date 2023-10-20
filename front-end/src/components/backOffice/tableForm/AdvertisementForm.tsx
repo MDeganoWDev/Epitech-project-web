@@ -5,13 +5,20 @@ import { putAdvertisement } from '../../../api/put/putAdvertisement';
 import { getAdvertisement } from '../../../api/get/getAdvertisement';
 import { getNPContract } from '../../../api/get/getNPContract';
 import type { AdvertisementType, ContractType } from '../../../typings/type';
+import { ScrollArea } from '../../ui/scroll-area';
+import { Label } from '../../ui/label';
+import { Input } from '../../ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
+import { Button } from '../../ui/button';
+import { Textarea } from '../../ui/textarea';
+import { Checkbox } from '../../ui/check-box';
 
 const AdvertisementForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { company } = useParams();
   const [loading, setLoading] = useState(true);
-  const [idPermission, setIdPermission] = useState<number | undefined>(undefined)
+  const [idAdvertisement, setIdAdvertisement] = useState<number | undefined>(undefined)
   const [fullDescription, setFullDescription] = useState("");
   const [title, setTitle] = useState("");
   const [quickDescription, setQuickDescription] = useState("");
@@ -19,7 +26,7 @@ const AdvertisementForm = () => {
   const [hour, setHour] = useState("");
   const [wage, setWage] = useState("");
   const [isOnline, setIsOnline] = useState(false);
-  const [idContract, setIdContract] = useState<number | undefined>();
+  const [idContract, setIdContract] = useState("");
   const [idCompany, setIdCompany] = useState<number>();
   const [contracts, setContracts] = useState<ContractType[]>([]);
 
@@ -33,21 +40,17 @@ const AdvertisementForm = () => {
       working_time: hour,
       wage: wage,
       isOnline: isOnline,
-      contract_id: idContract,
+      contract_id: Number(idContract),
       company_id: idCompany
     }
 
-    if (!idPermission) values.offer_date = new Date().toISOString()
-    idPermission != undefined ? response = await putAdvertisement(idPermission, values) : response = await postAdvertisement(values);
+    if (!idAdvertisement) values.offer_date = new Date().toISOString()
+    idAdvertisement != undefined ? response = await putAdvertisement(idAdvertisement, values) : response = await postAdvertisement(values);
     if (response) navigate(`/admin/advertisement`);
   }
 
   const HandleCancel = () => {
     navigate(`/admin/advertisement`);
-  }
-
-  const handleCheckboxChange = () => {
-    setIsOnline(!isOnline);
   }
 
   useEffect(() => {
@@ -57,7 +60,7 @@ const AdvertisementForm = () => {
 
     if (id != undefined) {
       const currentId = Number(id);
-      setIdPermission(currentId);
+      setIdAdvertisement(currentId);
 
       const fetchData = async () => {
         const existingAdvertisement = await getAdvertisement(currentId);
@@ -65,10 +68,10 @@ const AdvertisementForm = () => {
         setDate(existingAdvertisement.offerDate)
         setQuickDescription(existingAdvertisement.quick_description)
         setFullDescription(existingAdvertisement.full_description)
-        setHour(existingAdvertisement.hour)
+        setHour(existingAdvertisement.working_time)
         setWage(existingAdvertisement.wage)
         setIsOnline(existingAdvertisement.isOnline)
-        setIdContract(existingAdvertisement.contract.id);
+        setIdContract(existingAdvertisement.contract.id.toString());
         setIdCompany(existingAdvertisement.company.id);
         setLoading(false)
       }
@@ -89,11 +92,19 @@ const AdvertisementForm = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-
-        <label htmlFor="title">Title</label>
-        <input
+    <div className=" mx-4">
+      <h1 className="text-3xl font-bold my-3">{idAdvertisement ? `Update advertisement ${idAdvertisement}` : "Create new advertisement"}</h1>
+      <form className="flex flex-col max-w-md gap-3" onSubmit={handleSubmit}>
+       <ScrollArea className="h-[70vh]">
+      <div className="m-1">
+      <div className="flex flex-col justify-center content-center">
+        <Label htmlFor="isOnline">Is Online</Label>
+        <Checkbox defaultChecked={isOnline} onCheckedChange={()=>setIsOnline(!isOnline)}/>
+        </div>
+   
+      <div>
+        <Label htmlFor="title">Title</Label>
+        <Input
           type="text"
           name="title"
           id="title"
@@ -101,9 +112,10 @@ const AdvertisementForm = () => {
           onChange={e => setTitle(e.target.value)}
           required
         />
-
-        <label htmlFor="quick_description">Quick description</label>
-        <input
+      </div>
+      <div>
+        <Label htmlFor="quick_description">Quick description</Label>
+        <Input
           type="text"
           name="quick_description"
           id="quick_description"
@@ -111,9 +123,10 @@ const AdvertisementForm = () => {
           onChange={e => setQuickDescription(e.target.value)}
           required
         />
-
-        <label htmlFor="hour">Work hour</label>
-        <input
+      </div>
+      <div>
+        <Label htmlFor="hour">Work hour</Label>
+        <Input
           type="text"
           name="hour"
           id="hour"
@@ -121,9 +134,10 @@ const AdvertisementForm = () => {
           onChange={e => setHour(e.target.value)}
           required
         />
-
-        <label htmlFor="wage">Wage</label>
-        <input
+       </div>
+      <div>
+        <Label htmlFor="wage">Wage</Label>
+        <Input
           type="text"
           name="wage"
           id="wage"
@@ -131,37 +145,34 @@ const AdvertisementForm = () => {
           onChange={e => setWage(e.target.value)}
           required
         />
+        </div>
 
-        <label htmlFor="isOnline">Is Online</label>
-        <input
-          type="checkbox"
-          name="isOnline"
-          id="isOnline"
-          checked={isOnline}
-          onChange={handleCheckboxChange}
-        />
-
-        <label htmlFor="contract">Contract</label>
-        <select
+        <div>
+        <Label htmlFor="contract">Contract</Label>
+        <Select
           name="contract"
-          id="contract"
-          value={idContract}
-          onChange={e => setIdContract(Number(e.target.value))}
+          defaultValue={idContract}
+          onValueChange={(value: string) => setIdContract(value)}
           required
         >
-          <option value="">Select Contract</option>
+          <SelectTrigger>
+            <SelectValue placeholder="Contract" />
+          </SelectTrigger>
+          <SelectContent>
           {contracts.map((contract) => (
-            <option
+            <SelectItem
               key={contract.id}
-              value={contract.id}
-            >{contract.name}</option>
+              value={contract.id.toString()}
+            >{contract.name}</SelectItem>
           ))}
-        </select>
-
+          </SelectContent>
+        </Select>
+        </div>
         {!company &&
           <>
-            <label htmlFor="company">Company ID</label>
-            <input
+      <div>
+            <Label htmlFor="company">Company ID</Label>
+            <Input
               type="number"
               name="company"
               id="company"
@@ -170,19 +181,24 @@ const AdvertisementForm = () => {
               required
               min={1}
             />
+          </div>
           </>}
-
-        <label htmlFor="full_description">Full Description</label>
-        <textarea
+      <div>
+        <Label htmlFor="full_description">Full Description</Label>
+        <Textarea
           name="full_description"
           id="full_description"
           value={fullDescription}
           onChange={e => setFullDescription(e.target.value)}
           required
         />
-
-        <button type="submit">Enregister</button>
-        <button onClick={HandleCancel}>Annuler</button>
+      </div>
+      </div>
+      </ScrollArea>
+      <div className="grid grid-cols-2 w-full gap-2">
+        <Button className="bg-green-700" type="submit">Save</Button>
+        <Button className="bg-red-700" onClick={HandleCancel}>Cancel</Button>
+      </div>
       </form>
     </div>
   )

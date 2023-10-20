@@ -26,8 +26,8 @@ const UtilisateurForm = () => {
   const [, setOldCv] = useState("");
   const [cv, setCv] = useState<File>();
   const [password, setPassword] = useState("");
-  const [idPermission, setIdPermission] = useState<string | undefined>();
-  const [idSex, setIdSex] = useState<string | undefined>();
+  const [idPermission, setIdPermission] = useState("");
+  const [idSex, setIdSex] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,10 +95,10 @@ const UtilisateurForm = () => {
 
 return (
   <div className=" mx-4">
-    <h1 className="text-3xl font-bold my-3">{idUnregister ? `Modifier l'utilisateur ${idUnregister}` : "Créer un nouvel Utilisateur"}</h1>
+    <h1 className="text-3xl font-bold my-3">{idUnregister ? `Update user ${idUnregister}` : "Create new user"}</h1>
     <form className=" max-w-md gap-3 flex flex-col" onSubmit={handleSubmit}>
     <ScrollArea className="max-h-[70vh]">
-      <div className="mx-1">
+      <div className="m-1">
       <div>
       <Label htmlFor="firstname">Firstname</Label>
       <Input 
@@ -213,8 +213,8 @@ return (
       </div>
       </ScrollArea>
       <div className="grid grid-cols-2 w-full gap-2">
-      <Button className="bg-green-700" type="submit">Enregister</Button>
-      <Button className="bg-red-700" onClick={HandleCancel}>Annuler</Button>
+        <Button className="bg-green-700" type="submit">Save</Button>
+        <Button className="bg-red-700" onClick={HandleCancel}>Cancel</Button>
       </div>
     </form>
   </div>
