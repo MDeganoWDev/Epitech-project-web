@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { deleteUtilisateur } from "../../../api/delete/deleteUtilisateur";
 import { getUtilisateur } from "../../../api/get/getUtilisateur";
 import { useState, useEffect } from "react";
-import type { UtilisateurType } from "../../../typings/type"
 import Pagination from "../../Pagination";
+import { Button } from "../../ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
+import type { UtilisateurType } from "../../../typings/type"
 
 const UtilisateurTableDisplay = () => {
     const navigate = useNavigate();
@@ -57,38 +59,41 @@ const UtilisateurTableDisplay = () => {
     }
 
   return (
-      <div>
-        <button onClick={handleCreateNewUtilisateur}>Create new user</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>CV</th>
-                    <th>Sex</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
-            <tbody>
+      <div className="pt-2">
+        <div className="flex items-center">
+        <h2>Utilisateur</h2>
+        <Button className="ml-2 bg-green-600 text-white rounded-full h-full" onClick={handleCreateNewUtilisateur}>+</Button>
+        </div>
+        <Table>
+            <TableHeader >
+                <TableRow>
+                    <TableHead >ID</TableHead>
+                    <TableHead >Firstname</TableHead>
+                    <TableHead >Lastname</TableHead>
+                    <TableHead >Email</TableHead>
+                    <TableHead >Phone</TableHead>
+                    <TableHead >CV</TableHead>
+                    <TableHead >Sex</TableHead>
+                    <TableHead >Role</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
                 {filteredUtilisateurs.map((utilisateur)=>(
-                    <tr key={utilisateur.id}>
-                        <td>{utilisateur.id}</td>
-                        <td>{utilisateur.firstname}</td>
-                        <td>{utilisateur.lastname}</td>
-                        <td>{utilisateur.email}</td>
-                        <td>{utilisateur.phone}</td>
-                        <td><a href={utilisateur.cv} target="_blank">Link</a></td>
-                        <td>{utilisateur.sex?.name}</td>
-                        <td>{utilisateur.permission?.name}</td>
-                        <td><button onClick={() => handleEditUtilisateur(utilisateur.id)}>Modifier</button></td>
-                        <td><button onClick={() => handleDeleteUtilisateur(utilisateur.id)}>Supprimer</button></td>
-                    </tr>
+                    <TableRow key={utilisateur.id}>
+                        <TableCell >{utilisateur.id}</TableCell>
+                        <TableCell >{utilisateur.firstname}</TableCell>
+                        <TableCell >{utilisateur.lastname}</TableCell>
+                        <TableCell >{utilisateur.email}</TableCell>
+                        <TableCell >{utilisateur.phone}</TableCell>
+                        <TableCell ><a href={utilisateur.cv} target="_blank">{utilisateur.cv ? "Link" : "no cv"}</a></TableCell>
+                        <TableCell >{utilisateur.sex?.name}</TableCell>
+                        <TableCell >{utilisateur.permission?.name}</TableCell>
+                        <TableCell ><button onClick={() => handleEditUtilisateur(utilisateur.id)}>Modifier</button></TableCell>
+                        <TableCell ><button onClick={() => handleDeleteUtilisateur(utilisateur.id)}>Supprimer</button></TableCell>
+                    </TableRow>
                 ))}
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
        <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
     </div>
   )

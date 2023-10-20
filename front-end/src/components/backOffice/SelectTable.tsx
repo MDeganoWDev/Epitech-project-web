@@ -14,7 +14,7 @@ const SelectTable = () => {
     
 
   return (
-    <div>
+    <div className="flex justify-between bg-primary">
         {allTable.map((table)=>(
             <SelectTableButton 
                 key={table.name}
