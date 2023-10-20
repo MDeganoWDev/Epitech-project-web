@@ -197,7 +197,7 @@ const UserOffice = () => {
                   </p>
                 </div>
                 <Button
-                  variant="destructive"
+                  className='bg-red-700'
                   onClick={() => {
                     handleDeleteApplication(app.id);
                   }}
