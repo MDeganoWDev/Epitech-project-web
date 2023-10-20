@@ -4,6 +4,7 @@ import CardAdvertisement from "./ui/CardAdvertisement";
 import type { AdvertisementType } from "../typings/type";
 import Pagination from "./Pagination";
 import { ScrollArea } from "./ui/scroll-area"
+import { useAdvertisementStore } from "../store/advertisementStore";
 
 const AdvertisementsPanel = () => {
   const [loading, setLoading] = useState(true);
@@ -16,6 +17,9 @@ const AdvertisementsPanel = () => {
     const fetchData = async () => {
       const advertisementData = await getAdvertisement();
       setAdvertisements(advertisementData);
+      const onlineAdvertisements = advertisementData.results.filter(advertisement => advertisement.isOnline);
+      useAdvertisementStore.setState({ selectedId: onlineAdvertisements[0].id });
+
       setLoading(false);
       setNextPage(advertisementData.next);
       setPrevPage(advertisementData.previous);
@@ -45,12 +49,16 @@ const AdvertisementsPanel = () => {
       <ScrollArea className="h-[85vh] w-[auto] rounded-md p-2">
         <div className="grid grid-cols-1 m-2 gap-2">
           {advertisements.results.map((advertisement) => (
-            <CardAdvertisement
-              key={advertisement.id}
-              id={advertisement.id}
-              title={advertisement.title}
-              description={advertisement.quick_description}
-            />
+            <>
+              {advertisement.isOnline && (
+                <CardAdvertisement
+                  key={advertisement.id}
+                  id={advertisement.id}
+                  title={advertisement.title}
+                  description={advertisement.quick_description}
+                />
+              )}
+            </>
           ))}
         </div>
       </ScrollArea>
