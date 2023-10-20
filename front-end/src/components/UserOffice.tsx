@@ -98,7 +98,7 @@ const UserOffice = () => {
     return (
         <div>
           {editing ? (
-            <div className="bg-gray-700 p-4 rounded-md shadow-md mb-4">
+            <div className="bg-secondary p-4 rounded-md shadow-md mb-4">
               <h2 className="text-2xl font-bold mb-4">Edit User Information</h2>
               <form onSubmit={handleSubmit}>
                 <label htmlFor="cv" className="block mb-2">
@@ -144,7 +144,7 @@ const UserOffice = () => {
               </form>
             </div>
           ) : (
-            <div className="bg-gray-700 p-4 rounded-md shadow-md mb-4">
+            <div className="bg-secondary p-4 rounded-md shadow-md mb-4">
               <h2 className="text-2xl font-bold mb-4">User Information</h2>
               <p className="mb-2">
                 <span className="font-bold">First Name:</span> {user?.firstname}
@@ -170,7 +170,7 @@ const UserOffice = () => {
             </div>
           )}
           {applications.length > 0 && (
-            <div className="bg-gray-700 p-4 rounded-md shadow-md mb-4">
+            <div className="bg-secondary p-4 rounded-md shadow-md mb-4">
               <h2 className="text-2xl font-bold mb-4">Applications</h2>
               {applications.map((app) => (
                 <div key={app.id} className="mb-4">
@@ -188,7 +188,7 @@ const UserOffice = () => {
             </div>
           )}
           {advertisements.length > 0 && (
-            <div className="bg-gray-700 p-4 rounded-md shadow-md mb-4">
+            <div className="bg-secondary p-4 rounded-md shadow-md mb-4">
               <h2 className="text-2xl font-bold mb-4">Advertisements</h2>
               {advertisements.map((ad) => (
                 <div key={ad.id} className="mb-4">

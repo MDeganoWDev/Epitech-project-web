@@ -61,7 +61,7 @@ const ApplicationPage = () => {
       if (isAuthenticated) {
         const application: ApplicationType = {
           user_id: user.id,
-          apply_date: new Date().toISOString(),
+          apply_date: new Date().toISOString().slice(0, 16),
           advertisement_id: parseInt(id as string),
           ...formValues,
         };

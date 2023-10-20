@@ -129,11 +129,11 @@ const RegisterPage = () => {
             <h1 className="text-4xl font-bold mb-8">{isLogin ? "Login" : "Register"}</h1>
             <form className="w-full max-w-md" onSubmit={(event) => isLogin ? handleLogin(event) : handleRegister(event)}>
                 <div className="mb-4">
-                    <label className="block text-gray-300 font-bold mb-2" htmlFor="email">
+                    <label className="block text-primary font-bold mb-2" htmlFor="email">
                         Email:
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
                         type="text"
                         value={email}
@@ -141,11 +141,11 @@ const RegisterPage = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-300 font-bold mb-2" htmlFor="password">
+                    <label className="block text-primary font-bold mb-2" htmlFor="password">
                         Password:
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
                         id="password"
                         type="password"
                         value={password}
@@ -155,11 +155,11 @@ const RegisterPage = () => {
                 {!isLogin && (
                     <>
                         <div className="mb-4">
-                            <label className="block text-gray-300 font-bold mb-2" htmlFor="firstName">
+                            <label className="block text-primary font-bold mb-2" htmlFor="firstName">
                                 First name:
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
                                 id="firstName"
                                 type="text"
                                 value={firstName}
@@ -167,11 +167,11 @@ const RegisterPage = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-300 font-bold mb-2" htmlFor="lastName">
+                            <label className="block text-primary font-bold mb-2" htmlFor="lastName">
                                 Last name:
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
                                 id="lastName"
                                 type="text"
                                 value={lastName}
@@ -179,11 +179,11 @@ const RegisterPage = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-300 font-bold mb-2" htmlFor="phone">
+                            <label className="block text-primary font-bold mb-2" htmlFor="phone">
                                 Phone:
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
                                 id="phone"
                                 type="text"
                                 value={phone}
@@ -191,11 +191,11 @@ const RegisterPage = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-300 font-bold mb-2" htmlFor="sex">
+                            <label className="block text-primary font-bold mb-2" htmlFor="sex">
                                 Sex:
                             </label>
                             <select
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
                                 id="sex"
                                 value={sex}
                                 onChange={(event) => setSex(parseInt(event.target.value))}
@@ -209,11 +209,11 @@ const RegisterPage = () => {
                             </select>
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-300 font-bold mb-2" htmlFor="permission">
+                            <label className="block text-primary font-bold mb-2" htmlFor="permission">
                                 I want to:
                             </label>
                             <select
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
                                 id="permission"
                                 value={selectedPermission ?? ""}
                                 onChange={(event) => setSelectedPermission(parseInt(event.target.value))}
@@ -228,11 +228,11 @@ const RegisterPage = () => {
                         </div>
                         {selectedPermission === 2 && (
                             <div className="mb-4">
-                                <label className="block text-gray-300 font-bold mb-2" htmlFor="companyName">
+                                <label className="block text-primary font-bold mb-2" htmlFor="companyName">
                                     Company Name:
                                 </label>
                                 <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
                                     id="companyName"
                                     type="text"
                                     value={companyName}

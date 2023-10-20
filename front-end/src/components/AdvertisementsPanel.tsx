@@ -43,7 +43,7 @@ const AdvertisementsPanel = () => {
   return (
     <div className="grid grid-cols-1 gap-2">
       <ScrollArea className="h-[85vh] w-[auto] rounded-md p-2">
-        <div className="grid grid-cols-1 gap-2">
+        <div className="grid grid-cols-1 m-2 gap-2">
           {advertisements.results.map((advertisement) => (
             <CardAdvertisement
               key={advertisement.id}
