@@ -1,8 +1,12 @@
+import { useAuthStore } from "../../store/authStore";
+
 export const deletePermission = async (id? : number) => {
+    const token = useAuthStore.getState().token;
     return fetch(`http://localhost:8000/permission/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
         },
     })
     .then(response => {

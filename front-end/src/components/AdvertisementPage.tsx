@@ -45,7 +45,7 @@ export const AdvertisementPage = () => {
                             <dt className="text-sm font-medium text-gray-500">CV Link</dt>
                             <dd className="mt-1 text-sm text-blue-500 hover:underline">
                               <a href={app.user?.cv} target="_blank" rel="noreferrer">
-                                {app.user?.cv}
+                                {app.user?.cv.toString().split("/").pop()}
                               </a>
                             </dd>
                           </div>

@@ -1,10 +1,13 @@
 import type { SexType } from "../../typings/type";
+import { useAuthStore } from "../../store/authStore";
 
 export const putSex = async (id : number, values : SexType) => {
+    const token = useAuthStore.getState().token;
     return fetch(`http://localhost:8000/sex/${id}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
         },
         body : JSON.stringify(values)
     })

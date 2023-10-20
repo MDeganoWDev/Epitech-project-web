@@ -1,10 +1,13 @@
 import type { CompanyType } from "../../typings/type";
+import { useAuthStore } from "../../store/authStore";
 
 export const putCompany = async (id : number, values : CompanyType) => {
+    const token = useAuthStore.getState().token;
     return fetch(`http://localhost:8000/companies/${id}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
         },
         body : JSON.stringify(values)
     })

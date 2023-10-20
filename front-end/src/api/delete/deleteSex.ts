@@ -1,8 +1,12 @@
+import { useAuthStore } from "../../store/authStore";
+
 export const deleteSex = async (id? : number) => {
+    const token = useAuthStore.getState().token;
     return fetch(`http://localhost:8000/sex/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
         },
     })
     .then(response => {
