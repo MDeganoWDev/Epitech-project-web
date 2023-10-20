@@ -42,15 +42,6 @@ class UtilisateurSerializer(serializers.ModelSerializer):
         token, created = Token.objects.get_or_create(user=obj)
         return token.key
 
-    # def create(self, validated_data):
-    #     password = validated_data.pop('password', None)
-    #     user = Utilisateur(**validated_data)
-
-    #     if password:
-    #         user.set_password(password) # Set the password and hash it
-    #     user.save()
-    #     return user
-
 class CompanySerializer(serializers.ModelSerializer):
     user = UtilisateurSerializer(read_only=True)
     user_id = serializers.PrimaryKeyRelatedField(queryset=Utilisateur.objects.all(), source='user', write_only=True)

@@ -1,6 +1,8 @@
-export const getNPSex = async () => { 
+// get all sex with no pagination
+
+export const getNPSex = async () => {
     const url = `http://localhost:8000/all-sex`;
-    
+
     return fetch(url, {
         method: 'GET',
         headers: {
@@ -20,4 +22,4 @@ export const getNPSex = async () => {
         console.error("Error : ", error);
         throw error;
     });
-} 
+}
