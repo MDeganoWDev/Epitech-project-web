@@ -3,6 +3,7 @@ import { getAdvertisement } from "../api/get/getAdvertisement";
 import CardAdvertisement from "./ui/CardAdvertisement";
 import type { AdvertisementType } from "../typings/type";
 import Pagination from "./Pagination";
+import { ScrollArea } from "./ui/scroll-area"
 
 const AdvertisementsPanel = () => {
   const [loading, setLoading] = useState(true);
@@ -41,14 +42,18 @@ const AdvertisementsPanel = () => {
   }
   return (
     <div className="grid grid-cols-1 gap-2">
-      {advertisements.results.map((advertisement) => (
-        <CardAdvertisement
-          key={advertisement.id}
-          id={advertisement.id}
-          title={advertisement.title}
-          description={advertisement.quick_description}
-        />
-      ))}
+      <ScrollArea className="h-[85vh] w-[auto] rounded-md p-2">
+        <div className="grid grid-cols-1 gap-2">
+          {advertisements.results.map((advertisement) => (
+            <CardAdvertisement
+              key={advertisement.id}
+              id={advertisement.id}
+              title={advertisement.title}
+              description={advertisement.quick_description}
+            />
+          ))}
+        </div>
+      </ScrollArea>
       <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
     </div>
   )

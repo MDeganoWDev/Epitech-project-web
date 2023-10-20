@@ -3,6 +3,7 @@ import { getAdvertisement } from "../api/get/getAdvertisement";
 import { AdvertisementType } from "../typings/type";
 import { useAdvertisementStore } from "../store/advertisementStore";
 import { useNavigate } from "react-router-dom";
+import { ScrollArea } from "./ui/scroll-area"
 
 const SelectedAdvertisement = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const SelectedAdvertisement = () => {
     }
 
   return (
-    <div className="bg-white text-black rounded-2xl p-2">
+    <ScrollArea className="h-[85vh] w-[auto] bg-secondary text-black rounded-md p-2">
         <div>{advertisement?.offer_date}</div>
         <div>{advertisement?.title}</div>
         <div>{advertisement?.wage}</div>
@@ -38,7 +39,7 @@ const SelectedAdvertisement = () => {
         <div>{advertisement?.company?.address}</div>
         <br/>
         <button onClick={function () {navigate(`/apply/${advertisement?.id}`)}}>Apply</button>
-    </div>
+    </ScrollArea>
   )
 }
 
