@@ -4,6 +4,9 @@ import { deletePermission } from "../../../api/delete/deletePermission";
 import { getPermission } from "../../../api/get/getPermission";
 import { useEffect, useState } from "react";
 import Pagination from "../../Pagination";
+import { Button } from "../../ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
+import { PlusSquare } from "lucide-react";
 
 const PermissionTableDisplay = () => {
   const navigate = useNavigate();
@@ -57,28 +60,36 @@ const PermissionTableDisplay = () => {
     }
 
   return (
-      <div>
-          <button onClick={handleCreateNewPermission}>Create new permission</button>
-          <table>
-              <thead>
-                  <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {filteredPermissions.map((permission)=>(
-                      <tr key={permission.id}>
-                          <td>{permission.id}</td>
-                          <td>{permission.name}</td>
-                          <td><button onClick={() => handleEditPermission(permission.id)}>Modifier</button></td>
-                          <td><button onClick={() => handleDeletePermission(permission.id)}>Supprimer</button></td>
-                      </tr>
-                  ))}
-              </tbody>
-          </table>
-          <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
-      </div>
+    <div className="pt-2">
+      <Button className="ml-2 bg-green-700" onClick={handleCreateNewPermission}><PlusSquare className="mr-2"/> Create new Permission</Button>
+      <Table>
+          <TableHeader>
+              <TableRow>
+                  <TableHead>ID</TableHead>
+                  <TableHead>Name</TableHead>
+              </TableRow>
+          </TableHeader>
+          <TableBody>
+              {filteredPermissions.map((permission)=>(
+                  <TableRow key={permission.id}>
+                      <TableCell>{permission.id}</TableCell>
+                      <TableCell>{permission.name}</TableCell>
+                      <TableCell >
+                        <Button 
+                        className="bg-blue-700 mr-2" 
+                        onClick={() => handleEditPermission(permission.id)}
+                        >Update</Button>
+                        <Button 
+                        className="bg-red-700"
+                        onClick={() => handleDeletePermission(permission.id)}
+                        >Delete</Button>
+                    </TableCell>
+                  </TableRow>
+              ))}
+          </TableBody>
+      </Table>
+      <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
+    </div>
     )
 }
 

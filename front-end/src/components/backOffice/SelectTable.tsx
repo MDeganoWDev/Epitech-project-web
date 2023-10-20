@@ -2,14 +2,14 @@ import SelectTableButton from "./SelectTableButton"
 
 const SelectTable = () => {
     const allTable = [
-        {name : "Utilisateurs", route : "utilisateur"},
+        {name : "Users", route : "utilisateur"},
         {name : "Unregisters", route : "unregister"},
         {name : "Companies", route : "company"},
         {name : "Advertisements", route : "advertisement"},
         {name : "Applications", route : "application"},
         {name : "Permission", route : "permission"},
         {name : "Contract", route : "contract"},
-        {name : "Sex", route : "sex"},
+        {name : "Genders", route : "sex"},
     ]
     
 

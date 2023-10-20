@@ -3,7 +3,10 @@ import { deleteUnregister } from "../../../api/delete/deleteUnregister";
 import { getUnregister } from "../../../api/get/getUnregister";
 import { useState, useEffect } from "react";
 import Pagination from "../../Pagination";
+import { Button } from "../../ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
 import type { UnregisterType } from "../../../typings/type"
+import { ArrowUpRightFromCircle, CircleOff, PlusSquare } from "lucide-react";
 
 const UnregisterTableDisplay = () => {
     const navigate = useNavigate();
@@ -57,36 +60,49 @@ const UnregisterTableDisplay = () => {
         }
         
     return (
-        <div>
-        <button onClick={handleCreateNewUnregister}>Create new unregister user</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>CV</th>
-                    <th>Sex</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div className="pt-2">
+        <Button className="ml-2 bg-green-700" onClick={handleCreateNewUnregister}><PlusSquare className="mr-2"/> Create new Unregister</Button>
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHead>ID</TableHead>
+                    <TableHead>Firstname</TableHead>
+                    <TableHead>Lastname</TableHead>
+                    <TableHead>Email</TableHead>
+                    <TableHead>Phone</TableHead>
+                    <TableHead>CV</TableHead>
+                    <TableHead>Sex</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
                 {filteredUnregisters.map((unregister)=>(
-                    <tr key={unregister.id}>
-                        <td>{unregister.id}</td>
-                        <td>{unregister.firstname}</td>
-                        <td>{unregister.lastname}</td>
-                        <td>{unregister.email}</td>
-                        <td>{unregister.phone}</td>
-                        <td><a href={unregister.cv} target="_blank">{unregister.cv ? "Link" : "no cv"}</a></td>
-                        <td>{unregister.sex?.name}</td>
-                        <td><button onClick={() => handleEditUnregister(unregister.id)}>Modifier</button></td>
-                        <td><button onClick={() => handleDeleteUnregister(unregister.id)}>Supprimer</button></td>
-                    </tr>
+                    <TableRow key={unregister.id}>
+                        <TableCell>{unregister.id}</TableCell>
+                        <TableCell>{unregister.firstname}</TableCell>
+                        <TableCell>{unregister.lastname}</TableCell>
+                        <TableCell>{unregister.email}</TableCell>
+                        <TableCell>{unregister.phone}</TableCell>
+                        <TableCell >
+                        {unregister.cv ?
+                         <a className="text-blue-700 hover:text-green-700" href={unregister.cv} target="_blank"> <ArrowUpRightFromCircle /></a> :
+                         <div className=" text-red-700"><CircleOff /></div>
+                        }
+                        </TableCell>
+                        <TableCell>{unregister.sex?.name}</TableCell>
+                        <TableCell >
+                        <Button 
+                        className="bg-blue-700 mr-2" 
+                        onClick={() => handleEditUnregister(unregister.id)}
+                        >Update</Button>
+                        <Button 
+                        className="bg-red-700"
+                        onClick={() => handleDeleteUnregister(unregister.id)}
+                        >Delete</Button>
+                        </TableCell>
+                    </TableRow>
                 ))}
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
         <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
     </div>
   )

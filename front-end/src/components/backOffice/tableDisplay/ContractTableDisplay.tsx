@@ -4,6 +4,9 @@ import type { ContractType } from "../../../typings/type";
 import { getContract } from "../../../api/get/getContract";
 import { useState, useEffect } from "react";
 import Pagination from "../../Pagination";
+import { Button } from "../../ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
+import { PlusSquare } from "lucide-react";
 
 const ContractTableDisplay = () => {
   const navigate = useNavigate();
@@ -57,26 +60,34 @@ const ContractTableDisplay = () => {
     }
 
   return (
-      <div>
-          <button onClick={handleCreateNewContract}>Create new contract</button>
-          <table>
-              <thead>
-                  <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                  </tr>
-              </thead>
-              <tbody>
+      <div className="pt-2">
+          <Button className="ml-2 bg-green-700" onClick={handleCreateNewContract}><PlusSquare className="mr-2"/> Create new Contract</Button>
+          <Table>
+              <TableHeader>
+                  <TableRow>
+                      <TableHead>ID</TableHead>
+                      <TableHead>Name</TableHead>
+                  </TableRow>
+              </TableHeader>
+              <TableBody>
                   {filteredContracts.map((contract)=>(
-                      <tr key={contract.id}>
-                          <td>{contract.id}</td>
-                          <td>{contract.name}</td>
-                          <td><button onClick={() => handleEditContract(contract.id)}>Modifier</button></td>
-                          <td><button onClick={() => handleDeleteContract(contract.id)}>Supprimer</button></td>
-                      </tr>
+                      <TableRow key={contract.id}>
+                          <TableCell>{contract.id}</TableCell>
+                          <TableCell>{contract.name}</TableCell>
+                          <TableCell >
+                            <Button 
+                            className="bg-blue-700 mr-2" 
+                            onClick={() => handleEditContract(contract.id)}
+                            >Update</Button>
+                            <Button 
+                            className="bg-red-700"
+                            onClick={() => handleDeleteContract(contract.id)}
+                            >Delete</Button>
+                          </TableCell>
+                      </TableRow>
                   ))}
-              </tbody>
-          </table>
+              </TableBody>
+          </Table>
           <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
       </div>
     )

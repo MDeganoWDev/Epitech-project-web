@@ -4,6 +4,9 @@ import { getApplication } from "../../../api/get/getApplication";
 import { ApplicationType } from "../../../typings/type";
 import { useEffect, useState } from "react";
 import Pagination from "../../Pagination";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
+import { Button } from "../../ui/button";
+import { PlusSquare } from "lucide-react";
 
 
 const ApplicationTableDisplay = () => {
@@ -58,32 +61,40 @@ const ApplicationTableDisplay = () => {
     }
 
     return (
-        <div>
-            <button onClick={handleCreateNewApplication}>Create new application</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Message</th>
-                        <th>User ID</th>
-                        <th>Company ID</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div className="pt-2">
+            <Button className="ml-2 bg-green-700" onClick={handleCreateNewApplication}><PlusSquare className="mr-2"/> Create new application</Button>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>ID</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Message</TableHead>
+                        <TableHead>User ID</TableHead>
+                        <TableHead>Company ID</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
                     {filteredApplication.map((application)=>(
-                        <tr key={application.id}>
-                            <td>{application.id}</td>
-                            <td>{application.apply_date}</td>
-                            <td>{application.message}</td>
-                            <td>{application.user ? "Registered : " + application.user.id : "Unregistered : " + application.unregisterUser?.id}</td>
-                            <td>{application.advertisement?.company?.id}</td>
-                            <td> <button onClick={() => handleEditApplication(application.id)}>Modifier</button></td>
-                            <td> <button onClick={() => handleDeleteApplication(application.id)}>Supprimer</button></td>
-                        </tr>
+                        <TableRow key={application.id}>
+                            <TableCell>{application.id}</TableCell>
+                            <TableCell>{application.apply_date}</TableCell>
+                            <TableCell>{application.message}</TableCell>
+                            <TableCell>{application.user ? "Registered : " + application.user.id : "Unregistered : " + application.unregisterUser?.id}</TableCell>
+                            <TableCell>{application.advertisement?.company?.id}</TableCell>
+                            <TableCell >
+                                <Button 
+                                className="bg-blue-700 mr-2" 
+                                onClick={() => handleEditApplication(application.id)}
+                                >Update</Button>
+                                <Button 
+                                className="bg-red-700"
+                                onClick={() => handleDeleteApplication(application.id)}
+                                >Delete</Button>
+                            </TableCell>
+                        </TableRow>
                     ))}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
             <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
         </div>
       )

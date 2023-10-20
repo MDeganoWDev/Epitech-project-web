@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { deleteAdvertisement } from "../../../api/delete/deleteAdvertisement";
 import { useEffect, useState } from "react";
-import { AdvertisementType } from "../../../typings/type";
 import { getAdvertisement } from "../../../api/get/getAdvertisement";
 import Pagination from "../../Pagination";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
+import { Button } from "../../ui/button";
+import type{ AdvertisementType } from "../../../typings/type";
+import { PlusSquare } from "lucide-react";
 
 const AdvertisementTableDisplay = () => {
     const navigate = useNavigate();    
@@ -57,42 +60,54 @@ const AdvertisementTableDisplay = () => {
     }
     
     return (
-        <div>
-           <button onClick={handleCreateNewAdvertissement}>Create new advertissement</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Title</th>
-                        <th>Wage</th>
-                        <th>Working time</th>
-                        <th>Quick description</th>
-                        <th>Full description</th>
-                        <th>Status</th>
-                        <th>Contract</th>
-                        <th>Company ID</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div className="pt-2">
+           <Button className="ml-2 bg-green-700" onClick={handleCreateNewAdvertissement}><PlusSquare className="mr-2"/> Create new advertissement</Button>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>ID</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Title</TableHead>
+                        <TableHead>Wage</TableHead>
+                        <TableHead>Working time</TableHead>
+                        <TableHead>Quick description</TableHead>
+                        <TableHead>Full description</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Contract</TableHead>
+                        <TableHead>Company ID</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
                     {filteredAdvertisement.map((advertisement)=>(
-                        <tr key={advertisement.id}>
-                            <td>{advertisement.id}</td>
-                            <td>{advertisement.offer_date}</td>
-                            <td>{advertisement.title}</td>
-                            <td>{advertisement.wage}</td>
-                            <td>{advertisement.working_time}</td>
-                            <td>{advertisement.quick_description}</td>
-                            <td>{advertisement.full_description}</td>
-                            <td>{advertisement.isOnline ? "Online" : "Offline"}</td>
-                            <td>{advertisement.contract?.name}</td>
-                            <td>{advertisement.company?.id}</td>
-                            <td><button onClick={()=> handleEditAdvertissement(advertisement.id)}>Modifier</button></td>
-                            <td><button onClick={()=> handleDeleteAdvertissement(advertisement.id)}>Supprimer</button></td>
-                        </tr>
+                        <TableRow key={advertisement.id}>
+                            <TableCell>{advertisement.id}</TableCell>
+                            <TableCell>{advertisement.offer_date}</TableCell>
+                            <TableCell>{advertisement.title}</TableCell>
+                            <TableCell>{advertisement.wage}</TableCell>
+                            <TableCell>{advertisement.working_time}</TableCell>
+                            <TableCell>{advertisement.quick_description}</TableCell>
+                            <TableCell>{advertisement.full_description}</TableCell>
+                            <TableCell>
+                                {advertisement.isOnline ? 
+                                <div className="bg-green-700 text-white rounded-3xl text-center p-1">Online</div> : 
+                                <div className="bg-red-700 text-white rounded-3xl text-center p-1">Offline</div>}
+                            </TableCell>
+                            <TableCell>{advertisement.contract?.name}</TableCell>
+                            <TableCell>{advertisement.company?.id}</TableCell>
+                            <TableCell >
+                                <Button 
+                                className="bg-blue-700 mr-2" 
+                                onClick={() => handleEditAdvertissement(advertisement.id)}
+                                >Update</Button>
+                                <Button 
+                                className="bg-red-700"
+                                onClick={() => handleDeleteAdvertissement(advertisement.id)}
+                                >Delete</Button>
+                            </TableCell>
+                        </TableRow>
                     ))}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
             <Pagination count={count} next={nextPage} prev={prevPage} onPageChange={handlePageChange} />
         </div>
       )
