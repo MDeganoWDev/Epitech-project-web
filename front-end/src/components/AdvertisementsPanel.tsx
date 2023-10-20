@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAdvertisement } from "../api/get/getAdvertisement";
 import CardAdvertisement from "./ui/CardAdvertisement";
 import type { AdvertisementType } from "../typings/type";
@@ -49,16 +49,15 @@ const AdvertisementsPanel = () => {
       <ScrollArea className="h-[85vh] w-[auto] rounded-md p-2">
         <div className="grid grid-cols-1 m-2 gap-2">
           {advertisements.results.map((advertisement) => (
-            <>
+            <React.Fragment key={advertisement.id}>
               {advertisement.isOnline && (
-                <CardAdvertisement
-                  key={advertisement.id}
+                <CardAdvertisement                  
                   id={advertisement.id}
                   title={advertisement.title}
                   description={advertisement.quick_description}
                 />
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </ScrollArea>

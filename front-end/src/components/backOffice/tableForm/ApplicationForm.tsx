@@ -4,6 +4,12 @@ import { getApplication } from '../../../api/get/getApplication';
 import { useParams, useNavigate } from 'react-router-dom';
 import { postApplication } from '../../../api/post/postApplication';
 import { putApplication } from '../../../api/put/putApplication';
+import { ScrollArea } from '../../ui/scroll-area';
+import { Button } from '../../ui/button';
+import { Label } from '../../ui/label';
+import { Input } from '../../ui/input';
+import { Textarea } from '../../ui/textarea';
+import { Checkbox } from '../../ui/check-box';
 
 const ApplicationForm = () => {
   const { id } = useParams();
@@ -29,10 +35,7 @@ const ApplicationForm = () => {
     idUnregister != undefined ? response = await putApplication(idUnregister, values) : response = await postApplication(values); 
     if (response) navigate(`/admin/application`);
   }
-  
-  const handleIsRegistered = () =>{
-    setIsRegistered(!isRegistered)
-  }
+
   const HandleCancel = () => {
     navigate(`/admin/application`);
   }
@@ -65,20 +68,18 @@ const ApplicationForm = () => {
   }
 
 return (
-  <div>
-    <form onSubmit={handleSubmit}>
-
-      <label htmlFor="message">Message</label>
-      <textarea 
-        name="message" 
-        id="message"
-        value={message}
-        onChange={e => setMessage(e.target.value)}
-        required  
-      />
-        
-      <label htmlFor="idAdvertissement">Advertissement ID</label>
-       <input
+  <div className=" mx-4">
+  <h1 className="text-3xl font-bold my-3">{idUnregister ? `Update advertisement ${idUnregister}` : "Create new advertisement"}</h1>
+  <form className="flex flex-col max-w-md gap-3" onSubmit={handleSubmit}>
+    <ScrollArea className="h-[70vh]">
+      <div className="m-1">
+      <div className="flex flex-col justify-center content-center">
+        <Label htmlFor="isRegistered">Is Registered</Label>
+        <Checkbox defaultChecked={isRegistered} onCheckedChange={()=>setIsRegistered(!isRegistered)}/>
+        </div>
+      <div>
+      <Label htmlFor="idAdvertissement">Advertissement ID</Label>
+       <Input
          type="number"
          name="idAdvertissement"
          id="idAdvertissement"
@@ -87,19 +88,10 @@ return (
          required
          min={1}
        />
-
-     <label htmlFor="isRegistered">Is Registered</label>
-      <input
-        type="checkbox"
-        name="isRegistered"
-        id="isRegistered"
-        checked={isRegistered}
-        onChange={handleIsRegistered}
-        
-      />
-
-     <label htmlFor="idUser">User ID</label>
-      <input
+      </div>
+        <div>
+     <Label htmlFor="idUser">User ID</Label>
+      <Input
         type="number"
         name="idUser"
         id="idUser"
@@ -108,10 +100,24 @@ return (
         required
         min={1}
       />
-
-      <button type="submit">Enregister</button>
-      <button onClick={HandleCancel}>Annuler</button>
-    </form>
+      </div>
+      <div>
+      <Label htmlFor="message">Message</Label>
+      <Textarea 
+        name="message" 
+        id="message"
+        value={message}
+        onChange={e => setMessage(e.target.value)}
+        required  
+      />
+           </div>
+      </div>
+      </ScrollArea>
+      <div className="grid grid-cols-2 w-full gap-2">
+        <Button className="bg-green-700" type="submit">Save</Button>
+        <Button className="bg-red-700" onClick={HandleCancel}>Cancel</Button>
+      </div>
+      </form>
   </div>
 )
 }

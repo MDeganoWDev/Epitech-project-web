@@ -5,6 +5,11 @@ import { getUnregister } from '../../../api/get/getUnregister';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getNPSex } from '../../../api/get/getNPSex';
 import type { SexType } from '../../../typings/type';
+import { ScrollArea } from '../../ui/scroll-area';
+import { Button } from '../../ui/button';
+import { Label } from '../../ui/label';
+import { Input } from '../../ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
 
 const UnregisterForm = () => {
   const { id } = useParams();
@@ -18,7 +23,7 @@ const UnregisterForm = () => {
   const [email, setEmail] = useState("");
   const [, setOldCv] = useState("");
   const [cv, setCv] = useState<File>();
-  const [idSex, setIdSex] = useState<number | undefined>();
+  const [idSex, setIdSex] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,7 +66,7 @@ const UnregisterForm = () => {
           setPhone(existingUnregister.phone)
           setEmail(existingUnregister.email)
           setOldCv(existingUnregister.cv)
-          setIdSex(existingUnregister.sex.id)
+          setIdSex(existingUnregister.sex.id.toString())
           setLoading(false);
       }      
 
@@ -81,10 +86,14 @@ const UnregisterForm = () => {
   }
 
 return (
-  <div>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="firstname">Firstname</label>
-      <input 
+  <div className=" mx-4">
+  <h1 className="text-3xl font-bold my-3">{idUnregister ? `Update unregister ${idUnregister}` : "Create new unregister"}</h1>
+    <form className=" max-w-md gap-3 flex flex-col" onSubmit={handleSubmit}>
+    <ScrollArea className="max-h-[70vh]">
+      <div className="m-1">
+      <div>
+      <Label htmlFor="firstname">Firstname</Label>
+      <Input 
         type="text" 
         name="firstname" 
         id="firstname"
@@ -92,9 +101,10 @@ return (
         onChange={e => setFirstname(e.target.value)} 
         required
       />
-
-      <label htmlFor="lastname">Lastname</label>
-      <input 
+      </div>
+      <div>
+      <Label htmlFor="lastname">Lastname</Label>
+      <Input 
         type="text" 
         name="lastname" 
         id="lastname"
@@ -102,9 +112,10 @@ return (
         onChange={e => setLastname(e.target.value)} 
         required
       />
-
-      <label htmlFor="phone">Phone</label>
-      <input 
+      </div>
+      <div>
+      <Label htmlFor="phone">Phone</Label>
+      <Input 
         type="phone" 
         name="phone" 
         id="phone"
@@ -112,9 +123,10 @@ return (
         onChange={e => setPhone(e.target.value)}
         required  
       />
-      
-      <label htmlFor="email">Email</label>
-      <input 
+      </div>
+      <div>
+      <Label htmlFor="email">Email</Label>
+      <Input 
         type="email" 
         name="email" 
         id="email"
@@ -122,36 +134,44 @@ return (
         onChange={e => setEmail(e.target.value)}
         required 
       />
-
-      <label htmlFor="cv">CV (PDF)</label>
-      <input
+      </div>
+      <div>
+      <Label htmlFor="cv">CV (PDF)</Label>
+      <Input
         type="file"
         accept=".pdf"
         name="cv"
         id="cv"
         onChange={handleFileChange}
       />
-
- 
-      <label htmlFor="sex">Sex</label>
-      <select
+      </div>
+      <div> 
+      <Label htmlFor="sex">Sex</Label>
+      <Select
         name="sex"
-        id="sex"
-        value={idSex}
-        onChange={e => setIdSex(Number(e.target.value))}
+        defaultValue={idSex}
+        onValueChange={(value: string) => setIdSex(value)}
         required
       >
-        <option value="">Select Sex</option>
+        <SelectTrigger>
+            <SelectValue placeholder="Gender" />
+         </SelectTrigger>
+         <SelectContent>
         {sex.map((value)=>(
-          <option 
+          <SelectItem 
           key={value.id}
-          value={value.id}
-          >{value.name}</option>
+          value={value.id.toString()}
+          >{value.name}</SelectItem>
         ))}
-      </select>
-
-      <button type="submit">Enregister</button>
-      <button onClick={HandleCancel}>Annuler</button>
+        </SelectContent>
+      </Select>
+      </div>
+      </div>
+      </ScrollArea>
+      <div className="grid grid-cols-2 w-full gap-2">
+      <Button className="bg-green-700" type="submit">Save</Button>
+      <Button className="bg-red-700" onClick={HandleCancel}>Cancel</Button>
+      </div>
     </form>
   </div>
 )
