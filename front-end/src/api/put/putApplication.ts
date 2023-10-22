@@ -2,7 +2,7 @@ import type { ApplicationType } from "../../typings/type";
 
 export const putApplication = async (id : number, values : ApplicationType) => {
     return fetch(`http://localhost:8000/applications/${id}/`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },

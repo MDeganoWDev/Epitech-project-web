@@ -1,3 +1,4 @@
+import { ArrowLeft, ArrowRight } from "lucide-react"
 import { useState } from "react"
 
 type PaginationProps = {
@@ -21,11 +22,11 @@ function Pagination({ count, next, prev, onPageChange } : PaginationProps) {
 
   return (
     <div>
-      {count > 10 && 
-      <><button onClick={handlePrevPage} disabled={!prev}>Previous Page</button>
+      {count > 10 && <div className="flex justify-center gap-4">
+      {prev && <button onClick={handlePrevPage} disabled={!prev}><ArrowLeft/></button>}
       <p>Page {pageCount} on {Math.ceil(count / 10)}</p>
-      <button onClick={handleNextPage} disabled={!next}>Next Page</button>
-      </>}
+      {next && <button onClick={handleNextPage} disabled={!next}><ArrowRight/></button>}
+      </div>}
     </div>
   );
 }

@@ -17,7 +17,6 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<MainContent />} />
           <Route path="admin/*" element={withAdminPermission(AdminBackOffice)} />
-          {/* <Route path="admin/*" element={<AdminBackOffice/>} /> */}
           <Route path="user/" element={<RegisterPage />} />
           <Route path="user/profile/" element={<UserOffice />} />
           <Route path="advertisement/create/:company" element={<AdvertisementPage />} />

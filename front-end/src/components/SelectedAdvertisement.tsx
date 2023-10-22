@@ -12,6 +12,18 @@ const SelectedAdvertisement = () => {
   const [advertisement, setAdvertisement] =
     useState<AdvertisementType>();
 
+    const formattedDate = (dataDate : string) => {
+      const date = new Date(dataDate);
+      const options = {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      };
+      return date.toLocaleString("en-EN", options);
+  }
+
   useEffect(() => {
     setLoading(true);
     if (selectedId != undefined) {
@@ -31,7 +43,7 @@ const SelectedAdvertisement = () => {
   return (
     <ScrollArea className="h-[85vh] w-[auto] bg-secondary text-black rounded-md p-2">
       <div className="mb-2 text-muted-foreground">
-        Created at {advertisement?.offer_date}
+        Created {formattedDate(advertisement?.offer_date)}
         <br /><br />
       </div>
       <div className="mb-2 font-bold text-xl">{advertisement?.title}</div>

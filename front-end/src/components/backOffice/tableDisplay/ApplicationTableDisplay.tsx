@@ -32,6 +32,18 @@ const ApplicationTableDisplay = () => {
         if (id) setFiteredId(prevState => [...prevState, id]);
     }
 
+    const formattedDate = (dataDate : string) => {
+        const date = new Date(dataDate);
+        const options = {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        };
+        return date.toLocaleString("en-EN", options);
+    }
+
     useEffect(()=>{
         const fetchData = async () => {
           const applicatioData = await getApplication();
@@ -77,7 +89,7 @@ const ApplicationTableDisplay = () => {
                     {filteredApplication.map((application)=>(
                         <TableRow key={application.id}>
                             <TableCell>{application.id}</TableCell>
-                            <TableCell>{application.apply_date}</TableCell>
+                            <TableCell>{formattedDate(application.apply_date)}</TableCell>
                             <TableCell>{application.message}</TableCell>
                             <TableCell>{application.user ? "Registered : " + application.user.id : "Unregistered : " + application.unregisterUser?.id}</TableCell>
                             <TableCell>{application.advertisement?.company?.id}</TableCell>

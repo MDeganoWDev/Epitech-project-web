@@ -4,7 +4,6 @@ import { postAdvertisement } from '../../../api/post/postAdvertisement';
 import { putAdvertisement } from '../../../api/put/putAdvertisement';
 import { getAdvertisement } from '../../../api/get/getAdvertisement';
 import { getNPContract } from '../../../api/get/getNPContract';
-import type { AdvertisementType, ContractType } from '../../../typings/type';
 import { ScrollArea } from '../../ui/scroll-area';
 import { Label } from '../../ui/label';
 import { Input } from '../../ui/input';
@@ -12,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Button } from '../../ui/button';
 import { Textarea } from '../../ui/textarea';
 import { Checkbox } from '../../ui/check-box';
+import type { AdvertisementType, ContractType } from '../../../typings/type';
 
 const AdvertisementForm = () => {
   const navigate = useNavigate();

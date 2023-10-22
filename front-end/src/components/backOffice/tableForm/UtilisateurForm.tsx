@@ -97,7 +97,7 @@ return (
   <div className=" mx-4">
     <h1 className="text-3xl font-bold my-3">{idUnregister ? `Update user ${idUnregister}` : "Create new user"}</h1>
     <form className=" max-w-md gap-3 flex flex-col" onSubmit={handleSubmit}>
-    <ScrollArea className="max-h-[70vh]">
+    <ScrollArea className="h-[70vh]">
       <div className="m-1">
       <div>
       <Label htmlFor="firstname">Firstname</Label>

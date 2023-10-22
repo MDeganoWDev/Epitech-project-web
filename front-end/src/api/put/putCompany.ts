@@ -4,7 +4,7 @@ import { useAuthStore } from "../../store/authStore";
 export const putCompany = async (id : number, values : CompanyType) => {
     const token = useAuthStore.getState().token;
     return fetch(`http://localhost:8000/companies/${id}/`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Token ${token}`
