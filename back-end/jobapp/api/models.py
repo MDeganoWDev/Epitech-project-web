@@ -61,7 +61,7 @@ class Advertisement(models.Model):
 
 class Application(models.Model):
     apply_date = models.DateTimeField(null=False)
-    message = models.CharField(max_length=50, null=False)
+    message = models.CharField(max_length=2000, null=False)
     user = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, blank=True, null=True)
     unregisterUser = models.ForeignKey(Unregister, on_delete=models.SET_NULL, blank=True, null=True)
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE)

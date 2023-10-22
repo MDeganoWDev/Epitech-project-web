@@ -1,0 +1,65 @@
+[
+    {
+        "model": "api.Company",
+        "pk": 1,
+        "fields": {
+            "user_id": 2,
+            "name": "Tech Innovators Inc.",
+            "address": "123 Tech Park Avenue, Suite 101"
+        }
+    },
+    {
+        "model": "api.Company",
+        "pk": 2,
+        "fields": {
+            "user_id": 3,
+            "name": "Green Energy Solutions",
+            "address": "456 Renewable Street, 2nd Floor"
+        }
+    },
+    {
+        "model": "api.Company",
+        "pk": 3,
+        "fields": {
+            "user_id": 4,
+            "name": "Creative Designs Studio",
+            "address": "789 Artistic Lane, Suite 202"
+        }
+    },
+    {
+        "model": "api.Company",
+        "pk": 4,
+        "fields": {
+            "user_id": 5,
+            "name": "Global Logistics Corp.",
+            "address": "101 Shipping Way, Building C"
+        }
+    },
+    {
+        "model": "api.Company",
+        "pk": 5,
+        "fields": {
+            "user_id": 6,
+            "name": "Healthy Bites Catering",
+            "address": "202 Foodie Boulevard, Unit 303"
+        }
+    },
+    {
+        "model": "api.Company",
+        "pk": 6,
+        "fields": {
+            "user_id": 7,
+            "name": "Smart Home Solutions",
+            "address": "303 Technology Terrace, Suite 404"
+        }
+    },
+    {
+        "model": "api.Company",
+        "pk": 7,
+        "fields": {
+            "user_id": 8,
+            "name": "Nature's Beauty Spa",
+            "address": "404 Wellness Street, 3rd Floor"
+        }
+    }
+]
