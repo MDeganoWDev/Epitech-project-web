@@ -1,0 +1,268 @@
+[
+    {
+        "model": "api.Utilisateur",
+        "pk": 2,
+        "fields": {
+            "firstname": "Jane",
+            "lastname": "Smith",
+            "phone": "1111111111",
+            "email": "company@gmail.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 2,
+            "password": "company"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 3,
+        "fields": {
+            "firstname": "Michael",
+            "lastname": "Johnson",
+            "phone": "2222222222",
+            "email": "company2@example.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 2,
+            "password": "company2_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 4,
+        "fields": {
+            "firstname": "Emily",
+            "lastname": "Brown",
+            "phone": "3333333333",
+            "email": "company3@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 2,
+            "password": "company3_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 5,
+        "fields": {
+            "firstname": "Daniel",
+            "lastname": "Wilson",
+            "phone": "4444444444",
+            "email": "company4@example.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 2,
+            "password": "company4_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 6,
+        "fields": {
+            "firstname": "Olivia",
+            "lastname": "Lee",
+            "phone": "5555555555",
+            "email": "company5@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 2,
+            "password": "company5_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 7,
+        "fields": {
+            "firstname": "William",
+            "lastname": "Martinez",
+            "phone": "6666666666",
+            "email": "company6@example.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 2,
+            "password": "company6_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 8,
+        "fields": {
+            "firstname": "Sophia",
+            "lastname": "Garcia",
+            "phone": "7777777777",
+            "email": "company7@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 2,
+            "password": "company7_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 9,
+        "fields": {
+            "firstname": "Liam",
+            "lastname": "Davis",
+            "phone": "8888888888",
+            "email": "worker@gmail.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 3,
+            "password": "worker"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 10,
+        "fields": {
+            "firstname": "Emma",
+            "lastname": "Taylor",
+            "phone": "9999999999",
+            "email": "worker2@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 3,
+            "password": "worker2_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 11,
+        "fields": {
+            "firstname": "James",
+            "lastname": "Brown",
+            "phone": "1010101010",
+            "email": "worker3@example.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 3,
+            "password": "worker3_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 12,
+        "fields": {
+            "firstname": "Olivia",
+            "lastname": "Anderson",
+            "phone": "1111111111",
+            "email": "worker4@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 3,
+            "password": "worker4_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 13,
+        "fields": {
+            "firstname": "Noah",
+            "lastname": "Thomas",
+            "phone": "1212121212",
+            "email": "worker5@example.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 3,
+            "password": "worker5_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 14,
+        "fields": {
+            "firstname": "Sophia",
+            "lastname": "Walker",
+            "phone": "1313131313",
+            "email": "worker6@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 3,
+            "password": "worker6_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 15,
+        "fields": {
+            "firstname": "Elijah",
+            "lastname": "King",
+            "phone": "1414141414",
+            "email": "worker7@example.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 3,
+            "password": "worker7_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 16,
+        "fields": {
+            "firstname": "Ava",
+            "lastname": "Hall",
+            "phone": "1515151515",
+            "email": "worker8@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 3,
+            "password": "worker8_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 17,
+        "fields": {
+            "firstname": "Benjamin",
+            "lastname": "White",
+            "phone": "1616161616",
+            "email": "worker9@example.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 3,
+            "password": "worker9_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 18,
+        "fields": {
+            "firstname": "Mia",
+            "lastname": "Green",
+            "phone": "1717171717",
+            "email": "worker10@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 3,
+            "password": "worker10_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 19,
+        "fields": {
+            "firstname": "Liam",
+            "lastname": "Brown",
+            "phone": "1818181818",
+            "email": "worker11@example.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 3,
+            "password": "worker11_password"
+        }
+    },
+    {
+        "model": "api.Utilisateur",
+        "pk": 20,
+        "fields": {
+            "firstname": "Olivia",
+            "lastname": "Clark",
+            "phone": "1919191919",
+            "email": "worker12@example.com",
+            "cv": null,
+            "sex": 2,
+            "permission": 3,
+            "password": "worker12_password"
+        }
+    }
+]

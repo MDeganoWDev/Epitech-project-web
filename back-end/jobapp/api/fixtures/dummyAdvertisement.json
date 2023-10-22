@@ -1,0 +1,302 @@
+[
+    {
+        "model": "api.Advertisement",
+        "pk": 1,
+        "fields": {
+            "offer_date": "2023-11-10T08:00:00Z",
+            "title": "Software Developer",
+            "full_description": "We are looking for a skilled Software Developer to join our team.",
+            "quick_description": "Software Developer Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 1,
+            "company": 1
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 2,
+        "fields": {
+            "offer_date": "2023-11-11T10:00:00Z",
+            "title": "Marketing Specialist",
+            "full_description": "We are seeking an experienced Marketing Specialist to lead our marketing efforts.",
+            "quick_description": "Marketing Specialist Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 2,
+            "company": 2
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 3,
+        "fields": {
+            "offer_date": "2023-11-12T14:00:00Z",
+            "title": "Data Analyst Internship",
+            "full_description": "Join our data team as an intern and gain valuable experience in data analysis.",
+            "quick_description": "Data Analyst Internship",
+            "working_time": "Part-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 3,
+            "company": 3
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 4,
+        "fields": {
+            "offer_date": "2023-11-13T08:00:00Z",
+            "title": "Frontend Developer",
+            "full_description": "We are looking for a talented Frontend Developer to join our web development team.",
+            "quick_description": "Frontend Developer Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 4,
+            "company": 4
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 5,
+        "fields": {
+            "offer_date": "2023-11-14T10:00:00Z",
+            "title": "Marketing Specialist",
+            "full_description": "We are seeking an experienced Marketing Specialist to lead our marketing efforts.",
+            "quick_description": "Marketing Specialist Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": false,
+            "contract": 1,
+            "company": 5
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 6,
+        "fields": {
+            "offer_date": "2023-11-15T14:00:00Z",
+            "title": "Data Analyst Internship",
+            "full_description": "Join our data team as an intern and gain valuable experience in data analysis.",
+            "quick_description": "Data Analyst Internship",
+            "working_time": "Part-Time",
+            "wage": "Competitive",
+            "isOnline": false,
+            "contract": 1,
+            "company": 6
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 7,
+        "fields": {
+            "offer_date": "2023-11-16T08:00:00Z",
+            "title": "Frontend Developer",
+            "full_description": "We are looking for a talented Frontend Developer to join our web development team.",
+            "quick_description": "Frontend Developer Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 2,
+            "company": 7
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 8,
+        "fields": {
+            "offer_date": "2023-11-17T10:00:00Z",
+            "title": "Sales Representative",
+            "full_description": "Join our sales team and help drive revenue growth for our organization.",
+            "quick_description": "Sales Representative Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 3,
+            "company": 1
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 9,
+        "fields": {
+            "offer_date": "2023-11-18T14:00:00Z",
+            "title": "Graphic Designer",
+            "full_description": "We are looking for a creative Graphic Designer to join our design team.",
+            "quick_description": "Graphic Designer Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 4,
+            "company": 2
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 10,
+        "fields": {
+            "offer_date": "2023-11-19T08:00:00Z",
+            "title": "Product Manager",
+            "full_description": "Join our product development team and help drive innovation.",
+            "quick_description": "Product Manager Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 1,
+            "company": 3
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 11,
+        "fields": {
+            "offer_date": "2023-11-20T10:00:00Z",
+            "title": "Quality Assurance Tester",
+            "full_description": "We are seeking a detail-oriented Quality Assurance Tester to ensure the quality of our software.",
+            "quick_description": "Quality Assurance Tester Position",
+            "working_time": "Full-Time",
+            "wage": "Medium Range Salary",
+            "isOnline": true,
+            "contract": 1,
+            "company": 4
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 12,
+        "fields": {
+            "offer_date": "2023-11-21T14:00:00Z",
+            "title": "Digital Marketing Specialist",
+            "full_description": "Join our digital marketing team and help promote our brand effectively.",
+            "quick_description": "Digital Marketing Specialist Position",
+            "working_time": "Full-Time",
+            "wage": "Medium Range Salary",
+            "isOnline": false,
+            "contract": 1,
+            "company": 1
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 13,
+        "fields": {
+            "offer_date": "2023-11-22T08:00:00Z",
+            "title": "UX/UI Designer",
+            "full_description": "We are looking for a creative UX/UI Designer to create user-friendly interfaces.",
+            "quick_description": "UX/UI Designer Position",
+            "working_time": "Full-Time",
+            "wage": "Medium Range Salary",
+            "isOnline": true,
+            "contract": 1,
+            "company": 6
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 14,
+        "fields": {
+            "offer_date": "2023-11-23T10:00:00Z",
+            "title": "Customer Success Manager",
+            "full_description": "Join our customer success team and build strong customer relationships.",
+            "quick_description": "Customer Success Manager Position",
+            "working_time": "Full-Time",
+            "wage": "Medium Range Salary",
+            "isOnline": true,
+            "contract": 2,
+            "company": 7
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 15,
+        "fields": {
+            "offer_date": "2023-11-24T14:00:00Z",
+            "title": "Content Marketing Specialist",
+            "full_description": "We are looking for a Content Marketing Specialist to create valuable content.",
+            "quick_description": "Content Marketing Specialist Position",
+            "working_time": "Full-Time",
+            "wage": "Medium Range Salary",
+            "isOnline": true,
+            "contract": 3,
+            "company": 1
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 16,
+        "fields": {
+            "offer_date": "2023-11-25T08:00:00Z",
+            "title": "IT Support Specialist",
+            "full_description": "Join our IT support team and provide technical assistance to our organization.",
+            "quick_description": "IT Support Specialist Position",
+            "working_time": "Full-Time",
+            "wage": "Medium Range Salary",
+            "isOnline": true,
+            "contract": 4,
+            "company": 2
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 17,
+        "fields": {
+            "offer_date": "2023-11-26T10:00:00Z",
+            "title": "Software Developer",
+            "full_description": "We are looking for a skilled Software Developer to join our team.",
+            "quick_description": "Software Developer Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 1,
+            "company": 3
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 18,
+        "fields": {
+            "offer_date": "2023-11-27T14:00:00Z",
+            "title": "Marketing Specialist",
+            "full_description": "We are seeking an experienced Marketing Specialist to lead our marketing efforts.",
+            "quick_description": "Marketing Specialist Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 1,
+            "company": 4
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 19,
+        "fields": {
+            "offer_date": "2023-11-28T08:00:00Z",
+            "title": "Data Analyst Internship",
+            "full_description": "Join our data team as an intern and gain valuable experience in data analysis.",
+            "quick_description": "Data Analyst Internship",
+            "working_time": "Part-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 1,
+            "company": 5
+        }
+    },
+    {
+        "model": "api.Advertisement",
+        "pk": 20,
+        "fields": {
+            "offer_date": "2023-11-29T10:00:00Z",
+            "title": "Frontend Developer",
+            "full_description": "We are looking for a talented Frontend Developer to join our web development team.",
+            "quick_description": "Frontend Developer Position",
+            "working_time": "Full-Time",
+            "wage": "Competitive",
+            "isOnline": true,
+            "contract": 1,
+            "company": 6
+        }
+    }
+]

@@ -75,5 +75,19 @@
         "fields" : {
             "name": "interim"
         }
+    },    
+    {
+        "model": "api.Utilisateur",
+        "pk": 1,
+        "fields": {
+            "firstname": "admin",
+            "lastname": "admin",
+            "phone": "1234567890",
+            "email": "admin@gmail.com",
+            "cv": null,
+            "sex": 1,
+            "permission": 1,
+            "password": "admin"
+        }
     }
 ]

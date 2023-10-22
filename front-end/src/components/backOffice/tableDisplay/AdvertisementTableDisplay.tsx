@@ -107,6 +107,7 @@ const AdvertisementTableDisplay = () => {
                             <TableCell>{advertisement.contract?.name}</TableCell>
                             <TableCell>{advertisement.company?.id}</TableCell>
                             <TableCell >
+                                <div className="grid grid-cols-2 gap-1">
                                 <Button 
                                 className="bg-blue-700 mr-2" 
                                 onClick={() => handleEditAdvertissement(advertisement.id)}
@@ -115,6 +116,7 @@ const AdvertisementTableDisplay = () => {
                                 className="bg-red-700"
                                 onClick={() => handleDeleteAdvertissement(advertisement.id)}
                                 >Delete</Button>
+                                </div>
                             </TableCell>
                         </TableRow>
                     ))}
