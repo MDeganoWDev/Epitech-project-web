@@ -9,6 +9,11 @@ import { ApplicationType } from '../typings/type';
 import { postApplication } from '../api/post/postApplication';
 import { postUnregister } from '../api/post/postUnregister';
 import { useNavigate } from 'react-router-dom';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Button } from './ui/button';
+import { ScrollArea } from './ui/scroll-area';
 
 interface FormValues extends UtilisateurType {
   message: string;
@@ -100,54 +105,116 @@ const ApplicationPage = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        {!isAuthenticated ?
+      <form className="max-w-md mx-auto mt-8" onSubmit={handleSubmit}>
+        {!isAuthenticated ? (
           <>
-            <label>
-              First Name:
-              <input type="text" name="firstname" value={formValues.firstname} onChange={handleChange} />
-            </label>
-            <label>
-              Last Name:
-              <input type="text" name="lastname" value={formValues.lastname} onChange={handleChange} />
-            </label>
-            <label>
-              Email:
-              <input type="email" name="email" value={formValues.email} onChange={handleChange} />
-            </label>
-            <label>
-              Phone:
-              <input type="tel" name="phone" value={formValues.phone} onChange={handleChange} />
-            </label>
-            <input
-              type="file"
-              accept=".pdf"
-              name="cv"
-              id="cv"
-              onChange={handleFileChange}
-            />
-            <label>
-              Sex:
-              <select value={sex.id} onChange={(event) => setSex({ id: parseInt(event.target.value), name: '' })}>
+            <div className="m-1">
+              <Label htmlFor="firstname">First Name</Label>
+              <Input
+                type="text"
+                name="firstname"
+                id="firstname"
+                value={formValues.firstname}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="m-1">
+              <Label htmlFor="lastname">Last Name</Label>
+              <Input
+                type="text"
+                name="lastname"
+                id="lastname"
+                value={formValues.lastname}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="m-1">
+              <Label htmlFor="phone">Phone</Label>
+              <Input
+                type="tel"
+                name="phone"
+                id="phone"
+                value={formValues.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="m-1">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                value={formValues.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="m-1">
+              <Label htmlFor="cv">CV (PDF)</Label>
+              <Input
+                type="file"
+                accept=".pdf"
+                name="cv"
+                id="cv"
+                onChange={handleFileChange}
+                required
+              />
+            </div>
+            <div className="m-1">
+              <Label htmlFor="sex">Sex</Label>
+              <Select
+                name="sex"
+                onValueChange={(value: string) => setSex({ id: parseInt(value), name: '' })}
+                required
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select..." />
+                </SelectTrigger>
+                <SelectContent>
+                  {sexOptions.map((option) => (
+                    <SelectItem key={option.id} value={option.id.toString()}>
+                      {option.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {/* <select
+                value={sex.id}
+                onChange={(event) => setSex({ id: parseInt(event.target.value), name: '' })}
+                className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              >
                 <option value="">Select...</option>
-                {sexOptions.map((option) => (
-                  <option key={option.id} value={option.id}>
-                    {option.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+
+              </select> */}
+            </div>
           </>
-          : <p>Your data is imported from your profile</p>}
-        <label>
-          Message:
-          <textarea name="message" value={formValues.message} onChange={handleChange} />
-        </label>
-        <button type="submit">Submit</button>
-        <br />
+        ) : (
+          <p className="text-gray-700 m-1">Your data is imported from your profile</p>
+        )}
+        <div className="m-1">
+          <Label htmlFor="message">Message</Label>
+          <textarea
+            name="message"
+            value={formValues.message}
+            onChange={handleChange}
+            className="form-textarea mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          />
+        </div>
+        <Button
+          type="submit"
+          className="inline-block bg-indigo-500 text-white py-2 px-4 rounded hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50 m-1"
+        >
+          Submit
+        </Button>
       </form>
-      {!isAuthenticated ? <Link to="/user" >Or... I have an account - LogIn</Link> : <></>}
-    </>
+      {!isAuthenticated ? (
+        <Link to="/user" className="block text-center mt-4 text-gray-700 hover:text-indigo-500">
+          Or... I have an account - LogIn
+        </Link>
+      ) : null}</>
   );
 };
 
