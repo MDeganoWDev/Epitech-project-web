@@ -59,8 +59,14 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```bash
 cd ./back-end/
 docker-compose up -d --build
+```
+
+Then you can use our script to run Django migration and fixtures:
+
+```bash
 ./migrate.sh
 ```
+***Nb: An admin user will be created with default username 'admin@admin.org' and password 'admin'.***
 
 Then you will start the front-end as dev mode:
 
