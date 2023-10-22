@@ -4,7 +4,7 @@ import { useAuthStore } from "../../store/authStore";
 export const putSex = async (id : number, values : SexType) => {
     const token = useAuthStore.getState().token;
     return fetch(`http://localhost:8000/sex/${id}/`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Token ${token}`

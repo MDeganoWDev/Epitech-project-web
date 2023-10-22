@@ -5,8 +5,8 @@ import { getAdvertisement } from "../../../api/get/getAdvertisement";
 import Pagination from "../../Pagination";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../ui/table";
 import { Button } from "../../ui/button";
-import type{ AdvertisementType } from "../../../typings/type";
 import { PlusSquare } from "lucide-react";
+import type{ AdvertisementType } from "../../../typings/type";
 
 const AdvertisementTableDisplay = () => {
     const navigate = useNavigate();    
@@ -29,6 +29,18 @@ const AdvertisementTableDisplay = () => {
     const handleDeleteAdvertissement = (id? : number) => {
         deleteAdvertisement(id)
         if (id) setFiteredId(prevState => [...prevState, id]);
+    }
+
+    const formattedDate = (dataDate : string) => {
+        const date = new Date(dataDate);
+        const options = {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        };
+        return date.toLocaleString("en-En", options);
     }
     
     useEffect(()=>{
@@ -81,7 +93,7 @@ const AdvertisementTableDisplay = () => {
                     {filteredAdvertisement.map((advertisement)=>(
                         <TableRow key={advertisement.id}>
                             <TableCell>{advertisement.id}</TableCell>
-                            <TableCell>{advertisement.offer_date}</TableCell>
+                            <TableCell>{formattedDate(advertisement.offer_date)}</TableCell>
                             <TableCell>{advertisement.title}</TableCell>
                             <TableCell>{advertisement.wage}</TableCell>
                             <TableCell>{advertisement.working_time}</TableCell>
