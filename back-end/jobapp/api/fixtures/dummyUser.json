@@ -1,6 +1,20 @@
 [
     {
         "model": "api.Utilisateur",
+        "pk": 1,
+        "fields": {
+            "firstname": "Admin",
+            "lastname": "Super",
+            "phone": "0123456789",
+            "email": "admin@admin.org",
+            "cv": null,
+            "sex": 3,
+            "permission": 1,
+            "password": "pbkdf2_sha256$600000$dyFcqbfHZX1Tw0J1wMB4Ju$cq/Txu99KF3w/HAkMIAzEkLTqpHNUFtPyYHf6EkGEkc="
+        }
+    },
+    {
+        "model": "api.Utilisateur",
         "pk": 2,
         "fields": {
             "firstname": "Jane",
