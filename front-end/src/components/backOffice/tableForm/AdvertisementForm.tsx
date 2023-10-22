@@ -97,7 +97,7 @@ const AdvertisementForm = () => {
       <form className="flex flex-col max-w-md gap-3" onSubmit={handleSubmit}>
        <ScrollArea className="h-[70vh]">
       <div className="m-1">
-      <div className="flex flex-col justify-center content-center">
+        <div className="flex flex-col justify-center content-center">
         <Label htmlFor="isOnline">Is Online</Label>
         <Checkbox defaultChecked={isOnline} onCheckedChange={()=>setIsOnline(!isOnline)}/>
         </div>

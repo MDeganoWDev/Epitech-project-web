@@ -56,7 +56,7 @@ const AdvertisementTableDisplay = () => {
         fetchData()
       }, [])
     
-      function handlePageChange(url) {
+      function handlePageChange(url: RequestInfo) {
           fetch(url)
             .then(response => response.json())
             .then(data => {
